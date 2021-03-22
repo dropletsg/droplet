@@ -1,9 +1,24 @@
-<h2>Name:<%= @worker.name %></h2>
-<p>Email:<%= @worker.email %></p>
-<p>Alias:<%= @worker.alias %></p>
-<p>Mobile number:<%= @worker.mobile_number %></p>
-<p>Description:<%= @worker.description %></p>
-<p>ID Type:<%= @worker.id_type %></p>
-<p>Valid ID?:<%= @worker.id_valid %></p>
-<p>Payment link:<%= @worker.payment_link %></p>
-<p>Archived:<%= @worker.is_archived %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col mt-5 mb-5">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://source.unsplash.com/random/200x200" alt="Card image">
+        <div class="card-body">
+          <h5 class="card-title">Name:<%= @worker.name %></h5>
+          <p class="card-text">
+            <p>Email:<%= @worker.email %></p>
+            <p>Alias:<%= @worker.alias %></p>
+            <p>Mobile number:<%= @worker.mobile_number %></p>
+            <p>Description:<%= @worker.description %></p>
+            <p>ID Type:<%= @worker.id_type %></p>
+            <p>Valid ID?:<%= @worker.id_valid %></p>
+            <p>Payment link:<%= @worker.payment_link %></p>
+            <p>Archived:<%= @worker.is_archived %></p>
+          </p>
+          <%= link_to "Edit", edit_worker_path %>
+          <%= link_to "Back", workers_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,7 @@
-<!-- Why must this be @worker and not worker like in the lecture notes? -->
-<%= simple_form_for(@worker) do |f| %>
-  <%= f.input :email %>
-  <%= f.input :name %>
-  <%= f.input :alias %>
-  <%= f.input :mobile_number %>
-  <%= f.input :description %>
-  <%= f.input :id_type %>
-  <%= f.input :id_valid %>
-  <%= f.input :payment_link %>
-  <%= f.input :is_archived %>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col mt-5 mb-5">
+      <%= render "form", worker: @worker %>
+    </div>
+  </div>
+</div>

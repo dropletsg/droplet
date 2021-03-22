@@ -1,5 +1,20 @@
-<ul>
-  <% @workers.each do |worker| %>
-    <li>Worker ID is: <%= worker.id %>. worker name is: <%= worker.name %> and mobile number is <%= worker.mobile_number %> and email is <%= worker.email %></li>
-  <% end %>
-</ul>
+<!-- How to achieve uniform height for all the cards? -->
+
+<div class="card-group">
+  <div class="container">
+    <div class="row">
+      <% @workers.each do |worker| %>
+        <div class="col mt-5 mb-5">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://source.unsplash.com/random/200x200" alt="Card image cap">
+              <div class="card-body">
+                <h5>Worker ID is: <%= worker.id %></h5>
+                <p>Worker name is: <%= worker.name %> and mobile number is <%= worker.mobile_number %> and email is <%= worker.email %></p>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

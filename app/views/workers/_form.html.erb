@@ -1,0 +1,17 @@
+<!-- Why must this be @worker and not worker like in the lecture notes? -->
+<!-- Excluded the fields photo_id_front, photo_id_back, id_selfie, payment_qr as those produce the following error
+Showing /Users/jasonlee/code/jasonleewkd/droplet/app/views/workers/new.html.erb where line #9 raised:
+undefined method `photo_id_front' for #<Worker:0x00007fb672e4dcb8>
+ -->
+<%= simple_form_for(@worker) do |f| %>
+  <%= f.input :email %>
+  <%= f.input :name %>
+  <%= f.input :alias %>
+  <%= f.input :mobile_number %>
+  <%= f.input :description %>
+  <%= f.input :id_type %>
+  <%= f.input :id_valid %>
+  <%= f.input :payment_link %>
+  <%= f.input :is_archived %>
+  <%= f.submit %>
+<% end %>
