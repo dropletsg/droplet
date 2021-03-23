@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :cases
   has_one_attached :profile_photo
+
+  EMAILS_ALLOWED = %w[yuanming.lee91@gmail.com jasonleewkd@gmail.com jaelyn.sng@gmail.com jiiayenn.lee@gmail.com]
+  validates_format_of :email, with: Regexp.union(EMAILS_ALLOWED)
 end
