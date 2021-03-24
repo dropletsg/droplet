@@ -2,6 +2,7 @@
   <table class="table table-striped table-hover">
     <tr>
         <th>Case No.</th>
+        <th>Created On</th>
         <th>Name</th>
         <th>Status</th>
         <th>Coordinator</th>
@@ -9,8 +10,9 @@
     </tr>
     <tr>
         <% @cases.each do |c| %>
-        <tr>
+        <tr class = "case-row">
             <td><%= c.id %></td> 
+            <th><%= c.created_at.strftime("%d %B %Y") %></th>
             <td><%= c.worker.name %></td>
             <td><%= c.status %></td>
             <td><%= c.coordinator.name %></td>
@@ -24,3 +26,14 @@
     </tr>
   </table>
 </div>
+
+<script>
+  const row = document.querySelectorAll(".case-row");
+  row.forEach((element) => {
+      element.addEventListener('click', () => {
+      window.location.replace("<%= root_path %>");
+    });
+  });
+      
+  
+</script>
