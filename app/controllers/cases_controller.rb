@@ -3,7 +3,7 @@ class CasesController < ApplicationController
 
   def index
     @cases = Case.all
-    raise
+  
   end
 
   def show
