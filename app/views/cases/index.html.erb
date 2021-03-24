@@ -1,1 +1,21 @@
-Hello
+<table>
+  <tr>
+    <th>Case No.</th>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Coordinator</th>
+    <th>Progress</th>
+  </tr>
+  <tr>
+    <% @cases.each do |case| %>
+      <tr>
+        <td><%= case.id %></td>
+        <td><%= case.worker.name %></td>
+        <td><%= case.status %></td>
+        <td><%= case.coordinator.name %></td>
+        <td><%= case.target_amount %></td>
+      </tr>
+    <% end %>
+  </tr>
+
+</table>
