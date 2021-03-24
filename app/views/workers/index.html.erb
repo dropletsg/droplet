@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Listing Workers</h1>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Alias</th>
+          <th>Mobile number</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @workers.each do |worker| %>
+          <tr>
+            <td><%= worker.email %></td>
+            <td><%= worker.name %></td>
+            <td><%= worker.alias %></td>
+            <td><%= worker.mobile_number %></td>
+            <td><%= link_to "Show", worker %></td>
+            <td><%= link_to "Edit", edit_worker_path(worker) %></td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-4 mb-4">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary"><%= link_to "Create new worker", new_worker_path %></button>
+    </div>
+  </div>
+</div>
+
