@@ -1,0 +1,10 @@
+<h1><%= @coordinator.name %></h1>
+<p>Email: <%= @coordinator.email %></p>
+<p>Mobile number: <%= @coordinator.mobile_number %></p>
+<p>Description: <%= @coordinator.description %></p>
+<%= cl_image_tag @coordinator.profile_photo.key %>
+<p>Telegram handle: <%= @coordinator.telegram_handle %></p>
+<p>Archived: <%= @coordinator.is_archived %></p>
+
+<p><%= link_to "Edit Coordinator", edit_coordinator_path %></p>
+<p><%= link_to "All Coordinators", coordinators_path %></p>
