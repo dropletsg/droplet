@@ -1,13 +1,11 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: %i[edit update]
+  before_action :set_case, only: %i[show edit update]
 
   def index
     @cases = Case.all
-  
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @case = Case.new

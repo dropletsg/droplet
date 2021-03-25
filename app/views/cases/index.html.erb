@@ -10,7 +10,7 @@
     </tr>
     <tr>
         <% @cases.each do |c| %>
-        <tr class = "case-row">
+        <tr class = "case-row" data-case-id="<%= c.id %>">
             <td><%= c.id %></td> 
             <th><%= c.created_at.strftime("%d %B %Y") %></th>
             <td><%= c.worker.name %></td>
@@ -31,9 +31,8 @@
   const row = document.querySelectorAll(".case-row");
   row.forEach((element) => {
       element.addEventListener('click', () => {
-      window.location.replace("<%= root_path %>");
+      const case_id = element.dataset.caseId;
+      window.location.replace("/cases/"+case_id);
     });
   });
-      
-  
 </script>
