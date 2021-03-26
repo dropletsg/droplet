@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>All Coordinators</h1>
+  <div class="row">  
+    <ul>
+      <% @coordinators.each do |coordinator| %>
+        <li><%= link_to coordinator.name, coordinator_path(coordinator) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <%= link_to "Create Coordinator", new_coordinator_path %>
+</div>
