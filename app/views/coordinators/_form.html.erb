@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">  
+    <div class="col"> 
+      <%= simple_form_for(coordinator) do |f| %>
+        <%= f.input :name %>
+        <%= f.input :profile_photo %>
+        <%= f.input :email %>
+        <%= f.input :mobile_number %>
+        <%= f.input :description %>
+        <%= f.input :telegram_handle %>
+        <%= f.input :is_archived %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
