@@ -31,13 +31,11 @@
 </div>
 
 
-<!-- Placeholder for As a User I can view a Worker's Cases -->
-<tbody>
-  <% @workers.each do |worker| %>
-    <tr>
-      <td><%= worker.case.title %></td>
-      <td><%= worker.case.story_summary %></td>
-      <td><%= worker.case.story %></td>
-    </tr>
+<!-- Showing cases for each worker -->
+<ul>
+  <% @worker.cases.each do |f| %>
+    <%= f.title %>
+    <%= f.story_summary %>
   <% end %>
-</tbody>
+
+</ul>
