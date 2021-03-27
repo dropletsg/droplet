@@ -1,0 +1,4 @@
+<%= simple_form_for [ @worker, @workernote ] do |f| %>
+  <%= f.input :content %>
+  <%= f.submit "Submit note", class: "btn btn-primary" %>
+<% end %>

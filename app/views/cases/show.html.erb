@@ -1,10 +1,10 @@
-<div class="container">  
+<div class="container">
     <div class="row  justify-content-around">
         <div class="col-4 case-profile-card">
           <div class="worker-img-container">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
-          
+
           <div class="case-info-container">
             <p>Catergory <%= @case.category.capitalize %></p>
             <div class="row">
@@ -32,7 +32,21 @@
             </div>
             <p>Coordinator  <%= @case.coordinator.name%></p>
           </div>
+
+          <h2>Case's notes</h2>
+
+          <ul class="list-group">
+            <% @case.case_notes.each do |note| %>
+              <li class="list-group-item"><%= note.content %></li>
+            <% end %>
+          </ul>
+
+          <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
         </div>
+
+
+
+
         <div class="col-7" >
           <div class="case-worker case-card">
             <div class="row">
@@ -72,11 +86,11 @@
     </tr>
     <tr>
         <tr class = "case-row" data-case-id="<%= @case.id %>">
-            <td><%= @case.id %></td> 
+            <td><%= @case.id %></td>
             <th><%= @case.created_at.strftime("%d %B %Y") %></th>
             <td><%= @case.worker.name %></td>
             <td><%= @case.status %></td>
-        
+
         </tr>
     </tr>
   </table>

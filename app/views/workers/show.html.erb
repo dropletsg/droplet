@@ -1,24 +1,63 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col mt-5 mb-5">
-      <div class="card" style="width: 18rem;">
-        <%= cl_image_tag @worker.payment_qr.key, class:"card-img-top" %>
-        <div class="card-body">
-          <h5 class="card-title">Name:<%= @worker.name %></h5>
-          <p class="card-text">
-            <p>Email:<%= @worker.email %></p>
-            <p>Alias:<%= @worker.alias %></p>
-            <p>Mobile number:<%= @worker.mobile_number %></p>
-            <p>Description:<%= @worker.description %></p>
-            <p>ID Type:<%= @worker.id_type %></p>
-            <p>Valid ID?:<%= @worker.id_valid %></p>
-            <p>Payment link:<%= @worker.payment_link %></p>
-            <p>Archived:<%= @worker.is_archived %></p>
-          </p>
-          <%= link_to "Edit", edit_worker_path %>
-          <%= link_to "Back", workers_path %>
-        </div>
+      <%= cl_image_tag @worker.payment_qr.key, class:"card-img-top" %>
+      <div class="card-body">
+        <h5 class="card-title">Name:<%= @worker.name %></h5>
+        <p class="card-text">
+          <p>Email:<%= @worker.email %></p>
+          <p>Name:<%= @worker.name %></p>
+          <p>Alias:<%= @worker.alias %></p>
+          <p>Mobile number:<%= @worker.mobile_number %></p>
+          <p>Description:<%= @worker.description %></p>
+          <p>Photo ID front:<%= cl_image_tag @worker.photo_id_front.key %></p>
+          <p>Photo ID back:<%= cl_image_tag @worker.photo_id_back.key %></p>
+          <p>ID selfie:<%= cl_image_tag @worker.id_selfie.key %></p>
+          <p>ID Type:<%= @worker.id_type %></p>
+          <p>Valid ID?:<%= @worker.id_valid %></p>
+          <p>Payment link:<%= @worker.payment_link %></p>
+          <p>Payment QR:<%= cl_image_tag @worker.payment_qr.key %></p>
+          <p>Archived:<%= @worker.is_archived %></p>
+        </p>
+        <%= link_to "Edit", edit_worker_path %>
+        <%= link_to "Back", workers_path %>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Worker's cases -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Worker's cases</h1>
+      <% @worker.cases.each do |c| %>
+        <%= c.title %>
+        <%= c.story_summary %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Worker's notes -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Worker's notes</h1>
+
+      <ul class="list-group">
+        <% @worker.worker_notes.each do |note| %>
+          <li class="list-group-item"><%= note.content %></li>
+        <% end %>
+      </ul>
+
+      <%= link_to 'Leave a note', new_worker_worker_notes_path(@worker) %>
     </div>
   </div>
 </div>
