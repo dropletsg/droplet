@@ -2,31 +2,39 @@ class CasesController < ApplicationController
   before_action :set_case, only: %i[show edit update]
 
   def index
-    @cases = Case.all
+    @cases = policy_scope(Case).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    authorize @case
+  end
 
   def new
     @case = Case.new
+    authorize @case
   end
 
   def create
     @case = Case.new(case_params)
     @case.user = current_user
-
+    authorize @case
     if @case.save!
       redirect_to cases_path, notice: "Case is created successfully."
     else
       render :new
       flash[:alert] = "Case not created."
     end
+
+
   end
 
-  def edit; end
+  def edit
+    authorize @case
+  end
 
   def update
     redirect_to cases_path, notice: "Case updated successfully." if @case.update(case_params)
+    authorize @case
   end
 
   private
