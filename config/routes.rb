@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   resources :coordinators
   resources :workers
+  resources :cases
 end
