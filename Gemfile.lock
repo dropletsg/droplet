@@ -131,11 +131,18 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     minitest (5.14.4)
+    monetize (1.9.4)
+      money (~> 6.12)
+    money (6.13.8)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.14.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9.0)
+      money (~> 6.13.2)
+      railties (>= 3.0)
     msgpack (1.4.2)
     netrc (0.11.0)
     nio4r (2.5.7)
-    nokogiri (1.11.2-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -260,11 +267,6 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  x86_64-darwin-18
-<<<<<<< HEAD
-=======
-  x86_64-darwin-20
->>>>>>> d59fbc3b99510bf496c461a31bf107a9f6b7ca60
   x86_64-linux
 
 DEPENDENCIES
@@ -279,6 +281,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  money-rails (~> 1.12)
   pg (~> 1.1)
   pry-byebug
   pry-rails
