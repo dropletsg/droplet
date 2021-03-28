@@ -108,6 +108,8 @@
       <td>Photo ID (back)</td>
       <td>
           <%= f.input_field  :photo_id_back, label: false %>
+          <%= f.hidden_field :case_id, value: @case.id %>
+          
           <%= f.submit 'Save' %>
       </td>
       <td>@twitter</td>
