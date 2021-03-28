@@ -1,29 +1,69 @@
 .worker-img-container{
-    background:#ccf2f4;
-    text-align:center;
-    padding: 30px;
+  background:#ccf2f4;
+  text-align:center;
+  padding: 30px;
 }
 
 .case-info-container{
-    padding: 20px;
+  padding: 20px;
 }
 
 .case-worker{
-    border-top: 15px solid #ccf2f4;
-    padding: 20px;
+ 
 }
 
 .case-index-top{
-    height: 100%;
-    width: 90%;
-    margin: 0 auto;
-    text-align: right;
-    margin-top: 10px;
+  height: 100%;
+  width: 90%;
+  margin: 0 auto;
+  text-align: right;
+  margin-top: 10px;
 }
 
+.toggle{
+  width: 100%;
+  background-color: #ccf2f4;
+  text-align: right;
+}
+
+.custom-switch.left {
+    padding-left: 0 !important;
+  }
+  
+  .custom-switch.left .custom-control-label {
+    left: 0;
+    padding-left: 0;
+  }
+  
+  .custom-switch.left .custom-control-label::before {
+    left: 2.25rem !important;
+  }
+  
+  .custom-switch.left .custom-control-label::after {
+    left: calc(2.25rem + 2px) !important;
+  }
+
 .red{
-    background-color: #df1e1e;
+  background-color: #f37171;
 }
 .green{
-    background-color: #4cb951;
+  background-color: #E2EFDA;
+}
+
+.fa-check-circle{
+  color: #008009;
+  font-size: 25px;
+}
+
+.fa-times-circle{
+  color: #b40000;
+  font-size: 25px;
+}
+
+.verification tbody th{
+  text-align: center;
+}
+
+.verification tbody tr td:last-child{
+  text-align: center;
 }

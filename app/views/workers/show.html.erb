@@ -18,7 +18,17 @@
           <%= link_to "Edit", edit_worker_path %>
           <%= link_to "Back", workers_path %>
         </div>
+         
       </div>
     </div>
   </div>
+  Photo Id Front 
+  <p><img src="<%= cl_image_path @worker.photo_id_front.key %>" alt=""></p>
+  Photo Id back 
+  <p><img src="<%= cl_image_path @worker.photo_id_back.key %>" alt=""></p>
+  Selfie + id
+  <p><img src="<%= cl_image_path @worker.id_selfie.key %>" alt=""></p>
+  Payment QR
+  <p><img src="<%= cl_image_path @worker.payment_qr.key %>" alt=""></p>
+
 </div>

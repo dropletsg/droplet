@@ -35,8 +35,15 @@
           </div>
         </div>
         <div class="col-7" >
-          <div class="case-worker case-card">
-            <div class="row">
+          <div class="case-worker case-card ">
+          <div class="toggle p-1 ">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1"></label>
+            </div> 
+          </div>
+
+            <div class="row p-4">
               <div class="col">
                 <p>Name <%= @case.worker.name %></p>
                 <p>Mobile Number <%= @case.worker.mobile_number %></p>
@@ -63,19 +70,19 @@
 
 
 <div class="container">
-   <div class="case-card">
+  <div class="case-card">
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">Step</th>
+      <th scope="col" style="text-align: center;">Step</th>
       <th scope="col">Verification Item</th>
       <th scope="col">Details</th>
-      <th scope="col">Completed</th>
+      <th scope="col" style="text-align: center;">Completed</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="verification">
     <tr>
-      <th scope="row">1</th>
+      <th scope="row" class = "">1</th>
       <td>Call Worker</td>
       <td>
         <div class="form-check">
@@ -83,7 +90,9 @@
           <label class="form-check-label" for="callWorker">Call Done</label>
         </div>
       </td>
-      <td><i class="far fa-check-circle"></i></td>
+      <td>
+        
+      </td>
     </tr>
 
    <%= simple_form_for(@case.worker) do |f| %>
@@ -91,9 +100,7 @@
       <th scope="row">2</th>
       <td>Photo ID (front)</td>
       <td>
-        
-          <%= f.input_field :photo_id_front, label: false %>
-        
+        <%= f.input_field :photo_id_front, label: false %>
       </td>
       <td>
         <% if  @case.worker.photo_id_front.attached? %>
@@ -103,96 +110,145 @@
         <% end %>
       </td>
     </tr>
-    <tr>
+
+    <tr class = "case-completed" data-completed="<%= @case.worker.photo_id_back.attached? %>">
       <th scope="row">3</th>
       <td>Photo ID (back)</td>
       <td>
           <%= f.input_field  :photo_id_back, label: false %>
-          <%= f.hidden_field :case_id, value: @case.id %>
-          
-          <%= f.submit 'Save' %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.photo_id_back.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <% end %>
-
-
-    <tr>
+   
+    <tr class = "case-completed" data-completed="<%= @case.worker.id_selfie.attached? %>">
       <th scope="row">4</th>
       <td>Selfie + ID</td>
       <td>
-        <%= simple_form_for(@case.worker) do |f| %>
-          <%= f.input :id_selfie, label: false %>
-        <% end %>  
+          <%= f.input_field :id_selfie, label: false %> 
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.id_selfie.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+
+    <tr class = "case-completed" data-completed="<%= @case.worker.id_type.present? %>">
       <th scope="row">5</th>
       <td>Type of ID</td>
       <td>
-        <%= simple_form_for(@case.worker) do |f| %>
-          <%= f.input :id_type, label: false %>
-        <% end %>  
+        <%= f.input :id_type, label: false %> 
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.id_type.present? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+
+    <tr class = "case-completed" data-completed="<%= @case.worker.id_valid? %>">
       <th scope="row">6</th>
       <td>Valid ID</td>
       <td>
-        <%= simple_form_for(@case.worker) do |f| %>
-          <%= f.input :id_valid, label: false %>
-        <% end %>  
+        <%= f.input :id_valid, label: false %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.id_valid? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+
+    <tr class = "case-completed" data-completed="<%= @case.worker.payment_link.present? %>">
       <th scope="row">7</th>
       <td>Paynow/Paylah</td>
       <td>
-        <%= simple_form_for(@case.worker) do |f| %>
-          <%= f.input :payment_link, label: false %>
-        <% end %>  
+        <%= f.input :payment_link, label: false %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.payment_link.present? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+    
+    <tr class = "case-completed" data-completed="<%= @case.worker.payment_qr.attached? %>">
       <th scope="row">8</th>
       <td>Payment QR</td>
       <td>
-        <%= simple_form_for(@case.worker) do |f| %>
-          <%= f.input :payment_qr, label: false %>
-        <% end %>  
+        <%= f.input :payment_qr, label: false %>
+        <%= f.hidden_field :case_id, value: @case.id %>
+        <%= f.submit 'Save' %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.worker.payment_qr.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+    <% end %>
+    
+    <%= simple_form_for(@case) do |f| %>
+    <tr class = "case-completed" data-completed="<%= @case.files.attached? %>">
       <th scope="row">9</th>
       <td>Claim Evidence</td> <!--is case.files -->
       <td>
-        <%= simple_form_for(@case) do |f| %>
-          <%= f.input :files, label: false %>
-        <% end %>  
+        <%= f.input :files, label: false %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.files.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
+
     <tr>
       <th scope="row">10</th>
       <td>Claim Verdict</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+      <td></td>
+      <td>
+        <% if  @case.files.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
-    <tr>
+
+    <tr class = "case-completed" data-completed="<%= @case.paid_proof.attached? %>">
       <th scope="row">11</th>
       <td>Payout Proof</td>
       <td>
-        <%= simple_form_for(@case) do |f| %>
-            <%= f.input :paid_proof, label: false %>
-        <% end %> 
+        <%= f.input :paid_proof, label: false %>
       </td>
-      <td>@twitter</td>
+      <td>
+        <% if  @case.paid_proof.attached? %>
+          <i class="far fa-check-circle"></i>
+        <% else %>
+          <i class="far fa-times-circle"></i>
+        <% end %>
+      </td>
     </tr>
+    <% end %>  
+
   </tbody>
 </table>
 </div>
@@ -202,8 +258,6 @@
   row.forEach((element) => {
       if (element.dataset.completed.toLowerCase() == 'true'){
         element.classList.add("green");
-      }else {
-         element.classList.add("red");
       }
   });
 

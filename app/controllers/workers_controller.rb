@@ -22,11 +22,11 @@ class WorkersController < ApplicationController
   end
 
   def update
+    @worker.update(worker_params)
     if upload_verification_doc?
       case_id = Case.find(params[:worker][:case_id])
       redirect_to case_path(case_id)
     else
-      @worker.update(worker_params)
       redirect_to worker_path
     end
   end
