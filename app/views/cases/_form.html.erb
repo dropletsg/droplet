@@ -1,0 +1,19 @@
+<div class="container">
+  <%= simple_form_for(@case) do |f| %>
+    <%= f.association :coordinator %>
+    <%= f.association :worker %>
+    <%= f.input :title %>
+    <%= f.input :story_summary %>
+    <%= f.input :story %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :target_amount %>
+    <%= f.input :payment_reference %>
+    <%= f.input :status %>
+    <%= f.input :category %>
+    <%= f.input :admin_approved %>
+    <%= f.input :paid_proof %>
+    <%= f.input :files %>
+    <%= f.submit %>
+  <% end %>
+</div>

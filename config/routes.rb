@@ -3,5 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :coordinators
-  resources :workers
+
+  resources :workers do
+    resource :worker_notes
+  end
+
+  resources :cases do
+    resource :case_notes
+  end
 end
