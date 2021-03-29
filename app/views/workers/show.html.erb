@@ -30,12 +30,32 @@
   </div>
 </div>
 
+<!-- Worker's cases -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Worker's cases</h1>
+      <% @worker.cases.each do |c| %>
+        <%= c.title %>
+        <%= c.story_summary %>
+    <% end %>
+    </div>
+  </div>
+</div>
 
-<!-- Showing cases for each worker -->
-<ul>
-  <% @worker.cases.each do |f| %>
-    <%= f.title %>
-    <%= f.story_summary %>
-  <% end %>
+<!-- Worker's notes -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Worker's notes</h1>
 
-</ul>
+      <ul class="list-group">
+        <% @worker.worker_notes.each do |note| %>
+          <li class="list-group-item"><%= note.content %></li>
+        <% end %>
+      </ul>
+
+      <%= link_to 'Leave a note', new_worker_worker_notes_path(@worker) %>
+    </div>
+  </div>
+</div>
