@@ -1,16 +1,33 @@
 <div class="container">
+<h1>Coordinator</h1>
   <div class="row">  
-    <div class="col">      
-      <h1><%= @coordinator.name %></h1>
-      <%= cl_image_tag @coordinator.profile_photo.key %>
-      <p>Email: <%= @coordinator.email %></p>
-      <p>Mobile number: <%= @coordinator.mobile_number %></p>
-      <p>Description: <%= @coordinator.description %></p>
-      <p>Telegram handle: <%= @coordinator.telegram_handle %></p>
-      <p>Archived: <%= @coordinator.is_archived %></p>
+    <div class="col">  
+      <div class="container">
+        <div class="case-profile-card p-3">
+          <% if @coordinator.profile_photo.attached? %>
+            <%= cl_image_tag @coordinator.profile_photo.key, class: "avatar-worker" %>
+          <% else %>
+            <img class="avatar-large" alt="avatar-large" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+          <% end %>
+          <p><strong>Name: </strong><%= @coordinator.name %></p>
+          <p><strong>Email: </strong><%= @coordinator.email %></p>
+          <p><strong>Mobile number: </strong><%= @coordinator.mobile_number %></p>
+          <p><strong>Telegram handle: </strong><%= @coordinator.telegram_handle %></p>
+          <p><strong>Archived: </strong><%= @coordinator.is_archived %></p>
+          <p><%= link_to "Edit Coordinator", edit_coordinator_path, class: "btn btn-outline-primary mt-3" %></p>
+        </div>  
+      </div>
+      <p><%= link_to "All Coordinators", coordinators_path, class: "btn btn-outline-primary" %></p>
+    </div>
 
-      <p><%= link_to "Edit Coordinator", edit_coordinator_path %></p>
-      <p><%= link_to "All Coordinators", coordinators_path %></p>
+    <div class="col">
+      <div class="case-profile-card">
+        <p><strong>Description: </strong><%= @coordinator.description %></p>
+      </div>
+    </div>
+      
     </div>
   </div>
 </div>
+
+
