@@ -1,3 +1,4 @@
+<h1>Worker's details</h1>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col mt-5 mb-5">
@@ -6,13 +7,19 @@
         <div class="card-body">
           <h5 class="card-title">Name:<%= @worker.name %></h5>
           <p class="card-text">
+            <p>ID:<%= @worker.id %></p>
             <p>Email:<%= @worker.email %></p>
+            <p>Name:<%= @worker.name %></p>
             <p>Alias:<%= @worker.alias %></p>
             <p>Mobile number:<%= @worker.mobile_number %></p>
             <p>Description:<%= @worker.description %></p>
+            <p>Photo ID front:<%= @worker.photo_id_front %></p>
+            <p>Photo ID back:<%= @worker.photo_id_back %></p>
+            <p>ID selfie:<%= @worker.id_selfie %></p>
             <p>ID Type:<%= @worker.id_type %></p>
             <p>Valid ID?:<%= @worker.id_valid %></p>
             <p>Payment link:<%= @worker.payment_link %></p>
+            <p>Payment QR:<%= @worker.payment_qr %></p>
             <p>Archived:<%= @worker.is_archived %></p>
           </p>
           <%= link_to "Edit", edit_worker_path %>
@@ -22,3 +29,13 @@
     </div>
   </div>
 </div>
+
+
+<!-- Showing cases for each worker -->
+<ul>
+  <% @worker.cases.each do |f| %>
+    <%= f.title %>
+    <%= f.story_summary %>
+  <% end %>
+
+</ul>
