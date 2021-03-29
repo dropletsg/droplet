@@ -1,0 +1,82 @@
+<div class="public-container">
+<h1>Cases</h1>
+  <div class="row">
+    <% @cases.each do |c| %>
+      <div class="public-card">
+
+        <div class="card-header row justify-content-start pb-0">
+          <p>Case ref<%= c.id %></p>
+        </div>
+          
+        <div class="row pt-3">
+          <div class="col">
+            <p>Category</p>
+          </div>
+          <div class="col">
+            <%= c.category %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>Start Date</p>
+            <p>End Date</p>
+          </div>
+          <div class="col">
+            <p><%= c.end_date %></p>
+            <p><%= c.start_date %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+           <p>Progress</p>
+          </div>
+          <div class="col">  
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col">
+            <p>Summary</p>
+          </div>
+          <div class="col">
+            <p><%= c.story_summary %></p>
+          </div>
+        </div>
+        
+        <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#caseStory<%= c.id %>" aria-expanded="false" aria-controls="caseStory<%= c.id %>">
+            Story
+          </button>
+        </p>
+
+        <div class="collapse" id="caseStory<%= c.id %>">
+          <div class="card card-body">
+            <%= c.story %>
+          </div>
+        </div>
+
+        <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#caseCoordinator<%= c.id %>" aria-expanded="false" aria-controls="caseCoordinator<%= c.id %>">
+          Contact Coordinator
+          </button>
+        </p>
+
+        <div class="collapse" id="caseCoordinator<%= c.id %>">
+          <div class="card card-body">
+            <%= c.coordinator.name %>
+          </div>
+        </div>
+
+      </div>
+    <%end%>
+  </div>
+</div>
+  
+
+
+
