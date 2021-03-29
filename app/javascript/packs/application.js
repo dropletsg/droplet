@@ -19,7 +19,9 @@ ActiveStorage.start()
 // ----------------------------------------------------
 
 // External imports
-import "bootstrap";
+import 'jquery'
+import 'popper.js'
+import "bootstrap"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
