@@ -8,6 +8,7 @@ class Case < ApplicationRecord
   has_many_attached :files
 
   monetize :target_amount_cents
+  
 
   STATUS = ["New","Shortlisted","Active","Closed"]
 

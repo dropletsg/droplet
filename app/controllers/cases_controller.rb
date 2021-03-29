@@ -5,7 +5,10 @@ class CasesController < ApplicationController
     @cases = Case.all
   end
 
-  def show; end
+  def show
+    @worker = @case.worker
+    
+  end
 
   def new
     @case = Case.new
@@ -26,7 +29,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    redirect_to cases_path, notice: "Case updated successfully." if @case.update(case_params)
+    if @case.update
+      redirect_to cases_path, notice: "Case updated successfully." 
+    end
   end
 
   private

@@ -35,7 +35,7 @@ class WorkersController < ApplicationController
 
   # params use set?
   def worker_params
-    params.require(:worker).permit(:email, :name, :alias, :mobile_number, :description, :photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr, :is_archived)
+    params.require(:worker).permit(:email, :name, :alias, :mobile_number, :description, :photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr, :is_archived, cases_attributes: [:paid_proof, :files, :story])
   end
 
   def set_worker
