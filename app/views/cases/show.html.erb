@@ -161,13 +161,13 @@
       <th scope="row">6</th>
       <td>Valid ID</td>
       <td>
-        <%= f.input :id_valid, label: false %>
+        <%= f.input :id_valid, label: false, input_html: { 'data-action': 'change->form-cases#validId'} %>
       </td>
       <td>
         <% if  @case.worker.id_valid? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="validIdCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="validIdCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -176,13 +176,13 @@
       <th scope="row">7</th>
       <td>Paynow/Paylah</td>
       <td>
-        <%= f.input :payment_link, label: false %>
+        <%= f.input :payment_link, label: false, input_html: { 'data-action': 'keydown->form-cases#payNow'} %>
       </td>
       <td>
         <% if  @case.worker.payment_link.present? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="payNowCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="payNowCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -191,15 +191,14 @@
       <th scope="row">8</th>
       <td>Payment QR</td>
       <td>
-        <%= f.input :payment_qr, label: false %>
+        <%= f.input :payment_qr, label: false, input_html: { 'data-action': 'change->form-cases#qrCode'} %>
         <%= f.hidden_field :case_id, value: @case.id %>
-        <%= f.submit 'Save' %>
       </td>
       <td>
         <% if  @case.worker.payment_qr.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="qrCodeCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="qrCodeCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -210,13 +209,13 @@
       <th scope="row">9</th>
       <td>Claim Evidence</td> <!--is case.files -->
       <td>
-        <%= f.input :files, label: false %>
+        <%= f.input :files, label: false, input_html: { 'data-action': 'change->form-cases#claim'} %>
       </td>
       <td>
         <% if  @case.files.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="claimCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="claimCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -224,12 +223,16 @@
     <tr>
       <th scope="row">10</th>
       <td>Claim Verdict</td>
-      <td></td>
+      <td>
+        <%= simple_fields_for :claim  do |g|%>
+        <%= g.input :claim, label: false, as: :select, collection: ['Accepted', 'Rejected'], input_html: { 'data-action': 'change->form-cases#claimVerdict' } %>
+        <% end %>
+      </td>
       <td>
         <% if  @case.files.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="verdictCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="verdictCheck"></i>
         <% end %>
       </td>
     </tr>
