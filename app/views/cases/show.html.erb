@@ -1,10 +1,10 @@
-<div class="container">  
+<div class="container">
     <div class="row  justify-content-around">
         <div class="col-4 case-profile-card">
           <div class="worker-img-container">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
-          
+
           <div class="case-info-container">
             <p>Catergory <%= @case.category.capitalize %></p>
             <div class="row">
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="progress" style="height: 20px;">
-              <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;" 
+              <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;"
                    aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
             <div class="custom-control custom-switch">
               <input type="checkbox" class="custom-control-input" id="customSwitch1">
               <label class="custom-control-label" for="customSwitch1"></label>
-            </div> 
+            </div>
           </div>
 
             <div class="row p-4">
@@ -71,7 +71,7 @@
 
 <div class="container">
   <div class="case-card">
-  <table class="table">
+  <table class="table" data-controller="form-cases">
   <thead>
     <tr>
       <th scope="col" style="text-align: center;">Step</th>
@@ -86,12 +86,12 @@
       <td>Call Worker</td>
       <td>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="callWorker">
+          <input class="form-check-input" type="checkbox" value="" id="callWorker" data-action="click->form-cases#callWorker">
           <label class="form-check-label" for="callWorker">Call Done</label>
         </div>
       </td>
       <td>
-        
+        <i data-form-cases-target="callCheck" class="far fa-times-circle"></i>
       </td>
     </tr>
 
@@ -125,12 +125,12 @@
         <% end %>
       </td>
     </tr>
-   
+
     <tr class = "case-completed" data-completed="<%= @case.worker.id_selfie.attached? %>">
       <th scope="row">4</th>
       <td>Selfie + ID</td>
       <td>
-          <%= f.input_field :id_selfie, label: false %> 
+          <%= f.input_field :id_selfie, label: false %>
       </td>
       <td>
         <% if  @case.worker.id_selfie.attached? %>
@@ -145,7 +145,7 @@
       <th scope="row">5</th>
       <td>Type of ID</td>
       <td>
-        <%= f.input :id_type, label: false %> 
+        <%= f.input :id_type, label: false %>
       </td>
       <td>
         <% if  @case.worker.id_type.present? %>
@@ -185,7 +185,7 @@
         <% end %>
       </td>
     </tr>
-    
+
     <tr class = "case-completed" data-completed="<%= @case.worker.payment_qr.attached? %>">
       <th scope="row">8</th>
       <td>Payment QR</td>
@@ -203,7 +203,7 @@
       </td>
     </tr>
     <% end %>
-    
+
     <%= simple_form_for(@case) do |f| %>
     <tr class = "case-completed" data-completed="<%= @case.files.attached? %>">
       <th scope="row">9</th>
@@ -247,7 +247,7 @@
         <% end %>
       </td>
     </tr>
-    <% end %>  
+    <% end %>
 
   </tbody>
 </table>
@@ -270,6 +270,6 @@
 
 
 
- 
+
 
 
