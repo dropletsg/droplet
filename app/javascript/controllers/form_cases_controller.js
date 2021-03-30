@@ -10,15 +10,49 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-static targets = ['callCheck']
+static targets = ['callCheck', 'frontIdCheck', 'backIdCheck', 'selfieCheck', 'idTypeCheck']
 
   connect() {
     console.log('Hello, Stimulus!')
   }
 
   callWorker() {
-    this.callCheckTarget.classList.toggle('fa-times-circle');
-    this.callCheckTarget.classList.toggle('fa-check-circle');
-    this.callCheckTarget.parentNode.parentNode.classList.toggle('green');
+    this.checkSection(this.callCheckTarget);
   }
+
+  frontId() {
+    this.checkSection(this.frontIdCheckTarget);
+  }
+
+  backId() {
+    this.checkSection(this.backIdCheckTarget)
+  }
+
+  selfie() {
+    this.checkSection(this.selfieCheckTarget)
+  }
+
+  idType(e) {
+    if (e.target.value == '') {
+      this.clearSection(this.idTypeCheckTarget);
+    } else {
+      this.idTypeCheckTarget.classList.remove('fa-times-circle');
+      this.idTypeCheckTarget.classList.add('fa-check-circle');
+      this.idTypeCheckTarget.parentNode.parentNode.classList.add('green');
+    }
+  }
+
+  clearSection(element) {
+    element.classList.add('fa-times-circle');
+    element.classList.remove('fa-check-circle');
+    element.parentNode.parentNode.classList.remove('green');
+  }
+
+  checkSection(element) {
+    element.classList.toggle('fa-times-circle');
+    element.classList.toggle('fa-check-circle');
+    element.parentNode.parentNode.classList.toggle('green');
+  }
+
+
 }

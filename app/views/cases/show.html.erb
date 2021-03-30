@@ -100,13 +100,14 @@
       <th scope="row">2</th>
       <td>Photo ID (front)</td>
       <td>
-        <%= f.input_field :photo_id_front, label: false %>
+        <%= f.input_field :photo_id_front, label: false, data: { 'action': "change->form-cases#frontId" }
+ %>
       </td>
-      <td>
+      <td >
         <% if  @case.worker.photo_id_front.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i data-form-cases-target="frontIdCheck" class="far fa-times-circle"></i>
         <% end %>
       </td>
     </tr>
@@ -115,13 +116,13 @@
       <th scope="row">3</th>
       <td>Photo ID (back)</td>
       <td>
-          <%= f.input_field  :photo_id_back, label: false %>
+          <%= f.input_field  :photo_id_back, label: false, data: { 'action': "change->form-cases#backId" } %>
       </td>
       <td>
         <% if  @case.worker.photo_id_back.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="backIdCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="backIdCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -130,13 +131,13 @@
       <th scope="row">4</th>
       <td>Selfie + ID</td>
       <td>
-          <%= f.input_field :id_selfie, label: false %>
+          <%= f.input_field :id_selfie, label: false, data: { 'action': "change->form-cases#selfie" } %>
       </td>
       <td>
         <% if  @case.worker.id_selfie.attached? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="selfieCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="selfieCheck"></i>
         <% end %>
       </td>
     </tr>
@@ -145,13 +146,13 @@
       <th scope="row">5</th>
       <td>Type of ID</td>
       <td>
-        <%= f.input :id_type, label: false %>
+        <%= f.input :id_type, label: false, as: :select, collection: ['NRIC', 'Passport'], input_html: { 'data-action': 'change->form-cases#idType' } %>
       </td>
       <td>
         <% if  @case.worker.id_type.present? %>
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" data-form-cases-target="idTypeCheck"></i>
         <% else %>
-          <i class="far fa-times-circle"></i>
+          <i class="far fa-times-circle" data-form-cases-target="idTypeCheck"></i>
         <% end %>
       </td>
     </tr>
