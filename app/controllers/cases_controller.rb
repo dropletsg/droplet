@@ -5,7 +5,19 @@ class CasesController < ApplicationController
     @cases = Case.all
   end
 
-  def show; end
+  def show
+    if Rails.env.development?
+      @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgoogle.com&layout=button&size=large&appId=321172835013412&width=77&height=28"
+    else
+      @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{case_url(@case)}&layout=button&size=large&appId=321172835013412&width=77&height=28"
+    end
+
+    if Rails.env.development?
+      @telegram_url = "https://google.com"
+    else
+      @telegram_url = case_url(@case)
+    end
+  end
 
   def new
     @case = Case.new

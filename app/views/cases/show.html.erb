@@ -1,10 +1,38 @@
-<div class="container">  
+<!-- Social sharing buttons -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-share-url="<%= @telegram_url %>" data-comment="I am sharing this with you because this worker needs assistance. Please consider helping!" data-size="large"></script>
+
+      <!-- Not sure how to convert this into a WhatsApp icon. Currently text. -->
+      <!-- Link is currently shown as text. br and \n does not work to force it to new line -->
+      <%= link_to "Click here to share on Whatsapp",
+        "https://api.whatsapp.com/send?text=I am sharing this with you because this worker needs assistance. Please consider helping! #{case_url(@case)}",
+        target: :_blank
+      %>
+
+      <iframe
+        src="<%= @facebook_url %>"
+        width="77"
+        height="28"
+        style="border:none;overflow:hidden"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
     <div class="row  justify-content-around">
         <div class="col-4 case-profile-card">
           <div class="worker-img-container">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
-          
+
           <div class="case-info-container">
             <p>Catergory <%= @case.category.capitalize %></p>
             <div class="row">
@@ -58,6 +86,10 @@
     </div>
 </div>
 
+
+
+
+
 <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
 
 
@@ -72,11 +104,11 @@
     </tr>
     <tr>
         <tr class = "case-row" data-case-id="<%= @case.id %>">
-            <td><%= @case.id %></td> 
+            <td><%= @case.id %></td>
             <th><%= @case.created_at.strftime("%d %B %Y") %></th>
             <td><%= @case.worker.name %></td>
             <td><%= @case.status %></td>
-        
+
         </tr>
     </tr>
   </table>
