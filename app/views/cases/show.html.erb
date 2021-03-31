@@ -36,12 +36,14 @@
         </div>
         <div class="col-7" >
           <div class="case-worker case-card ">
-          <div class="toggle p-1 ">
-            <div class="custom-control custom-switch">
-              <input type="checkbox" class="custom-control-input" id="customSwitch1">
-              <label class="custom-control-label" for="customSwitch1"></label>
-            </div> 
+          <div class="border">
+            
+             <input class ="toggle" type="checkbox" id="shortlist" >
+              <label for="shortlist">Shortlisted</label>
+             
+          
           </div>
+         
 
             <div class="row p-4">
               <div class="col">
@@ -266,6 +268,19 @@
   if  (document.getElementById("callWorker").checked == true){
     element.classList.add("green");
   }
+
+  const s = document.getElementById("shortlist");
+  s.addEventListener('change',(e)=>{
+    if (e.target.checked == true){
+      <% @case.update!(status: "Shortlisted") %>
+    
+      console.log("<%= @case.status %>")
+    }else{
+      <% @case.update(status: "New") %>
+      console.log("<%= @case.status %>")
+    }
+  })
+  
 </script>
 
 
