@@ -1,9 +1,5 @@
 class PaymentsController < ApplicationController
   def show
-    @payment = Payment.find(params[:id])
-  end
-
-  def new
     @payment = Payment.where(payment_type: 'pending').find(params[:id])
   end
 
@@ -26,12 +22,22 @@ class PaymentsController < ApplicationController
         currency: 'sgd',
         quantity: 1
       }],
-      success_url: payment_url(payment),
-      cancel_url: payment_url(payment)
+      success_url: success_payment_url(payment),
+      cancel_url: success_payment_url(payment),
+      payment_intent_data: {
+        metadata: {
+          payment_id: payment.id,
+          case_id: payment.case.id
+        }
+      }
     )
 
     payment.update(checkout_session_id: session.id)
-    redirect_to new_payment_path(payment)
+    redirect_to payment_path(payment)
+  end
+
+  def success
+    @payment = Payment.find(params[:id])
   end
 
   private

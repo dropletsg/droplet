@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row py-4">
+    <div class="col">
+      <h1>Payment successful!</h1>
+      <p>Contributed <strong><%= humanized_money_with_symbol @payment.amount %></strong> to <strong><%= @payment.case.worker.alias %></strong> for <strong><%= @payment.case.title %></strong></p>
+      <%= link_to 'Back to home', root_path %>
+    </div>
+  </div>
+</div>
