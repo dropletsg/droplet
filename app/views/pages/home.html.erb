@@ -9,8 +9,15 @@
       <ul>
         <li><a href="#section1"></a></li>
         <li><a href="#section2">About Us</a></li>
-        <li><a href="#section3">Donate</a></li>
-        <li><a href="#section4">Contact Us</a></li> 
+        <li><div class="dropdown">
+          <a class="dropbtn" href="#section3">Donate</a>
+          <div class="dropdown-content">
+            <%= link_to "Cases", active_cases_path %>
+            <a href="#">Solidarity Fund</a>
+          </div> 
+        </li>
+        <li><a href="#section4">Contact Us</a>  
+        </li> 
       </ul>
     </nav>
 
@@ -23,7 +30,7 @@
           <div class="col">
             <p>This is a platform to facilitate the redistribution of resources from Singaporeans to the migrant community.</p>
             <p>Your dollar goes a long way in ensuring that migrant workers remain safe, healthy, and cared for during and beyond their time in Singapore. The ultimate goal we are working towards is a society where migrant workers are treated equitably and with dignity.</p>
-            <a href="#section3">Donate Now</a>
+            <a href="#section3">Contribute Now</a>
           </div>
         </div>
       </div>

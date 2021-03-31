@@ -1,5 +1,15 @@
 <div class="public-container">
 <h1>Cases</h1>
+  <div class="filter-container">
+    <div class="row">
+      <p class="a">Category:</p>
+      <a class="filter-btn" href='active_cases'>Show all</a>
+      <a class="filter-btn" href='active_cases?category=Medical'>Medical</a>
+      <a class="filter-btn" href='active_cases?category=Agent_Fees'>Agent Fees</a>
+      <a class="filter-btn" href='active_cases?category=Bills'>Bills</a>
+      <a class="filter-btn" href='active_cases?category=Others'>Others</a>
+    </div>
+  </div>  
   <div class="row">
     <% @cases.each do |c| %>
       <div class="public-card">
