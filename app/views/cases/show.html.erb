@@ -33,7 +33,21 @@
             </div>
             <p>Coordinator  <%= @case.coordinator.name%></p>
           </div>
+
+          <h2>Case's notes</h2>
+
+          <ul class="list-group">
+            <% @case.case_notes.each do |note| %>
+              <li class="list-group-item"><%= note.content %></li>
+            <% end %>
+          </ul>
+
+          <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
         </div>
+
+
+
+
         <div class="col-7" >
           <div class="case-worker case-card ">
 
@@ -41,7 +55,7 @@
             <input class ="toggle" type="checkbox" id="shortlist" >
             <label for="shortlist">Shortlisted</label>
           </div>
-         
+
 
             <div class="row p-4">
               <div class="col">
@@ -274,14 +288,14 @@
   s.addEventListener('change',(e)=>{
     if (e.target.checked == true){
       <% @case.update!(status: "Shortlisted") %>
-    
+
       console.log("<%= @case.status %>")
     }else{
       <% @case.update(status: "New") %>
       console.log("<%= @case.status %>")
     }
   })
-  
+
 </script>
 
 

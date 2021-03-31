@@ -1,11 +1,32 @@
 <div class="container">
   <h1>All Coordinators</h1>
-  <div class="row">  
-    <ul>
-      <% @coordinators.each do |coordinator| %>
-        <li><%= link_to coordinator.name, coordinator_path(coordinator) %></li>
-      <% end %>
-    </ul>
-  </div>
-  <%= link_to "Create Coordinator", new_coordinator_path %>
+
+  <%= form_tag coordinators_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a coordinator" 
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary"%>
+  <% end %>
+  <p><%= link_to "Create Coordinator", new_coordinator_path, class: "btn btn-outline-primary" %></p>
+
+  <table class="table"> 
+    <tr>
+      <th scope="col">NO.</th>
+      <th scope="col">NAME</th>
+      <th scope="col">MOBILE NUMBER</th>
+      <th scope="col">EMAIL</th>
+    </tr>
+      
+    <% @coordinators.each_with_index do |coordinator, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= link_to coordinator.name, coordinator_path(coordinator) %></td>
+        <td><%= link_to coordinator.mobile_number, coordinator_path(coordinator) %></td>
+        <td><%= link_to coordinator.email, coordinator_path(coordinator) %></td>
+      </tr>
+    <% end %>
+      
+  </table>
 </div>
