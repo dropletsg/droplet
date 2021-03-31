@@ -5,5 +5,7 @@ class Worker < ApplicationRecord
   has_one_attached :photo_id_back
   has_one_attached :id_selfie
   has_one_attached :payment_qr
+
+  accepts_nested_attributes_for :cases
   validates_presence_of :name, :alias, :mobile_number
 end

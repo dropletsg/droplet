@@ -130,6 +130,7 @@ GEM
     mime-types-data (3.2021.0225)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     monetize (1.9.4)
       money (~> 6.12)
@@ -143,6 +144,9 @@ GEM
     msgpack (1.4.2)
     netrc (0.11.0)
     nio4r (2.5.7)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
@@ -235,6 +239,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus-rails (0.2.3)
+      rails (>= 6.0.0)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -269,6 +275,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-darwin-18
   x86_64-darwin-20
   x86_64-linux
@@ -298,6 +305,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
+  stimulus-rails
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
