@@ -1,49 +1,35 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>Listing Workers</h1>
-    </div>
-  </div>
-</div>
+  <h1>Listing Workers</h1>
 
+  <button type="button" class="btn btn-outline-primary"><%= link_to "Create new worker", new_worker_path %></button>
 
-<div class="container">
-  <div class="row">
-    <table>
-      <thead>
+  <table class="table table-striped"> 
+    <tr>
+      <th scope="col">NO.</th>
+      <th scope="col">Email</th>
+      <th scope="col">Name</th>
+      <th scope="col">Alias</th>
+      <th scope="col">Mobile number</th>
+      <th scope="col">Description</th>
+    </tr>
+
+    <tbody>
+      <% @workers.each_with_index do |worker, index| %>
         <tr>
-          <th>Email</th>
-          <th>Name</th>
-          <th>Alias</th>
-          <th>Mobile number</th>
-          <th>Description</th>
-          <th colspan="3"></th>
+          <td><%= index + 1 %>
+          <td><%= worker.email %></td>
+          <td><%= worker.name %></td>
+          <td><%= worker.alias %></td>
+          <td><%= worker.mobile_number %></td>
+          <td><%= worker.description %></td>
+          <td><%= link_to "Show", worker %></td>
+          <td><%= link_to "Edit", edit_worker_path(worker) %></td>
         </tr>
-      </thead>
+      <% end %>
+    </tbody>
+    
+  </table>
 
-      <tbody>
-        <% @workers.each do |worker| %>
-          <tr>
-            <td><%= worker.email %></td>
-            <td><%= worker.name %></td>
-            <td><%= worker.alias %></td>
-            <td><%= worker.mobile_number %></td>
-            <td><%= worker.description %></td>
-            <td><%= link_to "Show", worker %></td>
-            <td><%= link_to "Edit", edit_worker_path(worker) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row mt-4 mb-4">
-    <div class="col">
-      <button type="button" class="btn btn-outline-primary"><%= link_to "Create new worker", new_worker_path %></button>
-    </div>
-  </div>
 </div>
 
 

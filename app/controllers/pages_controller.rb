@@ -5,7 +5,11 @@ class PagesController < ApplicationController
   end
 
   def active_cases
-    @cases = Case.where(status: "active")
+    if params[:category]
+     @cases = Case.where('status = \'active\' AND category = :category', { category: params[:category] } )
+    else
+      @cases = Case.where(status: "active")
+    end
   end
 
 end
