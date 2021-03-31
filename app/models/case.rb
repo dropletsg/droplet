@@ -8,9 +8,13 @@ class Case < ApplicationRecord
   has_many_attached :files
 
   monetize :target_amount_cents
+
+  accepts_nested_attributes_for :worker, update_only: true
   
 
-  STATUS = ["New","Shortlisted","Active","Closed"]
+  STATUS = ["new","shortlisted","active","closed"]
+  CATEGORIES = ["medical","agent_fee","bills","others"]
+  ID_TYPES = %w[NRIC Passport]
 
   def total_received
     #payments.reduce

@@ -80,223 +80,36 @@
     </div>
 </div>
 
-<hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
-
-
 <div class="container">
-  <div class="case-card">
-  <table class="table" data-controller="form-cases">
-  <thead>
-    <tr>
-      <th scope="col" style="text-align: center;">Step</th>
-      <th scope="col">Verification Item</th>
-      <th scope="col">Details</th>
-      <th scope="col" style="text-align: center;">Completed</th>
-    </tr>
-  </thead>
-  <tbody class="verification">
-    <tr>
-      <th scope="row" class = "">1</th>
-      <td>Call Worker</td>
-      <td>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="callWorker" data-action="click->form-cases#callWorker">
-          <label class="form-check-label" for="callWorker">Call Done</label>
-        </div>
-      </td>
-      <td>
-        <i data-form-cases-target="callCheck" class="far fa-times-circle"></i>
-      </td>
-    </tr>
-
-   <%= simple_form_for(@case.worker) do |f| %>
-    <tr class = "case-completed" data-completed="<%= @case.worker.photo_id_front.attached? %>">
-      <th scope="row">2</th>
-      <td>Photo ID (front)</td>
-      <td>
-        <%= f.input_field :photo_id_front, label: false, data: { 'action': "change->form-cases#frontId" }
- %>
-      </td>
-      <td >
-        <% if  @case.worker.photo_id_front.attached? %>
-          <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
-        <% else %>
-          <i data-form-cases-target="frontIdCheck" class="far fa-times-circle"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.photo_id_back.attached? %>">
-      <th scope="row">3</th>
-      <td>Photo ID (back)</td>
-      <td>
-          <%= f.input_field  :photo_id_back, label: false, data: { 'action': "change->form-cases#backId" } %>
-      </td>
-      <td>
-        <% if  @case.worker.photo_id_back.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="backIdCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="backIdCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_selfie.attached? %>">
-      <th scope="row">4</th>
-      <td>Selfie + ID</td>
-      <td>
-          <%= f.input_field :id_selfie, label: false, data: { 'action': "change->form-cases#selfie" } %>
-      </td>
-      <td>
-        <% if  @case.worker.id_selfie.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="selfieCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="selfieCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_type.present? %>">
-      <th scope="row">5</th>
-      <td>Type of ID</td>
-      <td>
-        <%= f.input :id_type, label: false, as: :select, collection: ['NRIC', 'Passport'], input_html: { 'data-action': 'change->form-cases#idType' } %>
-      </td>
-      <td>
-        <% if  @case.worker.id_type.present? %>
-          <i class="far fa-check-circle" data-form-cases-target="idTypeCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="idTypeCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_valid? %>">
-      <th scope="row">6</th>
-      <td>Valid ID</td>
-      <td>
-        <%= f.input :id_valid, label: false, input_html: { 'data-action': 'change->form-cases#validId'} %>
-      </td>
-      <td>
-        <% if  @case.worker.id_valid? %>
-          <i class="far fa-check-circle" data-form-cases-target="validIdCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="validIdCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.payment_link.present? %>">
-      <th scope="row">7</th>
-      <td>Paynow/Paylah</td>
-      <td>
-        <%= f.input :payment_link, label: false, input_html: { 'data-action': 'keydown->form-cases#payNow'} %>
-      </td>
-      <td>
-        <% if  @case.worker.payment_link.present? %>
-          <i class="far fa-check-circle" data-form-cases-target="payNowCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="payNowCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.payment_qr.attached? %>">
-      <th scope="row">8</th>
-      <td>Payment QR</td>
-      <td>
-        <%= f.input :payment_qr, label: false, input_html: { 'data-action': 'change->form-cases#qrCode'} %>
-      </td>
-      <td>
-        <% if  @case.worker.payment_qr.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="qrCodeCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="qrCodeCheck"></i>
-        <% end %>
-      </td>
-    </tr>
+  <%= simple_form_for @case do |f| %>
+    <%= f.simple_fields_for :worker do |w| %>
+      <%= w.input :photo_id_front, as: :file, label: 'Photo ID (front)' %>
+      <%= cl_image_tag @worker.photo_id_front.key if @worker.photo_id_front.attached? %>
+      <%= w.input :photo_id_back, as: :file, label: 'Photo ID (back)' %>
+      <%= cl_image_tag @worker.photo_id_back.key if @worker.photo_id_back.attached? %>
+      <%= w.input :id_selfie, as: :file, label: 'Selfie + ID' %>
+      <%= cl_image_tag @worker.id_selfie.key if @worker.id_selfie.attached? %>
+      <%= w.input :id_type, label: 'Type of ID', collection: Case::ID_TYPES, selected: @worker.id_type, prompt: "What's your ID type"  %>
+      <%= w.input :id_valid, as: :boolean, label: 'Validated the ID' %>
+      <%= w.input :payment_link, label: 'Paynow/Paylah' %>
+      <%= w.input :payment_qr, as: :file, label: 'Payment QR' %>
+      <%= cl_image_tag @worker.payment_qr.key if @worker.payment_qr.attached? %>
     <% end %>
 
-    <%= simple_form_for(@case) do |f| %>
-    <tr class = "case-completed" data-completed="<%= @case.files.attached? %>">
-      <th scope="row">9</th>
-      <td>Claim Evidence</td> <!--is case.files -->
-      <td>
-        <%= f.input :files, label: false, input_html: { 'data-action': 'change->form-cases#claim'} %>
-      </td>
-      <td>
-        <% if  @case.files.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="claimCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="claimCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">10</th>
-      <td>Claim Verdict</td>
-      <td>
-        <%= simple_fields_for :claim  do |g|%>
-        <%= g.input :claim, label: false, as: :select, collection: ['Accepted', 'Rejected'], input_html: { 'data-action': 'change->form-cases#claimVerdict' } %>
-        <% end %>
-      </td>
-      <td>
-        <% if  @case.files.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="verdictCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="verdictCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.paid_proof.attached? %>">
-      <th scope="row">11</th>
-      <td>Payout Proof</td>
-      <td>
-        <%= f.input :paid_proof, label: false %>
-      </td>
-      <td>
-        <% if  @case.paid_proof.attached? %>
-          <i class="far fa-check-circle"></i>
-        <% else %>
-          <i class="far fa-times-circle"></i>
-        <% end %>
-      </td>
-    </tr>
+    <%= f.input :files, input_html: { multiple: true }, label: 'Claim Evidence' %>
+    <% if @case.files.attached? %>
+      <% @case.files.each do |file| %>
+        <%= cl_image_tag file.key %>
+      <% end %>      
     <% end %>
+    
+    <%= f.input :paid_proof, label: 'Payout Proof' %>
+    <%= cl_image_tag @case.paid_proof.key if @case.paid_proof.attached? %>
 
-  </tbody>
-</table>
+    <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+  <% end %>
 </div>
 
-
-
-<script>
-  const row = document.querySelectorAll(".case-completed");
-  row.forEach((element) => {
-      if (element.dataset.completed.toLowerCase() == 'true'){
-        element.classList.add("green");
-      }
-  });
-
-  if  (document.getElementById("callWorker").checked == true){
-    element.classList.add("green");
-  }
-
-  const s = document.getElementById("shortlist");
-  s.addEventListener('change',(e)=>{
-    if (e.target.checked == true){
-      <% @case.update!(status: "Shortlisted") %>
-
-      console.log("<%= @case.status %>")
-    }else{
-      <% @case.update(status: "New") %>
-      console.log("<%= @case.status %>")
-    }
-  })
-
-</script>
 
 
 

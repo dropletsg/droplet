@@ -8,6 +8,7 @@
 // </div>
 
 import { Controller } from "stimulus"
+import fetchWithToken from '../utils/fetch_with_token'
 
 export default class extends Controller {
 static targets = ['callCheck', 'frontIdCheck', 'backIdCheck',
@@ -43,6 +44,18 @@ static targets = ['callCheck', 'frontIdCheck', 'backIdCheck',
       this.idTypeCheckTarget.classList.add('fa-check-circle');
       this.idTypeCheckTarget.parentNode.parentNode.classList.add('green');
     }
+
+    const formData = new FormData()
+    formData.append("form-cases[idTypeCheck]",e.target.value)
+    
+    fetchWithToken(this.data.get("update-url"), {
+      body: formData,
+      method: 'PATCH'
+    }).then(response => response.json())
+      .then(data => {
+        // the dom manipulation
+        console.log('fetch works!');
+      })
   }
 
   validId() {
