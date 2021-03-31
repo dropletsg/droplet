@@ -38,10 +38,8 @@
           <div class="case-worker case-card ">
 
           <div class="border">
-            
-             <input class ="toggle" type="checkbox" id="shortlist" >
-              <label for="shortlist">Shortlisted</label>
-     
+            <input class ="toggle" type="checkbox" id="shortlist" >
+            <label for="shortlist">Shortlisted</label>
           </div>
          
 
@@ -194,7 +192,6 @@
       <td>Payment QR</td>
       <td>
         <%= f.input :payment_qr, label: false, input_html: { 'data-action': 'change->form-cases#qrCode'} %>
-        <%= f.hidden_field :case_id, value: @case.id %>
       </td>
       <td>
         <% if  @case.worker.payment_qr.attached? %>

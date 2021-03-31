@@ -23,12 +23,8 @@ class WorkersController < ApplicationController
 
   def update
     @worker.update(worker_params)
-    if upload_verification_doc?
-      case_id = Case.find(params[:worker][:case_id])
-      redirect_to case_path(case_id)
-    else
-      redirect_to worker_path
-    end
+    redirect_to worker_path
+    
   end
 
   private
@@ -42,7 +38,4 @@ class WorkersController < ApplicationController
     @worker = Worker.find(params[:id])
   end
 
-  def upload_verification_doc?
-    params[:commit] == "Save"
-  end
 end
