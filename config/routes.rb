@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resources :cases do
     resource :case_notes
   end
+
+  resources :payments, only: [:show, :new, :create]
 end

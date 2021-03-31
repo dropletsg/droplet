@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
   def active_cases
     @cases = Case.where(status: "active")
+    @payment = Payment.new
   end
 
 end
