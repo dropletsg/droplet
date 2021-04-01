@@ -217,3 +217,33 @@
 
 
 
+
+
+<%= simple_form_for @case do |f| %>
+        <%= f.simple_fields_for :worker do |w| %>
+          <%= w.input :photo_id_front, as: :file, label: 'Photo ID (front)' %>
+          <%= cl_image_tag @worker.photo_id_front.key if @worker.photo_id_front.attached? %>
+          <%= w.input :photo_id_back, as: :file, label: 'Photo ID (back)' %>
+          <%= cl_image_tag @worker.photo_id_back.key if @worker.photo_id_back.attached? %>
+          <%= w.input :id_selfie, as: :file, label: 'Selfie + ID' %>
+          <%= cl_image_tag @worker.id_selfie.key if @worker.id_selfie.attached? %>
+          <%= w.input :id_type, label: 'Type of ID', collection: Case::ID_TYPES, selected: @worker.id_type, prompt: "What's your ID type"  %>
+          <%= w.input :id_valid, as: :boolean, label: 'Validated the ID' %>
+          <%= w.input :payment_link, label: 'Paynow/Paylah' %>
+          <%= w.input :payment_qr, as: :file, label: 'Payment QR' %>
+          <%= cl_image_tag @worker.payment_qr.key if @worker.payment_qr.attached? %>
+        <% end %>
+
+        <%= f.input :files, input_html: { multiple: true }, label: 'Claim Evidence' %>
+        <% if @case.files.attached? %>
+          <% @case.files.each do |file| %>
+            <%= cl_image_tag file.key %>
+          <% end %>      
+        <% end %>
+      
+        <%= f.input :paid_proof, label: 'Payout Proof' %>
+        <%= cl_image_tag @case.paid_proof.key if @case.paid_proof.attached? %>
+
+        <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+      <% end %>
+

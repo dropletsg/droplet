@@ -46,7 +46,7 @@ class CasesController < ApplicationController
   end
 
   def case_update_params
-    params.require(:case).permit(:paid_proof, files: [], worker_attributes: [:photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr])
+    params.require(:case).permit(:call_done, :paid_proof, files: [], worker_attributes: [:photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr])
   end
 
   def set_case

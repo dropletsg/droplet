@@ -10,10 +10,10 @@ class Case < ApplicationRecord
   monetize :target_amount_cents
 
   accepts_nested_attributes_for :worker, update_only: true
-  
 
-  STATUS = ["new","shortlisted","active","closed"]
-  CATEGORIES = ["medical","agent_fee","bills","others"]
+
+  STATUS = %w[new shortlisted active closed]
+  CATEGORIES = %w[medical agent_fee bills others]
   ID_TYPES = %w[NRIC Passport]
 
   def total_received
