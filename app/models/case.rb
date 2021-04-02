@@ -9,7 +9,7 @@ class Case < ApplicationRecord
 
   monetize :target_amount_cents
 
-  STATUS = ["New","Shortlisted","Active","Closed"]
+  STATUS = ["new", "shortlisted", "active", "closed"]
 
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount)
