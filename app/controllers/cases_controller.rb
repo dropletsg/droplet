@@ -18,7 +18,6 @@ class CasesController < ApplicationController
 
   def create
     @case = Case.new(case_params)
-    
     @case.user = current_user
 
     if @case.save!
@@ -36,8 +35,12 @@ class CasesController < ApplicationController
     if @case.update(case_update_params)
       if verification_completed?
         @case.update(status: 'to be listed')
+        notice = "Case ready to be listed."
+      else
+        @case.update(status: 'shortlisted')
+        notice = "Case updated successfully."
       end
-      redirect_to @case, notice: "Case updated successfully."
+      redirect_to @case, notice: notice
     else
       render :show
       # TODO
@@ -77,9 +80,11 @@ class CasesController < ApplicationController
   end
 
   def verification_completed?
+    
     @case = set_case
     @case.call_done && @case.worker.photo_id_front.attached? && @case.worker.photo_id_back.attached? &&
     @case.worker.id_selfie.attached? && @case.worker.id_type.present? && @case.worker.id_valid && @case.worker.payment_link.present? &&
     @case.worker.payment_qr.attached? && @case.files.attached? && @case.paid_proof.attached?
+    
   end 
 end
