@@ -27,38 +27,30 @@
 
     </div>
   </div>
-
   <div class="row justify-content-around">
       <div class="col-4 case-profile-card">
         <div class="worker-img-container">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
         </div>
 
-        <div class="case-info-container">
-          <p>Category <%= @case.category.capitalize %></p>
-          <div class="row">
-            <div class="col">
-              Start Date
-              <p><%= @case.start_date %></p>
-            </div>
-            <div class="col">
-              Due Date
-              <p><%= @case.end_date %></p>
-            </div>
+        <div class="progress">
+          <div class="progress-bar"
+            role="progressbar"
+            style="width: <%= 100 * @case.current_amount/@case.target_amount %>%;"
+            aria-valuenow="<%= @case.current_amount.cents %>"
+            aria-valuemin="0"
+            aria-valuemax="<%= @case.target_amount.cents %>">
           </div>
-          <div class="progress" style="height: 20px;">
-            <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;"
-                 aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
+        </div>
+        <p><%= money_without_cents_and_with_symbol(@case.current_amount) %> / <%= money_without_cents_and_with_symbol(@case.target_amount) %></p>
+        <div class="row">
+          <div class="col">
+            Target amount
+            <p><%= money_without_cents_and_with_symbol(@case.current_amount) %></p>
           </div>
-          <div class="row">
-            <div class="col">
-              Target amount
-              <p>SGD<%= @case.target_amount %></p>
-            </div>
-            <div class="col">
-              Amount left
-              <p>SGD<%= @case.target_amount %></p>
-            </div>
+          <div class="col">
+            Amount left
+            <p><%= money_without_cents_and_with_symbol(@case.target_amount - @case.current_amount) %></p>
           </div>
           <p>Coordinator  <%= @case.coordinator.name%></p>
         </div>

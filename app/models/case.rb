@@ -8,16 +8,15 @@ class Case < ApplicationRecord
   has_many_attached :files
 
   monetize :target_amount_cents
-  
 
   STATUS = ["New","Shortlisted","Active","Closed"]
 
-  def total_received
-    #payments.reduce
+  def current_amount
+    payments.where(payment_type: "incoming").sum(&:amount)
   end
 
   def calculate_progress
-    amount_received = 500 # replace with payment received 
+    amount_received = 500 # replace with payment received
     donation_progress = amount_received / target_amount.to_f * 100
     donation_progress.to_i
   end
