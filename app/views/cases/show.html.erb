@@ -1,83 +1,112 @@
 <div class="container">
-    <div class="row  justify-content-around">
-        <div class="col-4 case-profile-card">
-          <div class="worker-img-container">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
-          </div>
+  <div class="row justify-content-around">
+    <div class="col mt-4 ml-4">
 
-          <div class="case-info-container">
-            <p>Catergory <%= @case.category.capitalize %></p>
-            <div class="row">
-              <div class="col">
-                Start Date
-                <p><%= @case.start_date %></p>
-              </div>
-              <div class="col">
-                Due Date
-                <p><%= @case.end_date %></p>
-              </div>
-            </div>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;"
-                   aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
-            </div>
-            <div class="row">
-              <div class="col">
-                Target amount
-                <p>SGD<%= @case.target_amount %></p>
-              </div>
-              <div class="col">
-                Amount left
-                <p>SGD<%= @case.target_amount %></p>
-              </div>
-            </div>
-            <p>Coordinator  <%= @case.coordinator.name%></p>
-          </div>
+      <ul class="list-unstyled list-inline">
+        <li class="list-inline-item">
+          <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-share-url="<%= @url %>" data-comment="I am sharing this with you because this worker needs assistance. Please consider helping!" data-size="large"></script>
+        </li>
+        <li class="list-inline-item">
+          <%= link_to "https://api.whatsapp.com/send?text=I am sharing this with you because this worker needs assistance. Please consider helping!%0a#{@url}", target: :_blank, class: "p-0" do %>
+            <%= image_tag "https://uxwing.com/wp-content/themes/uxwing/download/10-brands-and-social-media/whatsapp-share-button.png", size: "77x28" %>
+          <% end %>
+        </li>
+        <li class="list-inline-item">
+          <iframe
+            src="<%= @facebook_url %>"
+            width="77"
+            height="28"
+            style="border:none;overflow:hidden"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
+        </li>
+      </ul>
 
-          <h2>Case's notes</h2>
-
-          <ul class="list-group">
-            <% @case.case_notes.each do |note| %>
-              <li class="list-group-item"><%= note.content %></li>
-            <% end %>
-          </ul>
-
-          <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
-        </div>
-
-
-
-
-        <div class="col-7" >
-          <div class="case-worker case-card ">
-
-          <div class="border">
-            <input class ="toggle" type="checkbox" id="shortlist" >
-            <label for="shortlist">Shortlisted</label>
-          </div>
-
-
-            <div class="row p-4">
-              <div class="col">
-                <p>Name <%= @case.worker.name %></p>
-                <p>Mobile Number <%= @case.worker.mobile_number %></p>
-              </div>
-              <div class="col">
-                <p>Alias <%= @case.worker.alias %></p>
-                <p>Email <%= @case.worker.email %></p>
-              </div>
-            </div>
-          </div>
-          <div class="case-card p-4">
-            Summary
-            <p><%= @case.story_summary %></p>
-          </div>
-          <div class="case-card p-4">
-            Story
-            <p><%= @case.story %></p>
-          </div>
-        </div>
     </div>
+  </div>
+
+  <div class="row justify-content-around">
+      <div class="col-4 case-profile-card">
+        <div class="worker-img-container">
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
+        </div>
+
+        <div class="case-info-container">
+          <p>Category <%= @case.category.capitalize %></p>
+          <div class="row">
+            <div class="col">
+              Start Date
+              <p><%= @case.start_date %></p>
+            </div>
+            <div class="col">
+              Due Date
+              <p><%= @case.end_date %></p>
+            </div>
+          </div>
+          <div class="progress" style="height: 20px;">
+            <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;"
+                 aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Target amount
+              <p>SGD<%= @case.target_amount %></p>
+            </div>
+            <div class="col">
+              Amount left
+              <p>SGD<%= @case.target_amount %></p>
+            </div>
+          </div>
+          <p>Coordinator  <%= @case.coordinator.name%></p>
+        </div>
+
+        <h2>Case's notes</h2>
+
+        <ul class="list-group">
+          <% @case.case_notes.each do |note| %>
+            <li class="list-group-item"><%= note.content %></li>
+          <% end %>
+        </ul>
+
+        <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
+      </div>
+
+
+
+
+      <div class="col-7" >
+        <div class="case-worker case-card ">
+
+        <div class="border">
+          <input class ="toggle" type="checkbox" id="shortlist" >
+          <label for="shortlist">Shortlisted</label>
+        </div>
+
+
+          <div class="row p-4">
+            <div class="col">
+              <p>Name <%= @case.worker.name %></p>
+              <p>Mobile Number <%= @case.worker.mobile_number %></p>
+            </div>
+            <div class="col">
+              <p>Alias <%= @case.worker.alias %></p>
+              <p>Email <%= @case.worker.email %></p>
+            </div>
+          </div>
+        </div>
+        <div class="case-card p-4">
+          Summary
+          <p><%= @case.story_summary %></p>
+        </div>
+        <div class="case-card p-4">
+          Story
+          <p><%= @case.story %></p>
+        </div>
+      </div>
+  </div>
 </div>
 
 <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
@@ -269,8 +298,6 @@
   </tbody>
 </table>
 </div>
-
-
 
 <script>
   const row = document.querySelectorAll(".case-completed");
