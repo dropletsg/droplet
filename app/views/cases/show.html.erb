@@ -1,25 +1,30 @@
 <div class="container">
   <div class="row justify-content-around">
-    <div class="col">
-      <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-share-url="<%= @telegram_url %>" data-comment="I am sharing this with you because this worker needs assistance. Please consider helping!" data-size="large"></script>
+    <div class="col mt-4 ml-4">
 
-      <!-- Not sure how to convert this into a WhatsApp icon. Currently text. -->
-      <!-- Link is currently shown as text. br and \n does not work to force it to new line -->
-      <%= link_to "Click here to share on Whatsapp",
-        "https://api.whatsapp.com/send?text=I am sharing this with you because this worker needs assistance. Please consider helping! #{case_url(@case)}",
-        target: :_blank
-      %>
+      <ul class="list-unstyled list-inline">
+        <li class="list-inline-item">
+          <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-share-url="<%= @url %>" data-comment="I am sharing this with you because this worker needs assistance. Please consider helping!" data-size="large"></script>
+        </li>
+        <li class="list-inline-item">
+          <%= link_to "https://api.whatsapp.com/send?text=I am sharing this with you because this worker needs assistance. Please consider helping!%0a#{@url}", target: :_blank, class: "p-0" do %>
+            <%= image_tag "https://uxwing.com/wp-content/themes/uxwing/download/10-brands-and-social-media/whatsapp-share-button.png", size: "77x28" %>
+          <% end %>
+        </li>
+        <li class="list-inline-item">
+          <iframe
+            src="<%= @facebook_url %>"
+            width="77"
+            height="28"
+            style="border:none;overflow:hidden"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
+        </li>
+      </ul>
 
-      <iframe
-        src="<%= @facebook_url %>"
-        width="77"
-        height="28"
-        style="border:none;overflow:hidden"
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-      </iframe>
     </div>
   </div>
 
@@ -30,7 +35,7 @@
         </div>
 
         <div class="case-info-container">
-          <p>Catergory <%= @case.category.capitalize %></p>
+          <p>Category <%= @case.category.capitalize %></p>
           <div class="row">
             <div class="col">
               Start Date

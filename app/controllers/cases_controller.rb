@@ -6,20 +6,10 @@ class CasesController < ApplicationController
   end
 
   def show
-    if Rails.env.development?
-      @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgoogle.com&layout=button&size=large&appId=321172835013412&width=77&height=28"
-    else
-      @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{case_url(@case)}&layout=button&size=large&appId=321172835013412&width=77&height=28"
-    end
-
-    if Rails.env.development?
-      @telegram_url = "https://google.com"
-    else
-      @telegram_url = case_url(@case)
-    end
-
     @worker = @case.worker
-    
+
+    @url = Rails.env.development? ? "https://google.com" : case_url(@case)
+    @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
   end
 
   def new
@@ -42,7 +32,7 @@ class CasesController < ApplicationController
 
   def update
     if @case.update
-      redirect_to cases_path, notice: "Case updated successfully." 
+      redirect_to cases_path, notice: "Case updated successfully."
     end
   end
 
