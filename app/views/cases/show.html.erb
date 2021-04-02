@@ -4,8 +4,12 @@
           <div class="worker-img-container">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
+           <div class="status-bar">
+              <%= @case.status.upcase %>
+            </div>
 
           <div class="case-info-container">
+           
             <p>Catergory <%= @case.category.capitalize %></p>
             <div class="row">
               <div class="col">
@@ -48,11 +52,11 @@
         <div class="col-7" >
           <div class="case-worker case-card ">
 
-          <div class="border">
-            <input class ="toggle" type="checkbox" id="shortlist" >
-            <label for="shortlist">Shortlisted</label>
-          </div>
-
+            <% if @case.status.downcase == 'new' %>
+              <%= button_to "Shortlist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-shortlist' %>
+            <% elsif @case.status.downcase == 'shortlisted' %>
+              <%= button_to "Delist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-delist' %>
+            <% end %>
 
             <div class="row p-4">
               <div class="col">
@@ -90,6 +94,8 @@
         element.classList.add("green");
       }
   });
+
+ 
 </script>
 
 

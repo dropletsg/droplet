@@ -1,5 +1,5 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: %i[show edit update]
+  before_action :set_case, only: %i[show edit update shortlist]
 
   def index
     @cases = Case.all
@@ -15,6 +15,7 @@ class CasesController < ApplicationController
 
   def create
     @case = Case.new(case_params)
+    
     @case.user = current_user
 
     if @case.save!
@@ -34,6 +35,16 @@ class CasesController < ApplicationController
     else
       render :show
       # TODO
+    end
+  end
+
+  def shortlist
+    if @case.status.downcase == 'new'
+      @case.update(status: 'shortlisted')
+      redirect_to @case, notice: "Case is shortlisted successfully."
+    elsif @case.status.downcase == "shortlisted"
+      @case.update(status: "new")
+      redirect_to @case, notice: "Case is delisted  successfully."
     end
   end
 

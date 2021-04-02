@@ -28,6 +28,7 @@
               <td>Photo ID (front)</td>
               <td><%= w.input_field :photo_id_front, as: :file, label: false %>
               <%= cl_image_tag worker.photo_id_front.key if worker.photo_id_front.attached? %>
+              
               </td>
               <td>
                 <% if  worker.photo_id_front.attached? %>
@@ -40,7 +41,8 @@
             <tr class = "case-completed" data-completed="<%= worker.photo_id_back.attached? %>">
               <th scope="row">3</th>
               <td>Photo ID (back)</td>
-              <td><%= w.input :photo_id_back, as: :file, label: false %></td>
+              <td><%= w.input :photo_id_back, as: :file, label: false %><%= cl_image_tag worker.photo_id_back.key if worker.photo_id_back.attached? %></td>
+              
               <td>
                 <% if  worker.photo_id_back.attached? %>
                   <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -52,7 +54,7 @@
             <tr class = "case-completed" data-completed="<%= worker.id_selfie.attached? %>">
               <th scope="row">4</th>
               <td>Selfie + ID</td>
-              <td><%= w.input :id_selfie, as: :file, label: false %></td>
+              <td><%= w.input :id_selfie, as: :file, label: false %><%= cl_image_tag worker.id_selfie.key if worker.id_selfie.attached? %></td>
               <td>
                 <% if  worker.id_selfie.attached? %>
                   <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -100,7 +102,7 @@
             <tr class = "case-completed" data-completed="<%= worker.payment_qr.attached? %>">
               <th scope="row">8</th>
               <td>Payment QR</td>
-              <td><%= w.input :payment_qr, as: :file, label: false %></td>
+              <td><%= w.input :payment_qr, as: :file, label: false %><%= cl_image_tag worker.payment_qr.key if worker.payment_qr.attached? %></td>
               <td>
                 <% if  worker.payment_qr.attached? %>
                   <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -113,7 +115,13 @@
           <tr class = "case-completed" data-completed="<%= c.files.attached? %>">
             <th scope="row">9</th>
             <td>Claim Evidence</td>
-            <td><%= f.input :files, input_html: { multiple: true }, label: false %></td>
+            <td><%= f.input :files, input_html: { multiple: true }, label: false %>
+                <% if c.files.attached? %>
+                  <%  c.files.each do |file| %>
+                    <%= cl_image_tag file.key %>
+                  <% end %>      
+                <% end %>
+            </td>
             <td>
               <% if  c.files.attached? %>
                 <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -125,7 +133,7 @@
           <tr class = "case-completed" data-completed="<%= c.paid_proof.attached? %>">
             <th scope="row">10</th>
             <td>Payout Proof</td>
-            <td><%= f.input :paid_proof, label: false %></td>
+            <td><%= f.input :paid_proof, label: false %> <%= cl_image_tag c.paid_proof.key if c.paid_proof.attached? %></td>
             <td>
               <% if  c.paid_proof.attached? %>
                 <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>

@@ -113,3 +113,30 @@
 .toggle:checked + label::after {
   left: 18px;
 }
+
+.btn-color{
+  background-color: #ccf2f4;
+  border: 0;
+  padding: 5px;
+  &:hover {
+    background-color:#c4e8ea;
+  }
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.btn-shortlist{
+  color: #2ea44f;
+}
+.btn-delist{
+  color: #f05945;
+}
+
+.status-bar{
+  background-color: #e4fbff;
+  color: #536162;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+ 
+}
