@@ -23,9 +23,15 @@
             <td><%= c.coordinator.name %></td>
             <td>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: <%= 100 * c.current_amount/c.target_amount %>%;" aria-valuenow="<%= c.current_amount.cents %>" aria-valuemin="0" aria-valuemax="<%= c.target_amount.cents %>"><%= c.current_amount.format %></div>
+                <div class="progress-bar"
+                  role="progressbar"
+                  style="width: <%= 100 * c.current_amount/c.target_amount %>%;"
+                  aria-valuenow="<%= c.current_amount.cents %>"
+                  aria-valuemin="0"
+                  aria-valuemax="<%= c.target_amount.cents %>">
+                </div>
               </div>
-              <p>Target: <%= c.target_amount.format %></p>
+              <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
             </td>
         </tr>
         <% end %>

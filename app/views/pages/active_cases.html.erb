@@ -34,8 +34,15 @@
           </div>
           <div class="col">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
+                            <div class="progress-bar"
+                              role="progressbar"
+                              style="width: <%= 100 * c.current_amount/c.target_amount %>%;"
+                              aria-valuenow="<%= c.current_amount.cents %>"
+                              aria-valuemin="0"
+                              aria-valuemax="<%= c.target_amount.cents %>">
+                            </div>
+                          </div>
+                          <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
           </div>
         </div>
 
