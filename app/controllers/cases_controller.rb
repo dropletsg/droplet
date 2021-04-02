@@ -58,9 +58,8 @@ class CasesController < ApplicationController
   end
 
   def list
-    if verification_completed?
-      @case.update(status: 'to be listed')
-    end
+    @case.update(status: 'to be listed')
+    redirect_to @case, notice: "Case approved to be listed."
   end
 
   private

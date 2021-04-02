@@ -38,6 +38,7 @@ gem 'faker'
 gem 'cloudinary', '~> 1.16.0'
 gem 'money-rails', '~>1.12'
 gem 'stimulus-rails'
+gem 'turbolinks_render'
 
 group :development, :test do
   gem 'pry-byebug'

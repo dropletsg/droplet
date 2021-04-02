@@ -145,5 +145,9 @@
       </tbody>
     </table>
   </div>
-    <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <%= f.submit "Save",  class: 'btn btn-primary mr-2', style:'width:95px;' %>
+      <button id="sweet-alert-demo" class="btn btn-outline-primary ">List Case</button>
+      <%= link_to "", list_case_path(@case), method: :patch, id: "list-case", class: "hidden" %>
+    </div>
     <% end %>

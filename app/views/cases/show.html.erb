@@ -86,9 +86,6 @@
 
 <div class="container mb-5">
   <%= render 'checklist', c: @case, worker: @worker %>
-  <% if @case.status == 'to be listed' %>
-   <%= button_to "List Case", list_case_path(@case), method: :patch, class: ' w-100 btn-color btn-shortlist' %>
-  <% end %>
 </div>
 
 <script>
@@ -98,8 +95,6 @@
         element.classList.add("green");
       }
   });
-
- 
 </script>
 
 
