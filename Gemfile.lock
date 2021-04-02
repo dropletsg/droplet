@@ -107,7 +107,7 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
-    faker (2.17.0)
+    faker (2.16.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.0)
     font-awesome-sass (5.15.1)
@@ -121,7 +121,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
-    listen (3.5.0)
+    listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
@@ -137,6 +137,7 @@ GEM
     mime-types-data (3.2021.0225)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     monetize (1.9.4)
       money (~> 6.12)
@@ -150,6 +151,9 @@ GEM
     msgpack (1.4.2)
     netrc (0.11.0)
     nio4r (2.5.7)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
@@ -244,6 +248,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus-rails (0.2.3)
+      rails (>= 6.0.0)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -278,6 +284,8 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
+  x86_64-darwin-18
   x86_64-darwin-20
   x86_64-linux
 
@@ -307,6 +315,7 @@ DEPENDENCIES
   simple_form
   social-share-button
   spring
+  stimulus-rails
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

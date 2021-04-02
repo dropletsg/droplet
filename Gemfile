@@ -37,6 +37,7 @@ gem 'rails_refactor'
 gem 'faker'
 gem 'cloudinary', '~> 1.16.0'
 gem 'money-rails', '~>1.12'
+gem 'stimulus-rails'
 
 group :development, :test do
   gem 'pry-byebug'

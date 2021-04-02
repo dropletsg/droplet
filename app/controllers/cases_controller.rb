@@ -17,6 +17,9 @@ class CasesController < ApplicationController
     else
       @telegram_url = case_url(@case)
     end
+
+    @worker = @case.worker
+    
   end
 
   def new
@@ -38,7 +41,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    redirect_to cases_path, notice: "Case updated successfully." if @case.update(case_params)
+    if @case.update
+      redirect_to cases_path, notice: "Case updated successfully." 
+    end
   end
 
   private
