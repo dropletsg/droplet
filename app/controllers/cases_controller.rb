@@ -5,7 +5,12 @@ class CasesController < ApplicationController
     @cases = Case.all
   end
 
-  def show; end
+  def show
+    @worker = @case.worker
+
+    @url = Rails.env.development? ? "https://google.com" : case_url(@case)
+    @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
+  end
 
   def new
     @case = Case.new
@@ -26,7 +31,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    redirect_to cases_path, notice: "Case updated successfully." if @case.update(case_params)
+    if @case.update
+      redirect_to cases_path, notice: "Case updated successfully."
+    end
   end
 
   private
