@@ -15,7 +15,7 @@
     <tr>
         <% @cases.each do |c| %>
         <tr class = "case-row" data-case-id="<%= c.id %>">
-            <td><%= c.id %></td> 
+            <td><%= c.id %></td>
             <th><%= c.created_at.strftime("%d %B %Y") %></th>
             <td><%= c.worker.name %></td>
             <td><%= c.status %></td>
@@ -23,8 +23,9 @@
             <td><%= c.coordinator.name %></td>
             <td>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                <div class="progress-bar" role="progressbar" style="width: <%= 100 * c.current_amount/c.target_amount %>%;" aria-valuenow="<%= c.current_amount.cents %>" aria-valuemin="0" aria-valuemax="<%= c.target_amount.cents %>"><%= c.current_amount.format %></div>
               </div>
+              <p>Target: <%= c.target_amount.format %></p>
             </td>
         </tr>
         <% end %>

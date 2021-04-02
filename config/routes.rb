@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resource :case_notes
   end
 
-  resources :payments, only: [:show, :create] do
+  resources :payments, only: [:new, :show, :create] do
     member do
       get 'success'
     end

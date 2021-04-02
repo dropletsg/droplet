@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home, :active_cases, :show ]
+  skip_before_action :authenticate_user!, only: [:home, :active_cases, :show]
 
   def home
   end
@@ -8,5 +8,4 @@ class PagesController < ApplicationController
     @cases = Case.where(status: "active")
     @payment = Payment.new
   end
-
 end

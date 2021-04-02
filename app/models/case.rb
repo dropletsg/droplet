@@ -8,4 +8,8 @@ class Case < ApplicationRecord
   has_many_attached :files
 
   monetize :target_amount_cents
+
+  def current_amount
+    payments.where(payment_type: "incoming").sum(&:amount)
+  end
 end
