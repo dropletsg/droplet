@@ -36,10 +36,10 @@
         <div class="progress">
           <div class="progress-bar"
             role="progressbar"
-            style="width: <%= 100 * @case.current_amount/@case.target_amount %>%;"
-            aria-valuenow="<%= @case.current_amount.cents %>"
+            style="width: <%= 100 * @case.current_amount_cents/@case.target_amount_cents %>%;"
+            aria-valuenow="<%= @case.current_amount_cents %>"
             aria-valuemin="0"
-            aria-valuemax="<%= @case.target_amount.cents %>">
+            aria-valuemax="<%= @case.target_amount_cents %>">
           </div>
         </div>
         <p><%= money_without_cents_and_with_symbol(@case.current_amount) %> / <%= money_without_cents_and_with_symbol(@case.target_amount) %></p>

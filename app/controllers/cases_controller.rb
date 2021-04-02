@@ -31,9 +31,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    if @case.update
-      redirect_to cases_path, notice: "Case updated successfully."
-    end
+    return unless @case.update(case_params)
+
+    redirect_to cases_path, notice: "Case updated successfully."
   end
 
   private
