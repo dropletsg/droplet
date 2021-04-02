@@ -19,7 +19,7 @@
           <td><%= link_to c.id, case_path(c) %></td> 
           <th><%= c.created_at.strftime("%d %B %Y") %></th>
           <td><%= c.worker.name %></td>
-          <td><%= c.status %></td>
+          <td><%= c.status.upcase %></td>
           <td><%= c.start_date %></td>
           <td><%= c.end_date %></td>
           <td><%= c.coordinator.name %></td>

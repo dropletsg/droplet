@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resource :case_notes
     member do 
       patch 'shortlist'
+      patch 'list'
     end
   end
 end
