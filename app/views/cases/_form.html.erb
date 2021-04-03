@@ -9,8 +9,8 @@
     <%= f.input :end_date %>
     <%= f.input :target_amount %>
     <%= f.input :payment_reference %>
-    <%= f.input :status, collection: Case::STATUS%>
-    <%= f.input :category,collection: Case::CATEGORIES%>
+    <%= f.input :status, collection: Case::STATUS, default: 'new' %>
+    <%= f.input :category,collection: Case::CATEGORIES %>
     <%= f.input :admin_approved %>
     <%= f.input :paid_proof %>
     <%= f.input :files %>

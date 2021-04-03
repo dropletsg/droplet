@@ -1,6 +1,4 @@
-<div class="container">
-  <h1>All Coordinators</h1>
-
+<div class="container search-container mt-5 mb-5">
   <%= form_tag coordinators_path, method: :get do %>
     <%= text_field_tag :query,
       params[:query],
@@ -9,11 +7,16 @@
     %>
     <%= submit_tag "Search", class: "btn btn-primary"%>
   <% end %>
-  <p><%= link_to "Create Coordinator", new_coordinator_path, class: "btn btn-outline-primary" %></p>
+</div>  
+  
+<div class="case-index-top">
+  <p><%= link_to "Add Coordinator", new_coordinator_path, class: "btn btn-outline-primary" %></p>
+</div>
 
+<div class="all-case-card">
   <table class="table table-striped"> 
     <tr>
-      <th scope="col">NO.</th>
+      <th scope="col">Case No.</th>
       <th scope="col">NAME</th>
       <th scope="col">MOBILE NUMBER</th>
       <th scope="col">EMAIL</th>

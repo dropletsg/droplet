@@ -101,9 +101,11 @@ ActiveRecord::Schema.define(version: 2021_04_01_095918) do
     t.text "comment"
     t.bigint "case_id", null: false
     t.string "status"
-    t.string "type"
+    t.string "payment_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.string "checkout_session_id"
     t.index ["case_id"], name: "index_payments_on_case_id"
   end
 

@@ -30,7 +30,6 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    # raise
     status = params[:case][:status]
     if status != @case.status && !status.nil?
       return redirect_to case_path(@case), alert: "Not allowed" unless (@case.send "#{status}_status_ready?")
@@ -40,17 +39,6 @@ class CasesController < ApplicationController
       redirect_to @case, notice: "Case updated successfully."
     else
       render :show
-      # TODO
-    end
-  end
-
-  def shortlist
-    if @case.status.downcase == 'new'
-      @case.update(status: 'shortlisted')
-      redirect_to @case, notice: "Case is shortlisted successfully."
-    elsif @case.status.downcase == "shortlisted"
-      @case.update(status: "new")
-      redirect_to @case, notice: "Case is delisted  successfully."
     end
   end
 

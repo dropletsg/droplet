@@ -1,16 +1,32 @@
 <div class="container">
-    <div class="row  justify-content-around">
+    <div class="row justify-content-around mt-3">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <%= image_tag "https://res.cloudinary.com/yuanming91/image/upload/v1617429145/case_lifecycle_tmixcq.png", class: "img-fluid" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-around">
         <div class="col-4 case-profile-card">
           <div class="worker-img-container">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
-          
           <div class="status-bar">
-            <%= @case.status.upcase %> 
+            <%= @case.status.upcase %>
+            <!-- Button trigger modal -->
+            <sup><a href="#" class="d-inline" data-toggle="modal" data-target="#exampleModalCenter">What's this?</a></sup>
           </div>
           <%= link_to "Update", edit_case_path %>
           <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
-         
+
           <div class="case-info-container">
             <p>Category <%= @case.category.capitalize %></p>
             <div class="row">
@@ -79,10 +95,3 @@
 <div class="container mb-5">
   <%= render 'checklist', c: @case, worker: @worker %>
 </div>
-
-
-
-
-
-
-
