@@ -28,39 +28,40 @@
           <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
 
           <div class="case-info-container">
-            <p>Category <%= @case.category.capitalize %></p>
+            <p><strong>Category:</strong> <%= @case.category.capitalize %></p>
             <div class="row">
               <div class="col">
-                Start Date
+                <strong>Start Date</strong>
                 <p><%= @case.start_date %></p>
               </div>
               <div class="col">
-                Due Date
+                <strong>Due Date</strong>
                 <p><%= @case.end_date %></p>
               </div>
             </div>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
+            <div class="progress" style="height:20px;">
+              <div class="progress-bar"
+                role="progressbar"
+                style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
+                aria-valuenow="<%= @case.current_amount_cents %>"
+                aria-valuemin="0"
+                aria-valuemax="<%= @case.target_amount.cents %>">
+              </div>
             </div>
             <div class="row">
               <div class="col">
-                Target amount
-                <p>SGD<%= @case.target_amount %></p>
-              </div>
-              <div class="col">
-                Amount left
-                <p>SGD<%= @case.target_amount %></p>
+                <p><%= money_without_cents_and_with_symbol @case.current_amount %> / <%= money_without_cents_and_with_symbol @case.target_amount %></p>
               </div>
             </div>
-            <p>Coordinator  <%= @case.coordinator.name%></p>
+            <p><strong>Coordinator</strong>: <%= @case.coordinator.name%></p>
 
-            <p>Case's notes</p>
+            <p><strong>Notes</strong></p>
             <ul class="list-group">
               <% @case.case_notes.each do |note| %>
                 <li class="list-group-item"><%= note.content %></li>
               <% end %>
             </ul>
-            <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
+            <%= link_to 'Leave a note', new_case_case_notes_path(@case), class: "btn btn-outline-dark" %>
           </div>
         </div>
 
