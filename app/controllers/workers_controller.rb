@@ -3,6 +3,12 @@ class WorkersController < ApplicationController
 
   def index
     @workers = Worker.all
+
+    if params[:query].present?
+      @workers = Worker.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @workers = Worker.all
+    end
   end
 
   def show

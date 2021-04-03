@@ -31,30 +31,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    # raise
-    if @case.update(case_update_params)
-      if verification_completed?
-        @case.update(status: 'to be listed')
-        notice = "Case ready to be listed."
-      else
-        @case.update(status: 'shortlisted')
-        notice = "Case updated successfully."
-      end
-      redirect_to @case, notice: notice
-    else
-      render :show
-      # TODO
-    end
-  end
+    return unless @case.update(case_params)
 
-  def shortlist
-    if @case.status.downcase == 'new'
-      @case.update(status: 'shortlisted')
-      redirect_to @case, notice: "Case is shortlisted successfully."
-    elsif @case.status.downcase == "shortlisted"
-      @case.update(status: "new")
-      redirect_to @case, notice: "Case is delisted  successfully."
-    end
+    redirect_to cases_path, notice: "Case updated successfully."
   end
 
   def list
