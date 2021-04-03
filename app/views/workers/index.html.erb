@@ -1,35 +1,39 @@
 <div class="container">
-  <h1>Listing Workers</h1>
+  <div class="container mt-5 mb-5">
+    <%= form_tag workers_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a worker" 
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary"%>
+    <% end %>
+  </div>  
 
-  <button type="button" class="btn btn-outline-primary"><%= link_to "Create new worker", new_worker_path %></button>
+  <p><%= link_to "Create Worker", new_worker_path, class: "btn btn-outline-primary" %></p>
 
   <table class="table table-striped"> 
     <tr>
       <th scope="col">NO.</th>
-      <th scope="col">Email</th>
       <th scope="col">Name</th>
       <th scope="col">Alias</th>
       <th scope="col">Mobile number</th>
+      <th scope="col">Email</th>
       <th scope="col">Description</th>
     </tr>
 
     <tbody>
       <% @workers.each_with_index do |worker, index| %>
         <tr>
-          <td><%= index + 1 %>
-          <td><%= worker.email %></td>
-          <td><%= worker.name %></td>
-          <td><%= worker.alias %></td>
-          <td><%= worker.mobile_number %></td>
+          <td><%= index + 1 %></td>
+          <td><%= link_to worker.name, worker_path(worker) %></td>
+          <td><%= link_to worker.alias, worker_path(worker) %></td>
+          <td><%= link_to worker.mobile_number, worker_path(worker) %></td>
+          <td><%= link_to worker.email, worker_path(worker) %></td>
           <td><%= worker.description %></td>
-          <td><%= link_to "Show", worker %></td>
-          <td><%= link_to "Edit", edit_worker_path(worker) %></td>
         </tr>
       <% end %>
     </tbody>
-    
   </table>
 
 </div>
-
-

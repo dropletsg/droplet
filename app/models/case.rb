@@ -10,6 +10,7 @@ class Case < ApplicationRecord
   monetize :target_amount_cents
 
   STATUS = ["new", "shortlisted", "active", "closed"]
+  CATEGORY = ["medical","agent_fees","bills","others"]
 
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount)

@@ -55,8 +55,7 @@
           <p>Coordinator  <%= @case.coordinator.name%></p>
         </div>
 
-        <h2>Case's notes</h2>
-
+        <h3>Notes</h3>
         <ul class="list-group">
           <% @case.case_notes.each do |note| %>
             <li class="list-group-item"><%= note.content %></li>
