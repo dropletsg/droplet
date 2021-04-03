@@ -9,10 +9,9 @@ class Case < ApplicationRecord
   monetize :target_amount_cents
   accepts_nested_attributes_for :worker, update_only: true
 
-  STATUS = %w[new shortlisted active closed]
+  STATUS = %w[new shortlisted active closed archived]
   CATEGORIES = %w[medical agent_fee bills others]
   ID_TYPES = %w[work_permit s_pass employment_pass entre_pass dependents_pass passport]
-  STATUS = ["new", "shortlisted", "active", "closed"]
 
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount)
@@ -46,6 +45,10 @@ class Case < ApplicationRecord
 
   def closed_status_ready?
     paid_proof.attached?
+  end
+
+  def archived_status_ready?
+    true
   end
 
   def archived_status_ready?
