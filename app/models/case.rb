@@ -10,7 +10,9 @@ class Case < ApplicationRecord
   monetize :target_amount_cents
   
 
-  STATUS = ["New","Shortlisted","Active","Closed"]
+  STATUS = ["new","shortlisted","active","closed"]
+
+  CATEGORY = ["medical","agent_fees","bills","others"]
 
   def total_received
     #payments.reduce

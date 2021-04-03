@@ -3,14 +3,6 @@ html{
   scroll-behavior: smooth;
 }
 
-
-// nav{
-//     width:100%;
-//     overflow: hidden;
-//     position: fixed;
-//     top: 0;
-// }
-
 ul{
 	padding: 0;
 	margin: 0;
@@ -31,7 +23,7 @@ a{
 	font-weight: bold;
 }
 
-#section1, #section3{
+#section3{
 	height: auto;
 	background: #FFEFD5;
 	display: inline-block;
@@ -41,15 +33,10 @@ a{
 
 #section2, #section4{
 	height: auto;
-	background: #C0C0C0;
+	background: rgb(247, 247, 247);
 	display: inline-block;
 	width: 100%;
 	padding: 40px;
-}
-
-h1{
-	text-align: center;
-	padding: 20px;
 }
 
 .dropdown {
@@ -68,4 +55,38 @@ h1{
 
 .dropdown:hover .dropdown-content {display: block;}
 
-a:hover {background-color:bisque;}
+h2 {
+	text-align: center;
+	padding: 20px;
+	font-weight: bold;
+	font-size: 60px;
+}
+
+h3 {
+	text-align: left;
+	padding-top: 20px;
+}
+
+#section1, .banner {
+	background-size: cover;
+	height: auto;
+	display: inline-block;
+	width: 100%;
+	padding: 40px;
+	background-position: center;
+}
+
+#section1 p {
+	font-size: 25px;
+	color: white;
+	opacity: 1;
+	font-weight: normal;
+}
+
+#section1 h2 {
+	font-size: 80px;
+	color: white;
+	opacity: 1;
+	font-weight: bolder;
+}
+

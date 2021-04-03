@@ -1,14 +1,15 @@
 <div class="container">
-  <h1>All Coordinators</h1>
-
-  <%= form_tag coordinators_path, method: :get do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control",
-      placeholder: "Find a coordinator" 
-    %>
-    <%= submit_tag "Search", class: "btn btn-primary"%>
-  <% end %>
+  <div class="container mt-5 mb-5">
+    <%= form_tag coordinators_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a coordinator" 
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary"%>
+    <% end %>
+  </div>  
+    
   <p><%= link_to "Create Coordinator", new_coordinator_path, class: "btn btn-outline-primary" %></p>
 
   <table class="table table-striped"> 

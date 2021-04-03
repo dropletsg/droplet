@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_142438) do
+ActiveRecord::Schema.define(version: 2021_03_24_122444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,11 +100,9 @@ ActiveRecord::Schema.define(version: 2021_03_29_142438) do
     t.text "comment"
     t.bigint "case_id", null: false
     t.string "status"
-    t.string "payment_type"
+    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "amount_cents", default: 0, null: false
-    t.string "checkout_session_id"
     t.index ["case_id"], name: "index_payments_on_case_id"
   end
 
