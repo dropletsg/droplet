@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show create success]
+
   def show
     @payment = Payment.where(payment_type: 'pending').find(params[:id])
   end
