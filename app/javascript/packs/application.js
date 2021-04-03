@@ -37,7 +37,7 @@ import highlightRow from "../plugins/checklist";
     // Call your functions here, e.g:
     // initSelect2();
     if(document.querySelector('.case-card')) {
-      highlightRow();      
+      highlightRow();
     }
 
     initSweetalert('#sweet-alert-demo', {
@@ -50,9 +50,8 @@ import highlightRow from "../plugins/checklist";
         const link = document.querySelector('#list-case');
         link.click();
       }
-      
-    });
 
+    });
 
   });
 
