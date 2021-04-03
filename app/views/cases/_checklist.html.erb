@@ -1,4 +1,5 @@
 <div class="case-card">
+  <%= simple_form_for c do |f| %>
     <table class="table">
       <thead>
         <tr>
@@ -8,8 +9,7 @@
           <th scope="col" style="text-align: center;">Completed</th>
         </tr>
       </thead>
-      <tbody>
-        <%= simple_form_for c do |f| %>
+      <tbody>        
           <tr class = "case-completed" data-completed="<%= c.call_done %>">
               <th scope="row">1</th>
               <td>Call Worker</td>
@@ -28,7 +28,6 @@
               <td>Photo ID (front)</td>
               <td><%= w.input_field :photo_id_front, as: :file, label: false %>
               <%= cl_image_tag worker.photo_id_front.key if worker.photo_id_front.attached? %>
-              
               </td>
               <td>
                 <% if  worker.photo_id_front.attached? %>
@@ -42,7 +41,6 @@
               <th scope="row">3</th>
               <td>Photo ID (back)</td>
               <td><%= w.input :photo_id_back, as: :file, label: false %><%= cl_image_tag worker.photo_id_back.key if worker.photo_id_back.attached? %></td>
-              
               <td>
                 <% if  worker.photo_id_back.attached? %>
                   <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -144,10 +142,11 @@
           </tr>
       </tbody>
     </table>
-  </div>
+  
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <%= f.submit "Save",  class: 'btn btn-primary mr-2', style:'width:95px;' %>
       <button id="sweet-alert-demo" class="btn btn-outline-primary ">List Case</button>
       <%= link_to "", list_case_path(@case), method: :patch, id: "list-case", class: "hidden" %>
     </div>
-    <% end %>
+  <% end %>
+</div>
