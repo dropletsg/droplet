@@ -40,6 +40,7 @@ gem 'money-rails', '~>1.12'
 gem 'stripe'
 gem 'stripe_event'
 gem 'stimulus-rails'
+gem 'turbolinks_render'
 
 group :development, :test do
   gem 'pry-byebug'

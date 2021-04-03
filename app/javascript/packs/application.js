@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -22,13 +23,36 @@ ActiveStorage.start()
 import 'jquery'
 import 'popper.js'
 import "bootstrap"
+import "controllers"
+
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { initSweetalert } from '../plugins/init_sweetalert';
+import highlightRow from "../plugins/checklist";
 
-document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
-});
 
-import "controllers"
+
+  document.addEventListener('turbolinks:load', () => {
+    // Call your functions here, e.g:
+    // initSelect2();
+    if(document.querySelector('.case-card')) {
+      highlightRow();      
+    }
+
+    initSweetalert('#sweet-alert-demo', {
+      title: "Varification Incomplete",
+      text: "Do you approve to list the case?",
+      icon: "warning",
+      buttons: {cancel: "Back", approve: "Approved"}
+    }, (value) => {
+      if (value == 'approve') {
+        const link = document.querySelector('#list-case');
+        link.click();
+      }
+      
+    });
+
+
+  });
+

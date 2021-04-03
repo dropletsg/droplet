@@ -1,323 +1,89 @@
 <div class="container">
-  <div class="row justify-content-around">
-    <div class="col mt-4 ml-4">
+    <div class="row  justify-content-around">
+        <div class="col-4 case-profile-card">
+          <div class="worker-img-container">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
+          </div>
+          
+           <div class="status-bar">
+              <%= @case.status.upcase %>
+           </div>
+           
+           <% if @case.status.downcase == 'to be listed' %>
+             <%= render 'socialMedia', url: @url, facebook_url: @facebook_url %>
+           <% end %>
 
-      <ul class="list-unstyled list-inline">
-        <li class="list-inline-item">
-          <script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-share-url="<%= @url %>" data-comment="I am sharing this with you because this worker needs assistance. Please consider helping!" data-size="large"></script>
-        </li>
-        <li class="list-inline-item">
-          <%= link_to "https://api.whatsapp.com/send?text=I am sharing this with you because this worker needs assistance. Please consider helping!%0a#{@url}", target: :_blank, class: "p-0" do %>
-            <%= image_tag "https://uxwing.com/wp-content/themes/uxwing/download/10-brands-and-social-media/whatsapp-share-button.png", size: "77x28" %>
-          <% end %>
-        </li>
-        <li class="list-inline-item">
-          <iframe
-            src="<%= @facebook_url %>"
-            width="77"
-            height="28"
-            style="border:none;overflow:hidden"
-            scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-          </iframe>
-        </li>
-      </ul>
+          <div class="case-info-container">
+            <p>Category <%= @case.category.capitalize %></p>
+            <div class="row">
+              <div class="col">
+                Start Date
+                <p><%= @case.start_date %></p>
+              </div>
+              <div class="col">
+                Due Date
+                <p><%= @case.end_date %></p>
+              </div>
+            </div>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar" role="progressbar" style="width: <%= @case.calculate_progress%>%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax= <%= @case.target_amount %>><%= @case.calculate_progress%>%</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                Target amount
+                <p>SGD<%= @case.target_amount %></p>
+              </div>
+              <div class="col">
+                Amount left
+                <p>SGD<%= @case.target_amount %></p>
+              </div>
+            </div>
+            <p>Coordinator  <%= @case.coordinator.name%></p>
 
+            <p>Case's notes</p>
+            <ul class="list-group">
+              <% @case.case_notes.each do |note| %>
+                <li class="list-group-item"><%= note.content %></li>
+              <% end %>
+            </ul>
+            <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
+          </div>
+        </div>
+
+        <div class="col-7" >
+          <div class="case-card ">
+
+            <% if @case.status.downcase == 'new' %>
+              <%= button_to "Shortlist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-shortlist' %>
+            <% elsif @case.status.downcase == 'shortlisted' %>
+              <%= button_to "Delist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-delist' %>
+            <% end %>
+
+            <div class="row p-4">
+              <div class="col">
+                <p>Name <%= @case.worker.name %></p>
+                <p>Mobile Number <%= @case.worker.mobile_number %></p>
+              </div>
+              <div class="col">
+                <p>Alias <%= @case.worker.alias %></p>
+                <p>Email <%= @case.worker.email %></p>
+              </div>
+            </div>
+          </div>
+          <div class="case-card p-4">
+            Summary
+            <p><%= @case.story_summary %></p>
+          </div>
+          <div class="case-card p-4">
+            Story
+            <p><%= @case.story %></p>
+          </div>
+        </div>
     </div>
-  </div>
-  <div class="row justify-content-around">
-      <div class="col-4 case-profile-card">
-        <div class="worker-img-container">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
-        </div>
-
-        <div class="progress">
-          <div class="progress-bar"
-            role="progressbar"
-            style="width: <%= 100 * @case.current_amount_cents/@case.target_amount_cents %>%;"
-            aria-valuenow="<%= @case.current_amount_cents %>"
-            aria-valuemin="0"
-            aria-valuemax="<%= @case.target_amount_cents %>">
-          </div>
-        </div>
-        <p><%= money_without_cents_and_with_symbol(@case.current_amount) %> / <%= money_without_cents_and_with_symbol(@case.target_amount) %></p>
-        <div class="row">
-          <div class="col">
-            Target amount
-            <p><%= money_without_cents_and_with_symbol(@case.current_amount) %></p>
-          </div>
-          <div class="col">
-            Amount left
-            <p><%= money_without_cents_and_with_symbol(@case.target_amount - @case.current_amount) %></p>
-          </div>
-          <p>Coordinator  <%= @case.coordinator.name%></p>
-        </div>
-
-        <h3>Notes</h3>
-        <ul class="list-group">
-          <% @case.case_notes.each do |note| %>
-            <li class="list-group-item"><%= note.content %></li>
-          <% end %>
-        </ul>
-
-        <%= link_to 'Leave a note', new_case_case_notes_path(@case) %>
-      </div>
-
-
-
-
-      <div class="col-7" >
-        <div class="case-worker case-card ">
-
-        <div class="border">
-          <input class ="toggle" type="checkbox" id="shortlist" >
-          <label for="shortlist">Shortlisted</label>
-        </div>
-
-
-          <div class="row p-4">
-            <div class="col">
-              <p>Name <%= @case.worker.name %></p>
-              <p>Mobile Number <%= @case.worker.mobile_number %></p>
-            </div>
-            <div class="col">
-              <p>Alias <%= @case.worker.alias %></p>
-              <p>Email <%= @case.worker.email %></p>
-            </div>
-          </div>
-        </div>
-        <div class="case-card p-4">
-          Summary
-          <p><%= @case.story_summary %></p>
-        </div>
-        <div class="case-card p-4">
-          Story
-          <p><%= @case.story %></p>
-        </div>
-      </div>
-  </div>
 </div>
 
 <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
 
-
-<div class="container">
-  <div class="case-card">
-  <table class="table" data-controller="form-cases">
-  <thead>
-    <tr>
-      <th scope="col" style="text-align: center;">Step</th>
-      <th scope="col">Verification Item</th>
-      <th scope="col">Details</th>
-      <th scope="col" style="text-align: center;">Completed</th>
-    </tr>
-  </thead>
-  <tbody class="verification">
-    <tr>
-      <th scope="row" class = "">1</th>
-      <td>Call Worker</td>
-      <td>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="callWorker" data-action="click->form-cases#callWorker">
-          <label class="form-check-label" for="callWorker">Call Done</label>
-        </div>
-      </td>
-      <td>
-        <i data-form-cases-target="callCheck" class="far fa-times-circle"></i>
-      </td>
-    </tr>
-
-   <%= simple_form_for(@case.worker) do |f| %>
-    <tr class = "case-completed" data-completed="<%= @case.worker.photo_id_front.attached? %>">
-      <th scope="row">2</th>
-      <td>Photo ID (front)</td>
-      <td>
-        <%= f.input_field :photo_id_front, label: false, data: { 'action': "change->form-cases#frontId" }
- %>
-      </td>
-      <td >
-        <% if  @case.worker.photo_id_front.attached? %>
-          <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
-        <% else %>
-          <i data-form-cases-target="frontIdCheck" class="far fa-times-circle"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.photo_id_back.attached? %>">
-      <th scope="row">3</th>
-      <td>Photo ID (back)</td>
-      <td>
-          <%= f.input_field  :photo_id_back, label: false, data: { 'action': "change->form-cases#backId" } %>
-      </td>
-      <td>
-        <% if  @case.worker.photo_id_back.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="backIdCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="backIdCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_selfie.attached? %>">
-      <th scope="row">4</th>
-      <td>Selfie + ID</td>
-      <td>
-          <%= f.input_field :id_selfie, label: false, data: { 'action': "change->form-cases#selfie" } %>
-      </td>
-      <td>
-        <% if  @case.worker.id_selfie.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="selfieCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="selfieCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_type.present? %>">
-      <th scope="row">5</th>
-      <td>Type of ID</td>
-      <td>
-        <%= f.input :id_type, label: false, as: :select, collection: ['NRIC', 'Passport'], input_html: { 'data-action': 'change->form-cases#idType' } %>
-      </td>
-      <td>
-        <% if  @case.worker.id_type.present? %>
-          <i class="far fa-check-circle" data-form-cases-target="idTypeCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="idTypeCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.id_valid? %>">
-      <th scope="row">6</th>
-      <td>Valid ID</td>
-      <td>
-        <%= f.input :id_valid, label: false, input_html: { 'data-action': 'change->form-cases#validId'} %>
-      </td>
-      <td>
-        <% if  @case.worker.id_valid? %>
-          <i class="far fa-check-circle" data-form-cases-target="validIdCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="validIdCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.payment_link.present? %>">
-      <th scope="row">7</th>
-      <td>Paynow/Paylah</td>
-      <td>
-        <%= f.input :payment_link, label: false, input_html: { 'data-action': 'keydown->form-cases#payNow'} %>
-      </td>
-      <td>
-        <% if  @case.worker.payment_link.present? %>
-          <i class="far fa-check-circle" data-form-cases-target="payNowCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="payNowCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.worker.payment_qr.attached? %>">
-      <th scope="row">8</th>
-      <td>Payment QR</td>
-      <td>
-        <%= f.input :payment_qr, label: false, input_html: { 'data-action': 'change->form-cases#qrCode'} %>
-      </td>
-      <td>
-        <% if  @case.worker.payment_qr.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="qrCodeCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="qrCodeCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-
-    <%= simple_form_for(@case) do |f| %>
-    <tr class = "case-completed" data-completed="<%= @case.files.attached? %>">
-      <th scope="row">9</th>
-      <td>Claim Evidence</td> <!--is case.files -->
-      <td>
-        <%= f.input :files, label: false, input_html: { 'data-action': 'change->form-cases#claim'} %>
-      </td>
-      <td>
-        <% if  @case.files.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="claimCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="claimCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">10</th>
-      <td>Claim Verdict</td>
-      <td>
-        <%= simple_fields_for :claim  do |g|%>
-        <%= g.input :claim, label: false, as: :select, collection: ['Accepted', 'Rejected'], input_html: { 'data-action': 'change->form-cases#claimVerdict' } %>
-        <% end %>
-      </td>
-      <td>
-        <% if  @case.files.attached? %>
-          <i class="far fa-check-circle" data-form-cases-target="verdictCheck"></i>
-        <% else %>
-          <i class="far fa-times-circle" data-form-cases-target="verdictCheck"></i>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr class = "case-completed" data-completed="<%= @case.paid_proof.attached? %>">
-      <th scope="row">11</th>
-      <td>Payout Proof</td>
-      <td>
-        <%= f.input :paid_proof, label: false %>
-      </td>
-      <td>
-        <% if  @case.paid_proof.attached? %>
-          <i class="far fa-check-circle"></i>
-        <% else %>
-          <i class="far fa-times-circle"></i>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-
-  </tbody>
-</table>
+<div class="container mb-5">
+  <%= render 'checklist', c: @case, worker: @worker %>
 </div>
-
-<script>
-  const row = document.querySelectorAll(".case-completed");
-  row.forEach((element) => {
-      if (element.dataset.completed.toLowerCase() == 'true'){
-        element.classList.add("green");
-      }
-  });
-
-  if  (document.getElementById("callWorker").checked == true){
-    element.classList.add("green");
-  }
-
-  const s = document.getElementById("shortlist");
-  s.addEventListener('change',(e)=>{
-    if (e.target.checked == true){
-      <% @case.update!(status: "Shortlisted") %>
-
-      console.log("<%= @case.status %>")
-    }else{
-      <% @case.update(status: "New") %>
-      console.log("<%= @case.status %>")
-    }
-  })
-
-</script>
-
-
-
-
-
-

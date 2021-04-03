@@ -7,5 +7,5 @@ class Worker < ApplicationRecord
   has_one_attached :payment_qr
 
   accepts_nested_attributes_for :cases
-  validates_presence_of :name, :alias, :mobile_number
+  # validates_presence_of :name, :alias, :mobile_number
 end

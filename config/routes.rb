@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :cases do
     resource :case_notes
+    member do 
+      patch 'shortlist'
+      patch 'list'
+    end
   end
 
   resources :payments, only: [:new, :show, :create] do
