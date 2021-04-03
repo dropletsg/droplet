@@ -6,8 +6,9 @@ class CasesController < ApplicationController
   end
 
   def show
+    raise
     @worker = @case.worker
-    @url = Rails.env.development? ? "https://google.com" : case_url(@case)
+    @url = Rails.env.development? ? "https://google.com" : active_cases_url
     @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
   end
 
