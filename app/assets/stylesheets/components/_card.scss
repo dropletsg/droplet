@@ -28,9 +28,15 @@
     height: 100%;
     width: 30%;
     background: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(20, 51, 228, 0.2);
     margin: 10px auto;
     padding: 0px 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.public-card:hover{
+    box-shadow: 0 0 11px rgb(75, 75, 206); 
 }
 
 .card-body{

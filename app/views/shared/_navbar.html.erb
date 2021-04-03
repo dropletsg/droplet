@@ -1,24 +1,33 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
+  <div class="logo-container">
+    <div class="row">
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "MMA.png", alt: "Migrant Mutual Aid" %>
+      <% end %>
+      <h1>Migrant Mutual Aid SG</h1>
+    </div>  
+  </div> 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "All Cases", cases_path, class: "nav-link" %>
+        <li class="nav-item dropdown">
+          <%= link_to "Cases", cases_path, class: "nav-link" %>
+          <div class="dropdown-content">
+            <%= link_to "create", new_case_path %>
+          </div>
         </li>
-        <li class="nav-item">
-          <%= link_to "All workers", workers_path, class: "nav-link"  %>
+        <li class="nav-item dropdown">
+          <%= link_to "Workers", workers_path, class: "nav-link"  %>
+          <div class="dropdown-content">
+            <%= link_to "create", new_worker_path %>
+          </div>
         </li>
-        <li class="nav-item">
-          <%= link_to "All coordinators", coordinators_path, class: "nav-link"  %>
+        <li class="nav-item dropdown">
+          <%= link_to "Coordinators", coordinators_path, class: "nav-link" %>
+          <div class="dropdown-content">
+            <%= link_to "create", new_coordinator_path %>
+          </div>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
