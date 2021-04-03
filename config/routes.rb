@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do 
       patch 'shortlist'
       patch 'list'
+      delete 'delete_attachment/:delete_attachment_id', to: "cases#delete_attachment", as: :delete_attachment
     end
   end
 end

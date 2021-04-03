@@ -245,5 +245,14 @@
         <%= cl_image_tag @case.paid_proof.key if @case.paid_proof.attached? %>
 
         <%= f.button :submit, class: 'btn btn-primary btn-block' %>
-      <% end %>
+<% end %>
 
+
+<button id="sweet-alert-demo" class="btn btn-outline-primary ">List Case</button>
+<%= link_to "", list_case_path(@case), method: :patch, id: "list-case", class: "hidden" %>
+
+   <% if @case.status.downcase == 'new' %>
+    <%= button_to "Shortlist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-shortlist' %>
+  <% elsif @case.status.downcase == 'shortlisted' %>
+    <%= button_to "Delist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-delist' %>
+  <% end %>

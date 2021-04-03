@@ -5,14 +5,12 @@
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
           </div>
           
-           <div class="status-bar">
-              <%= @case.status.upcase %>
-           </div>
-           
-           <% if @case.status.downcase == 'to be listed' %>
-             <%= render 'socialMedia', url: @url, facebook_url: @facebook_url %>
-           <% end %>
-
+          <div class="status-bar">
+            <%= @case.status.upcase %> 
+          </div>
+          <%= link_to "Update", edit_case_path %>
+          <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
+         
           <div class="case-info-container">
             <p>Category <%= @case.category.capitalize %></p>
             <div class="row">
@@ -51,16 +49,10 @@
         </div>
 
         <div class="col-7" >
-          <div class="case-card ">
+          <div class="case-card  ">
 
-            <% if @case.status.downcase == 'new' %>
-              <%= button_to "Shortlist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-shortlist' %>
-            <% elsif @case.status.downcase == 'shortlisted' %>
-              <%= button_to "Delist", shortlist_case_path(@case), method: :patch, class: ' w-100 btn-color btn-delist' %>
-            <% end %>
-
-            <div class="row p-4">
-              <div class="col">
+            <div class="row p-4 ">
+              <div class="col ">
                 <p>Name <%= @case.worker.name %></p>
                 <p>Mobile Number <%= @case.worker.mobile_number %></p>
               </div>
@@ -88,15 +80,6 @@
   <%= render 'checklist', c: @case, worker: @worker %>
 </div>
 
-<%# 
-<script>
-  const row = document.querySelectorAll(".case-completed");
-  row.forEach((element) => {
-      if (element.dataset.completed.toLowerCase() == 'true'){
-        element.classList.add("green");
-      }
-  });
-</script> %>
 
 
 
