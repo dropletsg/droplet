@@ -7,7 +7,9 @@ class CasesController < ApplicationController
 
   def show
     @worker = @case.worker
-    
+
+    @url = Rails.env.development? ? "https://google.com" : case_url(@case)
+    @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
   end
 
   def new
@@ -29,9 +31,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    if @case.update
-      redirect_to cases_path, notice: "Case updated successfully." 
-    end
+    return unless @case.update(case_params)
+
+    redirect_to cases_path, notice: "Case updated successfully."
   end
 
   private

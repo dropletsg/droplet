@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
-  devise_for :users
-  
   get 'active_cases', to: 'pages#active_cases'
-  
+
+  devise_for :users
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
   resources :coordinators
 
   resources :workers do
@@ -12,5 +14,11 @@ Rails.application.routes.draw do
 
   resources :cases do
     resource :case_notes
+  end
+
+  resources :payments, only: [:new, :show, :create] do
+    member do
+      get 'success'
+    end
   end
 end
