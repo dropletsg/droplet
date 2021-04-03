@@ -72,22 +72,6 @@
             <p><%= c.story_summary %></p>
           </div>
         </div>
-
-        <p>
-          <button class="btn btn-primary ml-4" type="button" data-toggle="collapse" data-target="#caseCoordinator<%= c.id %>" aria-expanded="false" aria-controls="caseCoordinator<%= c.id %>">
-          Donate
-          </button>
-        </p>
-
-        <div class="collapse" id="caseCoordinator<%= c.id %>">
-          <div class="card card-body">
-            <div class="paylah-container">
-              <p><%= image_tag "paylah.png", alt: "paylah", width: "90%" %></p>
-            </div>
-            <p> Send your contribution to coordinator <strong><%= c.coordinator.name%></strong> using the QR code above</p>
-          </div>
-        </div>
-
                 
         <p>
           <button class="btn btn-primary mt-2 ml-4" type="button" data-toggle="collapse" data-target="#caseStory<%= c.id %>" aria-expanded="false" aria-controls="caseStory<%= c.id %>">
@@ -101,11 +85,31 @@
           </div>
         </div>
 
-        <%= simple_form_for @payment do |f| %>
-          <%= hidden_field_tag 'case_id', c.id %>
-          <%= f.input :amount %>
-          <%= f.button :submit, 'Contribute', class: 'btn btn-primary' %>
-        <% end %>
+        <p>
+          <button class="btn btn-primary ml-4" type="button" data-toggle="collapse" data-target="#caseCoordinator<%= c.id %>" aria-expanded="false" aria-controls="caseCoordinator<%= c.id %>">
+          Contribute
+          </button>
+        </p>
+
+        <div class="collapse" id="caseCoordinator<%= c.id %>">
+          <div class="card card-body">
+            <div class="paylah-container">
+              <p><%= image_tag "paylah.png", alt: "paylah", width: "50%" %></p>
+            </div>
+            <p> Send your contribution to the QR code above </p>
+          </div>
+          <%= simple_form_for @payment do |f| %>
+            <%= hidden_field_tag 'case_id', c.id %>
+            <%= f.input :amount %>
+            <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3' %>
+          <% end %>
+        </div>
+
+        <%# <%= simple_form_for @payment do |f| %>
+          <%# <%= hidden_field_tag 'case_id', c.id %>
+          <%# <%= f.input :amount %>
+          <%# <%= f.button :submit, 'Contribute', class: 'btn btn-primary' %>
+        <%# <% end %>
 
       </div>
     <% end %>

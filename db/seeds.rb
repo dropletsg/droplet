@@ -1,7 +1,7 @@
 require 'faker'
 
-puts 'Creating 100 fake workers...'
-100.times do
+puts 'Creating 20 fake workers...'
+20.times do
   worker = Worker.new(
     email: Faker::Internet.email,
     name: Faker::Name.name,

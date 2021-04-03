@@ -11,29 +11,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <%= link_to "Cases", cases_path, class: "nav-link" %>
-          <div class="dropdown-content">
-            <%= link_to "create", new_case_path %>
-          </div>
+        <li class="nav-item">
+          <%= link_to "Cases", cases_path %>
         </li>
-        <li class="nav-item dropdown">
-          <%= link_to "Workers", workers_path, class: "nav-link"  %>
-          <div class="dropdown-content">
-            <%= link_to "create", new_worker_path %>
-          </div>
+        <li class="nav-item">
+          <%= link_to "Workers", workers_path  %>
         </li>
-        <li class="nav-item dropdown">
-          <%= link_to "Coordinators", coordinators_path, class: "nav-link" %>
-          <div class="dropdown-content">
-            <%= link_to "create", new_coordinator_path %>
-          </div>
+        <li class="nav-item">
+          <%= link_to "Coordinators", coordinators_path %>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Action", "#", class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
