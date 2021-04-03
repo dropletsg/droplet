@@ -17,7 +17,19 @@
           <p><strong>Archived: </strong><%= @worker.is_archived %></p>
           <%= link_to "Edit", edit_worker_path, class: "btn btn-outline-primary" %>
         </div>
-      </div>
+        
+        <!-- Worker's notes -->
+        <div class="case-info-container">
+          <h3>Notes</h3>
+          <ul class="list-group">
+            <% @worker.worker_notes.each do |note| %>
+              <li class="list-group-item"><%= note.content %></li>
+            <% end %>
+          </ul>
+
+          <%= link_to 'Leave a note', new_worker_worker_notes_path(@worker), class: "btn btn-outline-primary mt-3" %>
+          </div>
+        </div>  
     </div>
 
     <div class="col-6">
@@ -36,7 +48,6 @@
         <table class="table table-hover">
           <thead>
             <tr class="table-primary">
-              <th scope="col">#</th>
               <th scope="col">Case Ref</th>
               <th scope="col">Title</th>
             </tr>
@@ -44,7 +55,6 @@
           <tbody>
             <% @worker.cases.each do |c| %>
               <tr>
-                <th scope="row">1</th>
                 <td><%= c.id %></td>
                 <td><%= c.title %></td>
               </tr>
@@ -55,31 +65,15 @@
     </div>
   </div>
 
-  <!-- Worker's notes -->
-  <div class="row">
-    <div class="col mt-5">
-      <h3>Notes</h3>
-      <ul class="list-group">
-        <% @worker.worker_notes.each do |note| %>
-          <li class="list-group-item"><%= note.content %></li>
-        <% end %>
-      </ul>
-
-      <%= link_to 'Leave a note', new_worker_worker_notes_path(@worker), class: "btn btn-outline-primary mt-3" %>
-    </div>
-  </div>
 </div>
 
 
 
-<p>Photo ID front:<%= @worker.photo_id_front %></p>
-<p>Photo ID back:<%= @worker.photo_id_back %></p>
-<p>ID selfie:<%= @worker.id_selfie %></p>
-<p>ID Type:<%= @worker.id_type %></p>
-<p>Valid ID?:<%= @worker.id_valid %></p>
-<p>Payment link:<%= @worker.payment_link %></p>
-<p>Payment QR:<%= @worker.payment_qr %></p>
-
-
-
+  <%# <p>Photo ID front:<%= @worker.photo_id_front %>
+  <%# <p>Photo ID back:<%= @worker.photo_id_back %>
+  <%# <p>ID selfie:<%= @worker.id_selfie %>
+  <%# <p>ID Type:<%= @worker.id_type %>
+  <%# <p>Valid ID?:<%= @worker.id_valid %>
+  <%# <p>Payment link:<%= @worker.payment_link %>
+  <%# <p>Payment QR:<%= @worker.payment_qr %>
 
