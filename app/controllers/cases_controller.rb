@@ -31,9 +31,9 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    return unless @case.update(case_params)
+    return unless @case.update(case_update_params)
 
-    redirect_to cases_path, notice: "Case updated successfully."
+    redirect_to @case, notice: "Case updated successfully."
   end
 
   def list
@@ -58,11 +58,11 @@ class CasesController < ApplicationController
   end
 
   def verification_completed?
-    
+
     @case = set_case
     @case.call_done && @case.worker.photo_id_front.attached? && @case.worker.photo_id_back.attached? &&
     @case.worker.id_selfie.attached? && @case.worker.id_type.present? && @case.worker.id_valid && @case.worker.payment_link.present? &&
     @case.worker.payment_qr.attached? && @case.files.attached? && @case.paid_proof.attached?
-    
-  end 
+
+  end
 end

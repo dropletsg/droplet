@@ -16,7 +16,7 @@
     <tbody>
       <% @cases.each do |c| %>
         <tr class = "case-row" data-case-id="<%= c.id %>">
-          <td><%= c.id %></td>
+          <td><%= link_to c.id, case_path(c) %></td>
           <td><%= c.created_at.strftime("%d %B %Y") %></td>
           <td><%= c.worker.name %></td>
           <td><%= c.status %></td>

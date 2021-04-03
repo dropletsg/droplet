@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home active_cases show]
 
   def home
+    redirect_to cases_path if user_signed_in?
   end
 
   def active_cases
