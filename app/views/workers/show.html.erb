@@ -1,4 +1,4 @@
-<div class="container">  
+<div class="container">
   <h2>Worker's details</h2>
   <p><%= link_to "Back", workers_path, class: "btn btn-outline-primary" %></p>
 
@@ -7,7 +7,7 @@
       <div class="coordinator-profile-card mt-2">
         <div class="worker-img-container">
           <%= cl_image_tag @worker.payment_qr.key, class: "avatar-large avatar-worker" %>
-        </div>  
+        </div>
         <div class="case-info-container">
           <p><strong>ID: </strong><%= @worker.id %></p>
           <p><strong>Name: </strong><%= @worker.name %></p>
@@ -27,12 +27,12 @@
         </div>
         <%= @worker.description %>
       </div>
-      
+
       <!-- Worker's cases -->
       <div class="coordinator-card">
         <div class="card-header row justify-content-start pt-3 pb-0">
           <p><strong>Worker's cases</strong></p>
-        </div>  
+        </div>
         <table class="table table-hover">
           <thead>
             <tr class="table-primary">
@@ -71,14 +71,21 @@
 </div>
 
 
+<h2>Other worker details</h2>
+<div class="container">
+  <div class="row">
+    <div class="coordinator-profile-card mt-2">
+      <div class="worker-img-container">
+        <%= cl_image_tag @worker.photo_id_front.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.photo_id_back.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.id_selfie.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.id_selfie.key, class: "avatar-large avatar-worker" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>Photo ID front:<%= @worker.photo_id_front %></p>
-<p>Photo ID back:<%= @worker.photo_id_back %></p>
-<p>ID selfie:<%= @worker.id_selfie %></p>
-<p>ID Type:<%= @worker.id_type %></p>
-<p>Valid ID?:<%= @worker.id_valid %></p>
-<p>Payment link:<%= @worker.payment_link %></p>
-<p>Payment QR:<%= @worker.payment_qr %></p>
+
 
 
 
