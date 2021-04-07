@@ -1,19 +1,22 @@
-<div class="container">
-  <%= simple_form_for(@case) do |f| %>
-    <%= f.association :coordinator %>
-    <%= f.association :worker %>
-    <%= f.input :title %>
-    <%= f.input :story_summary %>
-    <%= f.input :story %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :target_amount %>
-    <%= f.input :payment_reference %>
-    <%= f.input :status, collection: Case::STATUS, default: 'new' %>
-    <%= f.input :category,collection: Case::CATEGORIES %>
-    <%= f.input :admin_approved %>
-    <%= f.input :paid_proof %>
-    <%= f.input :files %>
-    <%= f.submit %>
-  <% end %>
+<div class="section">
+  <div class="container">
+    <h2>New case</h2>
+    <%= simple_form_for(@case) do |f| %>
+      <%= f.association :worker %>
+      <%= f.association :coordinator, required: false %>
+      <%= f.input :title %>
+      <%= f.input :story_summary %>
+      <%= f.input :story %>
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+      <%= f.input :target_amount %>
+      <%= f.input :payment_reference %>
+      <%= f.input :status, collection: Case::STATUS, default: 'new' %>
+      <%= f.input :category,collection: Case::CATEGORIES %>
+      <%= f.input :admin_approved %>
+      <%= f.input :paid_proof %>
+      <%= f.input :files %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>

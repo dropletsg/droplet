@@ -1,42 +1,50 @@
-<div class="case-index-top">
-  <%= link_to "Add Case", new_case_path, class: "btn btn-outline-primary" %>
-</div>
-<div class="all-case-card">
-  <table class="table table-striped table-hover">
-    <thead>
-      <th>Case No.</th>
-      <th>Created On</th>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Start On</th>
-      <th>End On</th>
-      <th>Coordinator</th>
-      <th>Progress</th>
-    </thead>
-    <tbody>
-      <% @cases.each do |c| %>
-        <tr class = "case-row" data-case-id="<%= c.id %>">
-          <td><%= link_to c.id, case_path(c) %></td>
-          <td><%= c.created_at.strftime("%d %B %Y") %></td>
-          <td><%= c.worker.name %></td>
-          <td><%= c.status %></td>
-          <td><%= c.start_date %></td>
-          <td><%= c.end_date %></td>
-          <td><%= c.coordinator.name %></td>
-          <td style="width:20%">
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar"
-                role="progressbar"
-                style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
-                aria-valuenow="<%= c.current_amount_cents %>"
-                aria-valuemin="0"
-                aria-valuemax="<%= c.target_amount.cents %>">
+<div class="section">
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-md-7">
+        <h3>All cases</h3>
+      </div>
+      <div class="col-md-5 offset-md-5">
+        <%= button_to "New case", new_case_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Worker</th>
+        <th scope="col">Coordinator</th>
+        <th scope="col">Status</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Progress</th>
+      </thead>
+      <tbody>
+        <% @cases.each do |c| %>
+          <tr>
+            <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
+            <td><%= c.title %></td>
+            <td><%= c.worker.name %></td>
+            <td><%= c.coordinator.name %></td>
+            <td><%= c.status.capitalize %></td>
+            <td><%= c.start_date.strftime("%d %B %Y") %></td>
+            <td><%= c.end_date.strftime("%d %B %Y") %></td>
+            <td style="width:20%">
+              <div class="progress" style="height: 20px;">
+                <div class="progress-bar"
+                  role="progressbar"
+                  style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+                  aria-valuenow="<%= c.current_amount_cents %>"
+                  aria-valuemin="0"
+                  aria-valuemax="<%= c.target_amount.cents %>">
+                </div>
               </div>
-            </div>
-            <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+              <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
