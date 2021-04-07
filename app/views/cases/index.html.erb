@@ -1,9 +1,20 @@
+<%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
 <div class="case-index-top">
   <%= link_to "Add Case", new_case_path, class: "btn btn-outline-primary" %>
+  <%= form.submit "Create Telegram Message" %>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Actions
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/cases_roundup_telegram">Create Telegram Message</a>
+    </div>
+  </div>
 </div>
 <div class="all-case-card">
   <table class="table table-striped table-hover">
     <thead>
+      <th>select</th>
       <th>Case No.</th>
       <th>Created On</th>
       <th>Name</th>
@@ -14,8 +25,13 @@
       <th>Progress</th>
     </thead>
     <tbody>
+      
       <% @cases.each do |c| %>
         <tr class = "case-row" data-case-id="<%= c.id %>">
+          <td>
+            <%= check_box_tag 'select_case[]', c.id %>
+            
+          </td>
           <td><%= link_to c.id, case_path(c) %></td>
           <td><%= c.created_at.strftime("%d %B %Y") %></td>
           <td><%= c.worker.name %></td>
@@ -39,4 +55,38 @@
       <% end %>
     </tbody>
   </table>
+  
 </div>
+<% end %>
+
+<script>
+  selected_case = document.querySelectorAll("#select_case")
+  const case_id = []
+  selected_case.forEach((c)=>{
+    
+    c.addEventListener("change",(element)=>{
+     if (element.target.checked == true) {
+       case_id.push(element.target.closest("tr").dataset.caseId);
+       console.log(element.target.closest("tr").dataset.caseId); 
+       console.log(case_id);  
+     }
+    });
+  })
+
+  data = { case_id: case_id}
+
+  console.log(case_id)
+
+  fetchWithToken("\cases_roundup_telegram", {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+    });
+</script>
