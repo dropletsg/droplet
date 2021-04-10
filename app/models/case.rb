@@ -14,13 +14,18 @@ class Case < ApplicationRecord
   ID_TYPES = %w[work_permit s_pass employment_pass entre_pass dependents_pass passport]
 
   def current_amount
-    payments.where(payment_type: "incoming").sum(&:amount)
+    payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)
   end
 
   def current_amount_cents
     return 0 if current_amount.zero?
 
-    payments.where(payment_type: "incoming").sum(&:amount).cents
+    (payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)).cents
+  end
+
+  def update_target_amount
+    new_amount = target_amount - payments.where(payment_type: "outgoing").sum(&:amount)
+    update!(target_amount: new_amount)
   end
 
   def calculate_progress

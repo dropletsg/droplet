@@ -30,7 +30,7 @@
                 style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
                 aria-valuenow="<%= c.current_amount_cents %>"
                 aria-valuemin="0"
-                aria-valuemax="<%= c.target_amount.cents %>">
+                aria-valuemax="<%= c.target_amount %>">
               </div>
             </div>
             <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>

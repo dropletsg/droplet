@@ -45,7 +45,7 @@
                 style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
                 aria-valuenow="<%= @case.current_amount_cents %>"
                 aria-valuemin="0"
-                aria-valuemax="<%= @case.target_amount.cents %>">
+                aria-valuemax="<%= @case.target_amount %>">
               </div>
             </div>
             <div class="row">
@@ -89,6 +89,23 @@
           </div>
         </div>
     </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-around mt-3">
+    <p>Record outgoing payment</p>
+    <!-- Record an outgoing payment to a Case's worker -->
+    <!-- A dropdown form where User can select "outgoing" -->
+    <!-- An input field to input outgoing amount -->
+    <!-- A submit button so that a record can be created  -->
+    <%= simple_form_for Payment.new do |f| %>
+      <%= hidden_field_tag :payment_type, "outgoing" %>
+      <%= hidden_field_tag :case_id, @case.id %>
+      <%= f.input :amount %>
+      <%= f.input :payment_reference %>
+      <%= f.submit "Submit payment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
 <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
