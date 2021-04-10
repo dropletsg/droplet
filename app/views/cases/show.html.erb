@@ -1,98 +1,101 @@
-<div class="container">
-    <div class="row justify-content-around mt-3">
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <%= image_tag "https://res.cloudinary.com/yuanming91/image/upload/v1617429145/case_lifecycle_tmixcq.png", class: "img-fluid" %>
+<div class="section">
+
+  <div class="container">
+      <div class="row justify-content-around mt-3">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <%= image_tag "https://res.cloudinary.com/yuanming91/image/upload/v1617429145/case_lifecycle_tmixcq.png", class: "img-fluid" %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row justify-content-around">
-        <div class="col-4 case-profile-card">
-          <div class="worker-img-container">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
-          </div>
-          <div class="status-bar">
-            <%= @case.status.upcase %>
-            <!-- Button trigger modal -->
-            <sup><a href="#" class="d-inline" data-toggle="modal" data-target="#exampleModalCenter">What's this?</a></sup>
-          </div>
-          <%= link_to "Update", edit_case_path %>
-          <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
-
-          <div class="case-info-container">
-            <p><strong>Category:</strong> <%= @case.category.capitalize %></p>
-            <div class="row">
-              <div class="col">
-                <strong>Start Date</strong>
-                <p><%= @case.start_date %></p>
-              </div>
-              <div class="col">
-                <strong>Due Date</strong>
-                <p><%= @case.end_date %></p>
-              </div>
+      <div class="row justify-content-around">
+          <div class="col-4 case-profile-card">
+            <div class="worker-img-container">
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
             </div>
-            <div class="progress" style="height:20px;">
-              <div class="progress-bar"
-                role="progressbar"
-                style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
-                aria-valuenow="<%= @case.current_amount_cents %>"
-                aria-valuemin="0"
-                aria-valuemax="<%= @case.target_amount.cents %>">
-              </div>
+            <div class="status-bar">
+              <%= @case.status.upcase %>
+              <!-- Button trigger modal -->
+              <sup><a href="#" class="d-inline" data-toggle="modal" data-target="#exampleModalCenter">What's this?</a></sup>
             </div>
-            <div class="row">
-              <div class="col">
-                <p><%= money_without_cents_and_with_symbol @case.current_amount %> / <%= money_without_cents_and_with_symbol @case.target_amount %></p>
-              </div>
-            </div>
-            <p><strong>Coordinator</strong>: <%= @case.coordinator.name%></p>
+            <%= link_to "Update", edit_case_path %>
+            <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
 
-            <p><strong>Notes</strong></p>
-            <ul class="list-group">
-              <% @case.case_notes.each do |note| %>
-                <li class="list-group-item"><%= note.content %></li>
-              <% end %>
-            </ul>
-            <%= link_to 'Leave a note', new_case_case_notes_path(@case), class: "btn btn-outline-dark" %>
-          </div>
-        </div>
-
-        <div class="col-7" >
-          <div class="case-card  ">
-
-            <div class="row p-4 ">
-              <div class="col ">
-                <p>Name <%= @case.worker.name %></p>
-                <p>Mobile Number <%= @case.worker.mobile_number %></p>
+            <div class="case-info-container">
+              <p><strong>Category:</strong> <%= @case.category.capitalize %></p>
+              <div class="row">
+                <div class="col">
+                  <strong>Start Date</strong>
+                  <p><%= @case.start_date %></p>
+                </div>
+                <div class="col">
+                  <strong>Due Date</strong>
+                  <p><%= @case.end_date %></p>
+                </div>
               </div>
-              <div class="col">
-                <p>Alias <%= @case.worker.alias %></p>
-                <p>Email <%= @case.worker.email %></p>
+              <div class="progress" style="height:20px;">
+                <div class="progress-bar"
+                  role="progressbar"
+                  style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
+                  aria-valuenow="<%= @case.current_amount_cents %>"
+                  aria-valuemin="0"
+                  aria-valuemax="<%= @case.target_amount.cents %>">
+                </div>
               </div>
+              <div class="row">
+                <div class="col">
+                  <p><%= money_without_cents_and_with_symbol @case.current_amount %> / <%= money_without_cents_and_with_symbol @case.target_amount %></p>
+                </div>
+              </div>
+              <p><strong>Coordinator</strong>: <%= @case.coordinator.name%></p>
+
+              <p><strong>Notes</strong></p>
+              <ul class="list-group">
+                <% @case.case_notes.each do |note| %>
+                  <li class="list-group-item"><%= note.content %></li>
+                <% end %>
+              </ul>
+              <%= link_to 'Leave a note', new_case_case_notes_path(@case), class: "btn btn-outline-dark" %>
             </div>
           </div>
-          <div class="case-card p-4">
-            Summary
-            <p><%= @case.story_summary %></p>
-          </div>
-          <div class="case-card p-4">
-            Story
-            <p><%= @case.story %></p>
-          </div>
-        </div>
-    </div>
-</div>
 
-<hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
+          <div class="col-7" >
+            <div class="case-card  ">
 
-<div class="container mb-5">
-  <%= render 'checklist', c: @case, worker: @worker %>
+              <div class="row p-4 ">
+                <div class="col ">
+                  <p>Name <%= @case.worker.name %></p>
+                  <p>Mobile Number <%= @case.worker.mobile_number %></p>
+                </div>
+                <div class="col">
+                  <p>Alias <%= @case.worker.alias %></p>
+                  <p>Email <%= @case.worker.email %></p>
+                </div>
+              </div>
+            </div>
+            <div class="case-card p-4">
+              Summary
+              <p><%= @case.story_summary %></p>
+            </div>
+            <div class="case-card p-4">
+              Story
+              <p><%= @case.story %></p>
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
+
+  <div class="container mb-5">
+    <%= render 'checklist', c: @case, worker: @worker %>
+  </div>
 </div>

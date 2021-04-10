@@ -54,4 +54,8 @@ class Case < ApplicationRecord
   def archived_status_ready?
     true
   end
+
+  def active?
+    status == 'active'
+  end
 end

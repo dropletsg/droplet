@@ -1,26 +1,22 @@
 <div class="section">
   <div class="container">
-    <div class="row my-3">
-      <div class="col-md-7">
-        <h3>All coordinators</h3>
-      </div>
-      <div class="col-md-5">
-        <%= form_tag coordinators_path, method: :get do %>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <%= button_to "New coordinator", new_coordinator_path, class: "btn btn-primary" %>
-            </div>
-            <%= text_field_tag :query,
-              params[:query],
-              class: "form-control",
-              placeholder: "Find a coordinator"
-            %>
-            <%= button_tag type: "submit", class: "btn btn-primary" do %>
-              <i class="fas fa-search"></i>
-            <% end %>
+    <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
+      <h3>All coordinators</h3>
+      <%= form_tag coordinators_path, method: :get do %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <%= link_to "New coordinator", new_coordinator_path, class: "btn btn-primary" %>
           </div>
-        <% end %>
-      </div>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a coordinator"
+          %>
+          <%= button_tag type: "submit", class: "btn btn-primary" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <table class="table table-bordered">

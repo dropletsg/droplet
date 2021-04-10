@@ -1,22 +1,33 @@
 <div class="section">
   <div class="container">
-    <h2>New case</h2>
+    <h2 class="mb-3">New case</h2>
     <%= simple_form_for(@case) do |f| %>
+      <small><%= link_to "Add new worker", new_worker_path %></small>
       <%= f.association :worker %>
-      <%= f.association :coordinator, required: false %>
+
       <%= f.input :title %>
-      <%= f.input :story_summary %>
       <%= f.input :story %>
-      <%= f.input :start_date %>
-      <%= f.input :end_date %>
+      <%= f.input :story_summary %>
+
+      <div class="row">
+        <div class="col">
+          <%= f.input :start_date %>
+        </div>
+        <div class="col">
+          <%= f.input :end_date %>
+        </div>
+      </div>
+
       <%= f.input :target_amount %>
-      <%= f.input :payment_reference %>
-      <%= f.input :status, collection: Case::STATUS, default: 'new' %>
+
+      <small><%= link_to "Add new coordinator", new_coordinator_path %></small>
+      <%= f.association :coordinator, required: false %>
+
       <%= f.input :category,collection: Case::CATEGORIES %>
-      <%= f.input :admin_approved %>
-      <%= f.input :paid_proof %>
+      <%= f.input :admin_approved, inline_html: { class: 'form-check-sign' } %>
       <%= f.input :files %>
-      <%= f.submit %>
+      <%= f.input :paid_proof if @case.active? %>
+      <%= f.button :submit, class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
