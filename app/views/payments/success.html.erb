@@ -8,22 +8,10 @@
         <%= f.input :name %>
         <%= f.input :email %>
         <%= hidden_field_tag :case_id, @payment.case.id  %>
-        <%= f.submit %>
+        <%= f.submit :submit%>
       <% end %>
-      <%= link_to 'Back', case_path %>
+      <%= link_to 'Back', active_cases_path %>
     </div>
   </div>
 </div>
-
-
-
-CaseContributor
-id
-case_id
-name
-email
-
-
-Case.find(3).case_contributors.map(&:email_address)
-
 

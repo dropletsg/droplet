@@ -27,7 +27,7 @@
             <div class="progress" style="height: 20px;">
               <div class="progress-bar"
                 role="progressbar"
-                style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+                style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>;"
                 aria-valuenow="<%= c.current_amount_cents %>"
                 aria-valuemin="0"
                 aria-valuemax="<%= c.target_amount.cents %>">

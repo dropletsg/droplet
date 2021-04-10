@@ -42,8 +42,8 @@
             <div class="progress" style="height:20px;">
               <div class="progress-bar"
                 role="progressbar"
-                style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
-                aria-valuenow="<%= @case.current_amount_cents %>"
+                style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>;"
+                aria-valuenow="<%= @case.current_amount_cents%>"
                 aria-valuemin="0"
                 aria-valuemax="<%= @case.target_amount.cents %>">
               </div>
@@ -87,6 +87,10 @@
             Story
             <p><%= @case.story %></p>
           </div>
+          <div class="case-card p-4">
+            Update
+            <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
+          </div> 
         </div>
     </div>
 </div>

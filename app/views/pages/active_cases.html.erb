@@ -54,7 +54,7 @@
             <div class="progress">
               <div class="progress-bar"
                 role="progressbar"
-                style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+                style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>"
                 aria-valuenow="<%= c.current_amount_cents %>"
                 aria-valuemin="0"
                 aria-valuemax="<%= c.target_amount.cents %>">
@@ -102,18 +102,8 @@
             <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3' %>
           <% end %>
         </div>
-
-        <%# <%= simple_form_for @payment do |f| %>
-          <%# <%= hidden_field_tag 'case_id', c.id %>
-          <%# <%= f.input :amount %>
-          <%# <%= f.button :submit, 'Contribute', class: 'btn btn-primary' %>
-        <%# <% end %>
-
       </div>
     <% end %>
   </div>
 </div>
-
-
-
 
