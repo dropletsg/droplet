@@ -30,7 +30,7 @@ import "controllers"
 // import { initSelect2 } from '../components/init_select2';
 // import { initSweetalert } from '../plugins/init_sweetalert';
 import highlightRow from "../plugins/checklist";
-import fetchWithToken from "../utils/fetch_with_token";
+// import fetchWithToken from "../utils/fetch_with_token";
 
 
   document.addEventListener('turbolinks:load', () => {
@@ -39,7 +39,7 @@ import fetchWithToken from "../utils/fetch_with_token";
     if(document.querySelector('.case-card')) {
       highlightRow();
     }
-    fetchWithToken();
+    // fetchWithToken();
 
     // initSweetalert('#sweet-alert-demo', {
     //   title: "Varification Incomplete",

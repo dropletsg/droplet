@@ -50,18 +50,16 @@ class CasesController < ApplicationController
   end
 
   def cases_roundup_telegram
-    
     @selected_cases = params[:select_case]
     @cases_id = @selected_cases.map(&:to_i)
     @display_messages = []
     @telegram_messages = []
     @cases_id.each do |case_id|
       @display_messages << "#{Case.find(case_id).worker.alias} - #{Case.find(case_id).story_summary}<div>Target: #{Case.find(case_id).target_amount}</div><div>End Date: #{Case.find(case_id).end_date}</div>"
-      @telegram_messages << "#{Case.find(case_id).worker.alias} - #{Case.find(case_id).story_summary}\nTarget: #{Case.find(case_id).target_amount}\nEnd Date: #{Case.find(case_id).end_date}" 
+      #@telegram_messages << "#{Case.find(case_id).worker.alias} - #{Case.find(case_id).story_summary}\nTarget: #{Case.find(case_id).target_amount}\nEnd Date: #{Case.find(case_id).end_date}" 
     end
-    @display_mssg = @display_messages.join("<div><br></div>")
-    @telegram_mssg = @telegram_messages.join("\n\n")
-    
+    @display_msg = @display_messages.join("<div><br></div>")
+    @telegram_msg = @telegram_messages.join("\n\n")
   end
 
   private
