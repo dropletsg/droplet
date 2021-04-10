@@ -59,34 +59,3 @@
 </div>
 <% end %>
 
-<script>
-  selected_case = document.querySelectorAll("#select_case")
-  const case_id = []
-  selected_case.forEach((c)=>{
-    
-    c.addEventListener("change",(element)=>{
-     if (element.target.checked == true) {
-       case_id.push(element.target.closest("tr").dataset.caseId);
-       console.log(element.target.closest("tr").dataset.caseId); 
-       console.log(case_id);  
-     }
-    });
-  })
-
-  data = { case_id: case_id}
-
-  console.log(case_id)
-
-  <%# fetchWithToken("\cases_roundup_telegram", {
-    method: "POST",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then((data) => {
-      console.log(data)
-    }); %>
-</script>
