@@ -28,31 +28,30 @@ import "controllers"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
-// import { initSweetalert } from '../plugins/init_sweetalert';
-import highlightRow from "../plugins/checklist";
 // import fetchWithToken from "../utils/fetch_with_token";
+import { initSweetalert } from '../plugins/init_sweetalert';
+import highlightRow from "../plugins/checklist";
+
 
 
   document.addEventListener('turbolinks:load', () => {
     // Call your functions here, e.g:
     // initSelect2();
+    // fetchWithToken();
     if(document.querySelector('.case-card')) {
       highlightRow();
     }
-    // fetchWithToken();
 
-    // initSweetalert('#sweet-alert-demo', {
-    //   title: "Varification Incomplete",
-    //   text: "Do you approve to list the case?",
-    //   icon: "warning",
-    //   buttons: {cancel: "Back", approve: "Approved"}
-    // }, (value) => {
-    //   if (value == 'approve') {
-    //     const link = document.querySelector('#list-case');
-    //     link.click();
-    //   }
-
-    // });
+    initSweetalert('#sweet-alert-telegram', {
+      text: "Are you sure you want to post to Telegram?",
+      buttons: {cancel: "Back", approve: "Yes"}},(value) => {
+        if ("Yes") {
+          const link = document.querySelector('.post-button');
+          console.log(link)
+          link.click();
+          
+        }
+    });
 
   });
 

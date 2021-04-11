@@ -2,7 +2,8 @@
   <div style="padding: 20px; ">
     <h4>Create Message</h4>
     <textarea id="telegram-msg" name="telegram-msg" rows="4" cols="100"><%= @display_msg %></textarea>
-    <button type="button" class="post-button btn btn-primary" style="margin-top: 10px;"><i class="fab fa-telegram-plane"></i> Share</button>
+    <button  id="sweet-alert-telegram" class=" btn btn-primary"  style="margin-top: 10px;"><i class="fab fa-telegram-plane"></i> Share</button>
+    <button class=" btn post-button" hidden></button>
   </div>
  </div>
 
@@ -18,7 +19,7 @@
     post_button.addEventListener("click", (e)=>{
       let area = nicEditors.findEditor('telegram-msg'); 
       let content = area.getContent();
-      const msg = content.replace(/<div>|<br>|<div[\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
+      const msg = content.replace(/<div>|<br>|<\/span>|<[div|span][\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
       console.log(content);
       console.log(msg)
 
