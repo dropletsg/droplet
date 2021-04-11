@@ -45,9 +45,9 @@ import highlightRow from "../plugins/checklist";
     initSweetalert('#sweet-alert-telegram', {
       text: "Are you sure you want to post to Telegram?",
       buttons: {cancel: "Back", approve: "Yes"}},(value) => {
-        if ("Yes") {
+        if (value) {
           const link = document.querySelector('.post-button');
-          console.log(link)
+          console.log(value)
           link.click();
           
         }

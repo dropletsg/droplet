@@ -19,7 +19,7 @@
     post_button.addEventListener("click", (e)=>{
       let area = nicEditors.findEditor('telegram-msg'); 
       let content = area.getContent();
-      const msg = content.replace(/<div>|<br>|<\/span>|<[div|span][\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
+      const msg = content.replace(/<div>|<br>|<\/span>|<div[\s\w="-:;]*>|<span[\s\w="-:;]*>|<br[\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
       console.log(content);
       console.log(msg)
 
