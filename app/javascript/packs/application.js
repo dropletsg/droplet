@@ -24,31 +24,20 @@ import 'jquery'
 import 'popper.js'
 import "bootstrap"
 import "controllers"
-
+import "flatpickr"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 // import { initSweetalert } from '../plugins/init_sweetalert';
 import highlightRow from "../plugins/checklist";
+
   document.addEventListener('turbolinks:load', () => {
-    // Call your functions here, e.g:
-    // initSelect2();
     if(document.querySelector('.case-card')) {
       highlightRow();
     }
 
-    // initSweetalert('#sweet-alert-demo', {
-    //   title: "Varification Incomplete",
-    //   text: "Do you approve to list the case?",
-    //   icon: "warning",
-    //   buttons: {cancel: "Back", approve: "Approved"}
-    // }, (value) => {
-    //   if (value == 'approve') {
-    //     const link = document.querySelector('#list-case');
-    //     link.click();
-    //   }
-
-    // });
+    $('[data-tooltip-display="true"]').tooltip(),
+    flatpickr("[class='flatpickr']", {})
 
   });
 

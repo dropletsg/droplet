@@ -19,26 +19,23 @@ class CasesController < ApplicationController
     @case = Case.new(case_params)
     @case.user = current_user
 
-    if @case.save!
-      redirect_to cases_path, notice: "Case is created successfully."
+    if @case.valid?
+      @case.save!
+      redirect_to @case, notice: "Case has been created successfully."
     else
       render :new
-      flash[:alert] = "Case not created."
     end
   end
 
   def edit; end
 
   def update
-    status = params[:case][:status]
-    if status != @case.status && !status.nil?
-      return redirect_to case_path(@case), alert: "Not allowed" unless (@case.send "#{status}_status_ready?")
-    end
-
-    if @case.update(case_update_params)
+    if @case.update(case_update_params.merge({
+      status: params[:case][:status] || @case.status
+    }))
       redirect_to @case, notice: "Case updated successfully."
     else
-      render :show
+      render :edit
     end
   end
 
