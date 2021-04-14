@@ -1,15 +1,17 @@
 class CaseNotesController < ApplicationController
   def new
     @case = Case.find(params[:case_id])
-    @casenote = CaseNote.new
+    @case_note = CaseNote.new
   end
 
   def create
-    @casenote = CaseNote.new(review_params)
+    @case_note = CaseNote.new(case_note_params)
     @case = Case.find(params[:case_id])
-    @casenote.case = @case
-    if @casenote.save
-      redirect_to case_path(@case)
+    @case_note.case = @case
+
+    if @case_note.valid?
+      @case_note.save!
+      redirect_to @case, notice: "Note has been created successfully."
     else
       render :new
     end
@@ -17,7 +19,7 @@ class CaseNotesController < ApplicationController
 
   private
 
-  def review_params
+  def case_note_params
     params.require(:case_note).permit(:content)
   end
 end

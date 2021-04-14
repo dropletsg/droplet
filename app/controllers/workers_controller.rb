@@ -1,5 +1,5 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: [:show, :edit, :update]
+  before_action :set_worker, only: %w[show edit update]
 
   def index
     @workers = Worker.all
@@ -20,8 +20,13 @@ class WorkersController < ApplicationController
 
   def create
     @worker = Worker.new(worker_params)
-    @worker.save
-    redirect_to workers_path
+
+    if @worker.valid?
+      @worker.save!
+      redirect_to @worker, notice: "Worker has been created successfully."
+    else
+      render :new
+    end
   end
 
   def edit
@@ -29,8 +34,13 @@ class WorkersController < ApplicationController
 
   def update
     @worker.update(worker_params)
-    redirect_to worker_path
-    
+
+    if @worker.valid?
+      @worker.save!
+      redirect_to @worker, notice: "Worker has been updated successfully."
+    else
+      render :edit
+    end
   end
 
   private
@@ -42,5 +52,4 @@ class WorkersController < ApplicationController
   def set_worker
     @worker = Worker.find(params[:id])
   end
-
 end
