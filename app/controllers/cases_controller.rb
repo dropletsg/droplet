@@ -1,5 +1,5 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: %i[show edit update shortlist list delete_attachment]
+  before_action :set_case, only: %i[show edit update shortlist list delete_attachment ]
 
   def index
     @cases = Case.all
@@ -49,6 +49,17 @@ class CasesController < ApplicationController
     redirect_to @case, notice: "File has been deleted"
   end
 
+  def cases_roundup_telegram
+    selected_cases = params[:select_case]
+    cases_id = selected_cases.map(&:to_i)
+    @display_messages = ["<div>For more details, please visit: #{root_url}</div>"]
+    cases_id.each do |id|
+      case_id = Case.find(id)
+      @display_messages << "<div><b>#{case_id.worker.alias}</b> <i>(Case Ref ##{id})</i> - #{case_id.story_summary}</div><div>🎯 Target: #{case_id.target_amount.format}</div><div>📌 End Date: #{case_id.end_date.strftime("%d %b %Y")}</div>"
+    end
+    @display_msg = @display_messages.join("<div><br></div>")
+  end
+
   private
 
   def case_params
@@ -67,4 +78,6 @@ class CasesController < ApplicationController
   def set_case
     @case = Case.find(params[:id])
   end
+
+  
 end
