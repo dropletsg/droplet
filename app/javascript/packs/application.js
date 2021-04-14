@@ -24,7 +24,7 @@ import 'jquery'
 import 'popper.js'
 import "bootstrap"
 import "controllers"
-import "flatpickr"
+
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -47,7 +47,6 @@ import highlightRow from "../plugins/checklist";
           const link = document.querySelector('.post-button');
           console.log(value)
           link.click();
-          
         }
     });
 

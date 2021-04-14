@@ -21,7 +21,7 @@
       </thead>
       <tbody>
         <% @cases.each do |c| %>
-          <tr class = "case-row" data-case-id="<%= c.id>
+          <tr class = "case-row" data-case-id="<%= c.id %>">
             <td><%= check_box_tag 'select_case[]', c.id %></td>
             <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
             <td><%= c.title %></td>
@@ -55,6 +55,7 @@
       </tbody>
     </table>
   </div>
+  <% end %>
 </div>
-<% end %>
+
 
