@@ -12,3 +12,15 @@ puts 'Creating 20 fake workers...'
   worker.save!
 end
 puts 'Finished!'
+
+puts 'Creating 10 fake coordinators...'
+10.times do
+  coordinator = Coordinator.new(
+    email: Faker::Internet.email,
+    name: Faker::Name.name,
+    mobile_number: Faker::PhoneNumber.phone_number,
+    telegram_handle: Faker::Twitter.screen_name,
+  )
+  coordinator.save!
+end
+puts 'Finished!'
