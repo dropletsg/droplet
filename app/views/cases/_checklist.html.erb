@@ -9,7 +9,7 @@
           <th scope="col" style="text-align: center;">Completed</th>
         </tr>
       </thead>
-      <tbody>        
+      <tbody>
           <tr class = "case-completed" data-completed="<%= c.call_done %>">
               <th scope="row">1</th>
               <td>Call Worker</td>
@@ -29,12 +29,12 @@
               <td>
                 <%= w.input :photo_id_front, as: :file, label: false %>
                 <% if worker.photo_id_front.attached? %>
-                  <%= worker.photo_id_front.filename.to_s %> 
+                  <%= worker.photo_id_front.filename.to_s %>
                   <%= link_to 'Remove',
-                    delete_attachment_case_path(c, worker.photo_id_front.id), 
-                    method: :delete, 
+                    delete_attachment_case_path(c, worker.photo_id_front.id),
+                    method: :delete,
                     data: { confirm: "Delete?" } %>
-                <% end %>  
+                <% end %>
               </td>
               <td>
                 <% if  worker.photo_id_front.attached? %>
@@ -52,8 +52,8 @@
                 <% if worker.photo_id_back.attached? %>
                   <%= worker.photo_id_back.filename.to_s %>
                   <%= link_to 'Remove',
-                      delete_attachment_case_path(c, worker.photo_id_back.id), 
-                      method: :delete, 
+                      delete_attachment_case_path(c, worker.photo_id_back.id),
+                      method: :delete,
                       data: { confirm: "Delete?" } %>
                 <% end %>
               </td>
@@ -73,9 +73,9 @@
                 <% if worker.id_selfie.attached? %>
                   <%= worker.id_selfie.filename.to_s  %>
                   <%= link_to 'Remove',
-                        delete_attachment_case_path(c, worker.id_selfie.id), 
-                        method: :delete, 
-                        data: { confirm: "Delete?" } %> 
+                        delete_attachment_case_path(c, worker.id_selfie.id),
+                        method: :delete,
+                        data: { confirm: "Delete?" } %>
                   <% end %>
               </td>
               <td>
@@ -89,7 +89,7 @@
             <tr class = "case-completed" data-completed="<%= worker.id_type.present? %>">
               <th scope="row">5</th>
               <td>Type of ID</td>
-              <td><%= w.input :id_type, label: false, collection: Case::ID_TYPES, selected: worker.id_type, prompt: "What's your ID type"  %></td>
+              <td><%= w.input :id_type, label: false, collection: Worker::ID_TYPES, selected: worker.id_type, prompt: "What's your ID type"  %></td>
               <td>
                 <% if  worker.id_type.present? %>
                   <i data-form-cases-target="frontIdCheck" class="far fa-check-circle"></i>
@@ -128,11 +128,11 @@
               <td>
                 <%= w.input :payment_qr, as: :file, label: false %>
                 <% if worker.payment_qr.attached? %>
-                  <%= worker.payment_qr.filename.to_s %> 
+                  <%= worker.payment_qr.filename.to_s %>
                   <%= link_to 'Remove',
-                          delete_attachment_case_path(c, worker.payment_qr.id), 
-                          method: :delete, 
-                          data: { confirm: "Delete?" } %> 
+                          delete_attachment_case_path(c, worker.payment_qr.id),
+                          method: :delete,
+                          data: { confirm: "Delete?" } %>
                 <% end %>
               </td>
               <td>
@@ -153,10 +153,10 @@
                 <% @case.files.each do |file| %>
                   <p><%= file.filename.to_s %></p>
                   <%= link_to 'Remove',
-                            delete_attachment_case_path(c, file.id), 
-                            method: :delete, 
-                            data: { confirm: "Delete?" } %> 
-                <% end %>      
+                            delete_attachment_case_path(c, file.id),
+                            method: :delete,
+                            data: { confirm: "Delete?" } %>
+                <% end %>
               <% end %>
             </td>
             <td>
@@ -174,11 +174,11 @@
             <td>
               <%= f.input :paid_proof, label: false %>
               <% if c.paid_proof.attached? %>
-                <%= c.paid_proof.filename.to_s %> 
+                <%= c.paid_proof.filename.to_s %>
                 <%= link_to 'Remove',
-                            delete_attachment_case_path(c, c.paid_proof.id), 
-                            method: :delete, 
-                            data: { confirm: "Delete?" } %> 
+                            delete_attachment_case_path(c, c.paid_proof.id),
+                            method: :delete,
+                            data: { confirm: "Delete?" } %>
               <% end %>
             </td>
             <td>
@@ -190,17 +190,17 @@
             </td>
           </tr>
           <% end %>
-          
+
       </tbody>
     </table>
 
     <div class="px-4">
      Please make sure all the verification steps are completed before making the case active.
-      Verification incomplete but still want to make the case active? 
+      Verification incomplete but still want to make the case active?
       <%= f.input :admin_approved, as: :boolean, label: "Admin override" %>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end pb-3">
-      
+
       <%= f.submit "Save",  class: 'btn btn-primary mr-2', style:'width:95px;' %>
     </div>
   <% end %>
