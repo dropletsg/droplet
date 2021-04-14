@@ -80,6 +80,7 @@
                     </table>
                   </div>
                 </div>
+                <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
               </div>
 
               <!-- Worker tab -->
