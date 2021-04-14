@@ -3,7 +3,15 @@
     <div class="col">
       <h1>Payment successful!</h1>
       <p>Contributed <strong><%= humanized_money_with_symbol @payment.amount %></strong> to <strong><%= @payment.case.worker.alias %></strong> for <strong><%= @payment.case.title %></strong></p>
-      <%= link_to 'Back to home', root_path %>
+      <p>Subcribe to this case for update</p>
+      <%= simple_form_for @case_contributor do |f| %>
+        <%= f.input :name %>
+        <%= f.input :email %>
+        <%= hidden_field_tag :case_id, @payment.case.id  %>
+        <%= f.submit :submit%>
+      <% end %>
+      <%= link_to 'Back', active_cases_path %>
     </div>
   </div>
 </div>
+

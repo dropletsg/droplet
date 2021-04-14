@@ -30,4 +30,6 @@ Rails.application.routes.draw do
       get 'success'
     end
   end
+
+  resources :case_contributors, only: [:new, :create]
 end

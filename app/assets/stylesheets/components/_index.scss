@@ -1,8 +1,51 @@
 // Import your components CSS files here.
-@import "alert";
 @import "avatar";
-@import "navbar";
-@import "card";
 @import "container";
 @import "filter";
 @import "button";
+
+@import 'variables';
+@import 'mixins';
+
+// Plugins CSS
+@import "plugins/plugin-bootstrap-switch";
+@import "plugins/plugin-nouislider";
+@import "plugins/plugin-datepicker";
+
+// Core CSS
+@import "buttons";
+@import "inputs";
+@import "checkbox-radio";
+@import "progress-bars";
+@import "badges";
+@import "pagination";
+@import "typography";
+@import "misc";
+@import "labels";
+
+// components
+@import "nucleo-icons";
+@import "social-buttons";
+@import "tabs-navs";
+@import "navbars";
+@import "dropdown";
+@import "alerts";
+@import "images";
+@import "tooltips-and-popovers";
+@import "modal";
+@import "icons";
+@import "carousel";
+@import "footers";
+
+// Cards
+@import "cards";
+@import "cards/card-plain";
+@import "cards/card-register";
+@import "cards/card-profile";
+
+// example pages and sections
+@import "examples";
+@import "sections";
+
+
+@import "responsive";

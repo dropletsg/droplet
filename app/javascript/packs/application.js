@@ -24,7 +24,7 @@ import 'jquery'
 import 'popper.js'
 import "bootstrap"
 import "controllers"
-
+import "flatpickr"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -33,14 +33,12 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 import highlightRow from "../plugins/checklist";
 
 
-
   document.addEventListener('turbolinks:load', () => {
-    // Call your functions here, e.g:
-    // initSelect2();
-    // fetchWithToken();
+
     if(document.querySelector('.case-card')) {
       highlightRow();
     }
+
 
     initSweetalert('#sweet-alert-telegram', {
       text: "Are you sure you want to post to Telegram?",
@@ -52,6 +50,7 @@ import highlightRow from "../plugins/checklist";
           
         }
     });
+
 
   });
 

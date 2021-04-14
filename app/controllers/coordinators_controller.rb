@@ -1,6 +1,6 @@
 class CoordinatorsController < ApplicationController
-  before_action :set_coordinator, only: [:show, :edit, :update]
-  
+  before_action :set_coordinator, only: %w[show edit update]
+
   def index
     if params[:query].present?
       @coordinators = Coordinator.where("name ILIKE ?", "%#{params[:query]}%")
@@ -11,15 +11,17 @@ class CoordinatorsController < ApplicationController
 
   def show
   end
-  
+
   def new
     @coordinator = Coordinator.new
   end
 
   def create
     @coordinator = Coordinator.new(coordinator_params)
-    if @coordinator.save
-      redirect_to coordinator_path(@coordinator)
+
+    if @coordinator.valid?
+      @coordinator.save!
+      redirect_to @coordinator, notice: "coordinator has been created successfully."
     else
       render :new
     end
@@ -30,10 +32,12 @@ class CoordinatorsController < ApplicationController
 
   def update
     @coordinator.update(coordinator_params)
-    if @coordinator.save
-      redirect_to coordinator_path(@coordinator)
+
+    if @coordinator.valid?
+      @coordinator.save!
+      redirect_to @coordinator, notice: "Coordinator has been updated successfully."
     else
-      render :new
+      render :edit
     end
   end
 
@@ -46,5 +50,4 @@ class CoordinatorsController < ApplicationController
   def coordinator_params
     params.require(:coordinator).permit(:name, :email, :mobile_number, :description, :profile_photo, :telegram_handle, :is_archived)
   end
-
 end

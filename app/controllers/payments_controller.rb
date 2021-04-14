@@ -16,7 +16,25 @@ class PaymentsController < ApplicationController
       )
     )
 
-    session = Stripe::Checkout::Session.create(
+    session = create_stripe_checkout_session(payment)
+
+    payment.update(checkout_session_id: session.id)
+    redirect_to payment_path(payment)
+  end
+
+  def success
+    @payment = Payment.find(params[:id])
+    @case_contributor = CaseContributor.new
+  end
+
+  private
+
+  def payment_params
+    params.require(:payment).permit(:amount)
+  end
+
+  def create_stripe_checkout_session(payment)
+    Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
         name: 'contribution',
@@ -33,18 +51,6 @@ class PaymentsController < ApplicationController
         }
       }
     )
-
-    payment.update(checkout_session_id: session.id)
-    redirect_to payment_path(payment)
   end
 
-  def success
-    @payment = Payment.find(params[:id])
-  end
-
-  private
-
-  def payment_params
-    params.require(:payment).permit(:amount)
-  end
 end
