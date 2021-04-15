@@ -24,12 +24,12 @@
               <table class="w-100 mt-2">
                 <tbody>
                   <tr>
-                    <td width="40%"><strong>Title: </strong></td>
+                    <td width="35%" style="vertical-align: text-top;"><strong>Title: </strong></td>
                     <td><%= c.title%></td>
                   </tr>
                   <tr>
                     <td><strong>Category: </strong></td>
-                    <td><%= c.category&.capitalize %></td>
+                    <td><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></td>
                   </tr>
                   <tr>
                     <td><strong>Start date: </strong></td>
