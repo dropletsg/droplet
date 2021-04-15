@@ -39,7 +39,6 @@ import highlightRow from "../plugins/checklist";
       highlightRow();
     }
 
-
     initSweetalert('#sweet-alert-telegram', {
       text: "Are you sure you want to post to Telegram?",
       buttons: {cancel: "Back", approve: "Yes"}},(value) => {
@@ -49,7 +48,6 @@ import highlightRow from "../plugins/checklist";
           link.click();
         }
     });
-
 
   });
 

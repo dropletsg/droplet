@@ -1,60 +1,60 @@
 <div class="section">
   <%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
-  <div class="container">
-    <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
-      <h3>All cases</h3>
-      <%= link_to "New case", new_case_path, class: "btn btn-primary" %>
-      <%= form.submit "Create Telegram Message", class: "btn btn-primary" %>
-    </div>
+    <div class="container">
+      <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
+        <h3>All cases</h3>
+        <%= link_to "New case", new_case_path, class: "btn btn-primary" %>
+        <%= form.submit "Create Telegram Message", class: "btn btn-primary" %>
+      </div>
 
-    <table class="table table-bordered">
-      <thead>
-        <th scope="col">Select</th>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Worker</th>
-        <th scope="col">Coordinator</th>
-        <th scope="col">Status</th>
-        <th scope="col">Start date</th>
-        <th scope="col">End date</th>
-        <th scope="col">Progress</th>
-      </thead>
-      <tbody>
-        <% @cases.each do |c| %>
-          <tr class = "case-row" data-case-id="<%= c.id %>">
-            <td><%= check_box_tag 'select_case[]', c.id %></td>
-            <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
-            <td><%= c.title %></td>
-            <td><%= c.worker.name %></td>
-            <td><%= c.coordinator.name %></td>
-            <td><%= c.status&.capitalize %></td>
-            <td>
-              <%= c.start_date.strftime("%d %B %Y") %>
-              <br>
-              <small class="text-muted"><%= time_ago_in_words(c.start_date) %></small>
-            </td>
-            <td>
-              <%= c.end_date.strftime("%d %B %Y") %>
-              <br>
-              <small class="text-muted"><%= time_ago_in_words(c.end_date) %></small>
+      <table class="table table-bordered">
+        <thead>
+          <th scope="col">Select</th>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Worker</th>
+          <th scope="col">Coordinator</th>
+          <th scope="col">Status</th>
+          <th scope="col">Start date</th>
+          <th scope="col">End date</th>
+          <th scope="col">Progress</th>
+        </thead>
+        <tbody>
+          <% @cases.each do |c| %>
+            <tr class = "case-row" data-case-id="<%= c.id %>">
+              <td><%= check_box_tag 'select_case[]', c.id %></td>
+              <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
+              <td><%= c.title %></td>
+              <td><%= c.worker.name %></td>
+              <td><%= c.coordinator.name %></td>
+              <td><%= c.status&.capitalize %></td>
+              <td>
+                <%= c.start_date.strftime("%d %B %Y") %>
+                <br>
+                <small class="text-muted"><%= time_ago_in_words(c.start_date) %></small>
               </td>
-            <td style="width:20%">
-              <div class="progress" style="height: 20px;">
-                <div class="progress-bar"
-                  role="progressbar"
-                  style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
-                  aria-valuenow="<%= c.current_amount_cents %>"
-                  aria-valuemin="0"
-                  aria-valuemax="<%= c.target_amount.cents %>">
+              <td>
+                <%= c.end_date.strftime("%d %B %Y") %>
+                <br>
+                <small class="text-muted"><%= time_ago_in_words(c.end_date) %></small>
+                </td>
+              <td style="width:20%">
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar"
+                    role="progressbar"
+                    style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+                    aria-valuenow="<%= c.current_amount_cents %>"
+                    aria-valuemin="0"
+                    aria-valuemax="<%= c.target_amount.cents %>">
+                  </div>
                 </div>
-              </div>
-              <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+                <p><%= money_without_cents_and_with_symbol(c.current_amount) %> / <%= money_without_cents_and_with_symbol(c.target_amount) %></p>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 </div>
 
