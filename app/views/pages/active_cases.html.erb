@@ -65,16 +65,22 @@
               </p>
               <div class="collapse" id="caseCoordinator<%= c.id %>">
                 <div class="card-body">
+                <p>PayLah</p>
                   <div class="paylah-container">
                     <p class="text-center"><%= image_tag "paylah.png", alt: "paylah", width: "60%" %></p>
                   </div>
                   <p> Send your contribution to the QR code above </p>
                 </div>
-                <%= simple_form_for @payment do |f| %>
-                  <%= hidden_field_tag 'case_id', c.id %>
-                  <%= f.input :amount %>
-                  <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3 btn-wd' %>
-                <% end %>
+                <div class="card-body">
+                <p>STRIPE</p>
+                <p><i class="fab fa-cc-visa fa-2x"></i> <i class="fab fa-cc-mastercard fa-2x"></i> <i class="fab fa-cc-amex fa-2x"></i></p>
+                  <%= simple_form_for @payment do |f| %>
+                    <%= hidden_field_tag 'case_id', c.id %>
+                    <%= f.input :amount %>
+                    <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3 btn-wd' %>
+                  <% end %>
+                </div>
+                
               </div>
               
             </div>
