@@ -123,45 +123,45 @@
                           <td>
                             <p><small>
                               <% if @worker.photo_id_front.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Photo ID (front)
                             </small></p>
 
                             <p><small>
                               <% if @worker.photo_id_back.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Photo ID (back)
                             </small></p>
 
                             <p><small>
                               <% if @worker.id_selfie.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Selfie with ID
                             </small></p>
 
                             <p><small>
                               <% if @worker.payment_qr.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Payment QR code
                             </small></p>
 
                             <p><small>
                               <% if @worker.payment_link.present? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Payment link
                             </small></p>
@@ -200,11 +200,21 @@
       </div>
     </div>
 
-  </div>
-</div>
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-header">
+            <h4 class="mt-1">Verification</h4>
+          </div>
+          <div class="card-body">
+            <div class="case-verification">
+              <%= render 'checklist', c: @case, worker: @worker %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="section">
-  <div class="container">
   </div>
 </div>
 

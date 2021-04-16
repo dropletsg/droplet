@@ -51,13 +51,13 @@ class CasesController < ApplicationController
   def case_params
     params.require(:case).permit(:worker_id, :coordinator_id, :title, :story_summary, :story, :start_date, :end_date,
                                  :target_amount, :payment_reference, :status, :category,
-                                 :admin_approved, :paid_proof, :files)
+                                 :admin_approved, :paid_proof, files: [])
   end
 
   def case_update_params
     params.require(:case).permit(:worker_id, :coordinator_id, :title, :story_summary, :story, :start_date, :end_date,
                                  :target_amount, :payment_reference, :status, :category,
-                                 :admin_approved,:call_done, :paid_proof, files: [],
+                                 :admin_approved, :call_done, :paid_proof, files: [],
                                  worker_attributes: [:photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr])
   end
 
