@@ -13,6 +13,8 @@ class Case < ApplicationRecord
   CATEGORIES = %w[medical agent_fee bills others]
   ID_TYPES = %w[work_permit s_pass employment_pass entre_pass dependents_pass passport]
 
+  
+
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount)
   end
@@ -54,4 +56,32 @@ class Case < ApplicationRecord
   def archived_status_ready?
     true
   end
+
+  def off_track?
+    status == 'active' && current_amount < theoretical_target_amount
+  end
+
+  def total_days
+    # end_date - start_date
+    end_date - start_date
+  end
+
+  def theoretical_target_amount
+    target_amount * target_rate
+  end
+
+  def target_rate
+    days_passed / total_days
+  end
+
+  def days_passed
+    # how many days has passed since start_date of this case
+    current_date = Date.today
+    (current_date - start_date).to_i
+  end
+
+  def self.off_track
+    Case.select(&:off_track?)
+  end
+  
 end

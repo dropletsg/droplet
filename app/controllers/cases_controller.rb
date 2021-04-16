@@ -9,6 +9,7 @@ class CasesController < ApplicationController
     @worker = @case.worker
     @url = Rails.env.development? ? "https://google.com" : active_cases_url
     @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
+ 
   end
 
   def new
