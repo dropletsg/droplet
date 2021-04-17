@@ -1,15 +1,17 @@
 class WorkerNotesController < ApplicationController
   def new
     @worker = Worker.find(params[:worker_id])
-    @workernote = WorkerNote.new
+    @worker_note = WorkerNote.new
   end
 
   def create
-    @workernote = WorkerNote.new(review_params)
+    @worker_note = WorkerNote.new(worker_note_params)
     @worker = Worker.find(params[:worker_id])
-    @workernote.worker = @worker
-    if @workernote.save
-      redirect_to worker_path(@worker)
+    @worker_note.worker = @worker
+
+    if @worker_note.valid?
+      @worker_note.save!
+      redirect_to @worker, notice: "Note has been created successfully."
     else
       render :new
     end
@@ -17,7 +19,7 @@ class WorkerNotesController < ApplicationController
 
   private
 
-  def review_params
+  def worker_note_params
     params.require(:worker_note).permit(:content)
   end
 end

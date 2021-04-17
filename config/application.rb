@@ -16,6 +16,10 @@ module Droplet
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # Need this setting so Active Storage doesn't overwrite files.
+    config.active_storage.replace_on_assign_to_many = false
+
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
