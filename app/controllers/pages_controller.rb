@@ -13,5 +13,7 @@ class PagesController < ApplicationController
     else
       @cases = Case.where(status: "active")
     end
+
+    @category = params[:category]
   end
 end
