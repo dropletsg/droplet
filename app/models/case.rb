@@ -18,13 +18,13 @@ class Case < ApplicationRecord
   CATEGORIES = %w[medical agent_fee bills others]
 
   def current_amount
-    payments.where(payment_type: "incoming").sum(&:amount)
+    payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)
   end
 
   def current_amount_cents
     return 0 if current_amount.zero?
 
-    payments.where(payment_type: "incoming").sum(&:amount).cents
+    (payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)).cents
   end
 
   def calculate_progress
