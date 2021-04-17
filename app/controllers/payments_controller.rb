@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
         update_target_amount(@payment)
         redirect_to case_path(@case), notice: "Outgoing payment recorded. Target amount updated."
       end
-    
+
     else
       payment = Payment.create!(
         payment_params.merge(
@@ -36,6 +36,7 @@ class PaymentsController < ApplicationController
       payment.update(checkout_session_id: session.id)
       redirect_to payment_path(payment)
     end
+  end
 
   def success
     @payment = Payment.find(params[:id])
