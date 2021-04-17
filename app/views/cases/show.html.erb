@@ -46,6 +46,7 @@
                 </ul>
               </div>
             </div>
+
             <div id="my-tab-content" class="tab-content text-left">
 
               <!-- Progress tab -->
@@ -79,6 +80,7 @@
                     </table>
                   </div>
                 </div>
+                <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
               </div>
 
               <!-- Worker tab -->
@@ -192,6 +194,7 @@
                     <% end %>
                   </tbody>
                 </table>
+
               </div>
             </div>
 
@@ -321,8 +324,18 @@
               <p><%= @case.story %></p>
             </div>
           </div>
+
+          <div class="case-card p-4">
+            Update
+            <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
+          </div> 
+        </div>
+    </div>
+</div>
+
       </div>
   </div>
+
 
   <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
 
