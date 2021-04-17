@@ -1,25 +1,41 @@
 class PaymentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show create success]
 
+
   def show
     @payment = Payment.where(payment_type: 'pending').find(params[:id])
   end
 
   def create
-    payment = Payment.create!(
-      payment_params.merge(
-        {
-          payment_reference: "stripe_#{params[:case_id]}",
-          case: Case.find(params[:case_id]),
-          payment_type: 'pending'
-        }
+    if params[:payment_type] == "outgoing"
+      @payment = Payment.new(payment_params.merge({ payment_type: params[:payment_type] }))
+      @case = Case.find(params[:case_id])
+      @payment.case = @case
+
+      if @payment.amount > @case.current_amount # show error if the entered amount is greater than current amount
+        redirect_to case_path(@case), notice: "Error, outgoing amount more than current amount"
+      else
+        @payment.save!
+        update_target_amount(@payment)
+        redirect_to case_path(@case), notice: "Outgoing payment recorded. Target amount updated."
+      end
+
+    else
+      payment = Payment.create!(
+        payment_params.merge(
+          {
+            payment_reference: "stripe_#{params[:case_id]}",
+            case: Case.find(params[:case_id]),
+            payment_type: 'pending'
+          }
+        )
       )
-    )
 
-    session = create_stripe_checkout_session(payment)
+      session = create_stripe_checkout_session(payment)
 
-    payment.update(checkout_session_id: session.id)
-    redirect_to payment_path(payment)
+      payment.update(checkout_session_id: session.id)
+      redirect_to payment_path(payment)
+    end
   end
 
   def success
@@ -29,8 +45,13 @@ class PaymentsController < ApplicationController
 
   private
 
+  def update_target_amount(payment)
+    target_amount = payment.case.target_amount
+    payment.case.update!(target_amount: target_amount - @payment.amount)
+  end
+
   def payment_params
-    params.require(:payment).permit(:amount)
+    params.require(:payment).permit(:amount, :payment_reference, :payment_type)
   end
 
   def create_stripe_checkout_session(payment)
@@ -52,5 +73,4 @@ class PaymentsController < ApplicationController
       }
     )
   end
-
 end

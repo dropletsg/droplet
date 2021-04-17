@@ -9,9 +9,8 @@ class CasesController < ApplicationController
     @worker = @case.worker
     @url = Rails.env.development? ? "https://google.com" : active_cases_url
     @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
-    contributors = CaseContributor.where(case: @case)
-    @emails = []
-    contributors.each { |contributor| @emails << contributor.email }
+    
+    @emails = @case.case_contributors.map(&:email)
   end
 
   def new
@@ -65,13 +64,13 @@ class CasesController < ApplicationController
   def case_params
     params.require(:case).permit(:worker_id, :coordinator_id, :title, :story_summary, :story, :start_date, :end_date,
                                  :target_amount, :payment_reference, :status, :category,
-                                 :admin_approved, :paid_proof, :files)
+                                 :admin_approved, :paid_proof, files: [])
   end
 
   def case_update_params
     params.require(:case).permit(:worker_id, :coordinator_id, :title, :story_summary, :story, :start_date, :end_date,
                                  :target_amount, :payment_reference, :status, :category,
-                                 :admin_approved,:call_done, :paid_proof, files: [],
+                                 :admin_approved, :call_done, :paid_proof, files: [],
                                  worker_attributes: [:photo_id_front, :photo_id_back, :id_selfie, :id_type, :id_valid, :payment_link, :payment_qr])
   end
 

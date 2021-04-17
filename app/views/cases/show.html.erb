@@ -25,7 +25,7 @@
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <%= link_to "Edit case", edit_case_path, class: "dropdown-item" %>
-                <a class="dropdown-item" href="#">Another action</a>
+                <%= link_to "Send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "dropdown-item" %>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
             </div>
@@ -80,7 +80,18 @@
                     </table>
                   </div>
                 </div>
-                <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
+                  <div class="row mt-3">
+                    <div class="col">
+                      <h3>Record outgoing payment</h3>
+                      <%= simple_form_for Payment.new do |f| %>
+                        <%= hidden_field_tag :payment_type, "outgoing" %>
+                        <%= hidden_field_tag :case_id, @case.id %>
+                        <%= f.input :amount %>
+                        <%= f.input :payment_reference %>
+                        <%= f.submit "Submit payment", class: "btn btn-primary" %>
+                      <% end %>
+                    </div>
+                  </div>
               </div>
 
               <!-- Worker tab -->
@@ -125,45 +136,45 @@
                           <td>
                             <p><small>
                               <% if @worker.photo_id_front.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Photo ID (front)
                             </small></p>
 
                             <p><small>
                               <% if @worker.photo_id_back.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Photo ID (back)
                             </small></p>
 
                             <p><small>
                               <% if @worker.id_selfie.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Selfie with ID
                             </small></p>
 
                             <p><small>
                               <% if @worker.payment_qr.attached? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Payment QR code
                             </small></p>
 
                             <p><small>
                               <% if @worker.payment_link.present? %>
-                                <i class="fas fa-check-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-check-circle"></i>
                               <% else %>
-                                <i class="fas fa-times-circle" style="font-size: 1em;"></i>
+                                <i class="fas fa-times-circle"></i>
                               <% end %>
                               Payment link
                             </small></p>
@@ -203,134 +214,19 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<div class="section">
-  <div class="container">
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="section">
-
-  <div class="container">
-      <div class="row justify-content-around mt-3">
-
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <%= image_tag "https://res.cloudinary.com/yuanming91/image/upload/v1617429145/case_lifecycle_tmixcq.png", class: "img-fluid" %>
-              </div>
+    <div class="row mt-5">
+      <div class="col" data-controller="checklist">
+        <div class="card h-100 border" data-checklist-target="verification">
+          <div class="card-header">
+            <h4 class="mt-1">Verification</h4>
+          </div>
+          <div class="card-body">
+            <div class="case-verification">
+              <%= render 'checklist', c: @case, worker: @worker %>
             </div>
           </div>
         </div>
       </div>
-      <div class="row justify-content-around">
-          <div class="col-4 case-profile-card">
-            <div class="worker-img-container">
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
-            </div>
-            <div class="status-bar">
-              <%= @case.status.upcase %>
-
-              <sup><a href="#" class="d-inline" data-toggle="modal" data-target="#exampleModalCenter">What's this?</a></sup>
-            </div>
-            <%= link_to "Update", edit_case_path %>
-            <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
-
-            <div class="case-info-container">
-              <p><strong>Category:</strong> <%= @case.category.capitalize %></p>
-              <div class="row">
-                <div class="col">
-                  <strong>Start Date</strong>
-                  <p><%= @case.start_date %></p>
-                </div>
-                <div class="col">
-                  <strong>Due Date</strong>
-                  <p><%= @case.end_date %></p>
-                </div>
-              </div>
-              <div class="progress" style="height:20px;">
-                <div class="progress-bar"
-                  role="progressbar"
-                  style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
-                  aria-valuenow="<%= @case.current_amount_cents %>"
-                  aria-valuemin="0"
-                  aria-valuemax="<%= @case.target_amount.cents %>">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <p><%= money_without_cents_and_with_symbol @case.current_amount %> / <%= money_without_cents_and_with_symbol @case.target_amount %></p>
-                </div>
-              </div>
-              <p><strong>Coordinator</strong>: <%= @case.coordinator.name%></p>
-
-              <p><strong>Notes</strong></p>
-              <ul class="list-group">
-                <% @case.case_notes.each do |note| %>
-                  <li class="list-group-item"><%= note.content %></li>
-                <% end %>
-              </ul>
-              <%= link_to 'Leave a note', new_case_case_notes_path(@case), class: "btn btn-outline-dark" %>
-            </div>
-          </div>
-
-          <div class="col-7" >
-            <div class="case-card  ">
-
-              <div class="row p-4 ">
-                <div class="col ">
-                  <p>Name <%= @case.worker.name %></p>
-                  <p>Mobile Number <%= @case.worker.mobile_number %></p>
-                </div>
-                <div class="col">
-                  <p>Alias <%= @case.worker.alias %></p>
-                  <p>Email <%= @case.worker.email %></p>
-                </div>
-              </div>
-            </div>
-            <div class="case-card p-4">
-              Summary
-              <p><%= @case.story_summary %></p>
-            </div>
-            <div class="case-card p-4">
-              Story
-              <p><%= @case.story %></p>
-            </div>
-          </div>
-
-          <div class="case-card p-4">
-            Update
-            <p><%= link_to "send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "btn btn-primary" %></p>
-          </div> 
-        </div>
     </div>
-</div>
-
-      </div>
-  </div>
-
-
-  <hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
-
-  <div class="container mb-5">
-    <%= render 'checklist', c: @case, worker: @worker %>
   </div>
 </div>
- -->

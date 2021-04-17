@@ -1,4 +1,4 @@
-<div class="container">  
+<div class="container">
   <h2>Worker's details</h2>
   <p><%= link_to "Back", workers_path, class: "btn btn-outline-primary" %></p>
 
@@ -7,7 +7,7 @@
       <div class="coordinator-profile-card mt-2">
         <div class="worker-img-container">
           <%= cl_image_tag @worker.payment_qr.key, class: "avatar-large avatar-worker" %>
-        </div>  
+        </div>
         <div class="case-info-container">
           <p><strong>ID: </strong><%= @worker.id %></p>
           <p><strong>Name: </strong><%= @worker.name %></p>
@@ -17,7 +17,7 @@
           <p><strong>Archived: </strong><%= @worker.is_archived %></p>
           <%= link_to "Edit", edit_worker_path, class: "btn btn-outline-primary" %>
         </div>
-        
+
         <!-- Worker's notes -->
         <div class="case-info-container">
           <h3>Notes</h3>
@@ -29,7 +29,7 @@
 
           <%= link_to 'Leave a note', new_worker_worker_notes_path(@worker), class: "btn btn-outline-primary mt-3" %>
           </div>
-        </div>  
+        </div>
     </div>
 
     <div class="col-6">
@@ -39,12 +39,12 @@
         </div>
         <%= @worker.description %>
       </div>
-      
+
       <!-- Worker's cases -->
       <div class="coordinator-card">
         <div class="card-header row justify-content-start pt-3 pb-0">
           <p><strong>Worker's cases</strong></p>
-        </div>  
+        </div>
         <table class="table table-hover">
           <thead>
             <tr class="table-primary">
@@ -68,12 +68,18 @@
 </div>
 
 
+<h2>Other worker details</h2>
+<div class="container">
+  <div class="row">
+    <div class="coordinator-profile-card mt-2">
+      <div class="worker-img-container">
+        <%= cl_image_tag @worker.photo_id_front.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.photo_id_back.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.id_selfie.key, class: "avatar-large avatar-worker" %>
+        <%= cl_image_tag @worker.id_selfie.key, class: "avatar-large avatar-worker" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <%# <p>Photo ID front:<%= @worker.photo_id_front %>
-  <%# <p>Photo ID back:<%= @worker.photo_id_back %>
-  <%# <p>ID selfie:<%= @worker.id_selfie %>
-  <%# <p>ID Type:<%= @worker.id_type %>
-  <%# <p>Valid ID?:<%= @worker.id_valid %>
-  <%# <p>Payment link:<%= @worker.payment_link %>
-  <%# <p>Payment QR:<%= @worker.payment_qr %>
 
