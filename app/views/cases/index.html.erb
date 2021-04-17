@@ -1,15 +1,28 @@
 <div class="section">
-  <%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
-  <div class="container">
+  <div class="container" data-controller="checklist">
     <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
       <h3>All cases</h3>
-      <%= link_to "New case", new_case_path, class: "btn btn-primary" %>
-      <%= form.submit "Create Telegram Message" %>
+      <%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
+      <div class="input-group">
+        <%= link_to "New case", new_case_path, class: "btn btn-primary mr-2" %>
+        <div class="dropdown align-bottom">
+          <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary">
+            Actions
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <%= form.submit "Create Telegram Message", class: "dropdown-item" %>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <table class="table table-bordered">
       <thead>
-        <th scope="col">Select</th>
+        <th scope="col">
+          <input type="checkbox" id="select-all" data-action="change->checklist#selectAll" >
+        </th>
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Worker</th>
@@ -22,7 +35,7 @@
       <tbody>
         <% @cases.each do |c| %>
           <tr class = "case-row" data-case-id="<%= c.id %>">
-            <td><%= check_box_tag 'select_case[]', c.id %></td>
+            <td><%= check_box_tag 'select_case[]', c.id, false, data: { 'checklist-target': 'select' } %></td>
             <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
             <td><%= c.title %></td>
             <td><%= c.worker.name %></td>
@@ -54,6 +67,6 @@
         <% end %>
       </tbody>
     </table>
+    <% end %>
   </div>
-  <% end %>
 </div>
