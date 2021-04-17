@@ -34,8 +34,7 @@ import highlightRow from "../plugins/checklist";
 
 
   document.addEventListener('turbolinks:load', () => {
-
-    if(document.querySelector('.case-card')) {
+    if(document.querySelector('.case-verification')) {
       highlightRow();
     }
 
