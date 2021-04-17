@@ -1,17 +1,12 @@
-<div class="section">
-  <div class="container">
-    <h2 class="mb-3">New coordinator</h2>
+<h2 class="mb-3">New coordinator</h2>
 
-    <%= simple_form_for(coordinator) do |f| %>
-      <%= f.input :name %>
-      <%= f.input :mobile_number %>
-      <%= f.input :email %>
-      <%= f.input :telegram_handle %>
-      <%= f.input :description %>
-      <%= f.input :profile_photo, label: "Profile photo" %>
-      <%= f.input :is_archived unless coordinator.new_record? %>
-      <%= f.button :submit, class: "btn btn-primary" %>
-    <% end %>
-
-  </div>
-</div>
+<%= simple_form_for(coordinator) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :mobile_number %>
+  <%= f.input :email %>
+  <%= f.input :telegram_handle %>
+  <%= f.input :description %>
+  <%= f.input :profile_photo, label: "Profile photo" %>
+  <%= f.input :is_archived unless coordinator.new_record? %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

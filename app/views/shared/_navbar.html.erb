@@ -21,6 +21,9 @@
           <li class="nav-item">
             <%= link_to "Public cases", active_cases_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
         <% else %>
           <li class="nav-item">
             <a class= "nav-link" href="#section2">About Us</a>
@@ -37,9 +40,9 @@
           <li class="nav-item">
             <a class= "nav-link" href="#section4">Contact Us</a>
           </li>
-          
+
           <li class="nav-item">
-            <%= link_to "Admin", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Admin login", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
