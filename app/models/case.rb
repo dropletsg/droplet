@@ -17,8 +17,6 @@ class Case < ApplicationRecord
   STATUS = %w[new shortlisted active closed archived]
   CATEGORIES = %w[medical agent_fee bills others]
 
-  
-
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)
   end
@@ -105,7 +103,7 @@ class Case < ApplicationRecord
   def self.off_track
     Case.select(&:off_track?)
   end
-  
+
   def active?
     status == 'active'
   end
@@ -120,6 +118,10 @@ class Case < ApplicationRecord
 
   def admin_approved?
     admin_approved
+  end
+
+  def paid_proof?
+    paid_proof
   end
 
   def worker_photo_id_front?
