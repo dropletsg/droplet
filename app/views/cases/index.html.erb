@@ -52,7 +52,7 @@
             </td>
           <td style="width:20%">
             <div class="progress" style="height: 20px;">
-              <div class="progress-bar"
+              <div class="progress-bar-<%= c.off_track? ? 'danger' : 'success' %>"
                 role="progressbar"
                 style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
                 aria-valuenow="<%= c.current_amount_cents %>"
