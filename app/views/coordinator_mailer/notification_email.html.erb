@@ -4,7 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1> Dear <%=@active_case.coordinator.name %>, </h1>
-    <p> Case <%= @active_case.title %> is off track </p>
+    <p> Dear <%= @active_case.coordinator.name %>, </p>
+    <p> Case "<%= @active_case.title %>" is off track.</p>
+    <p> Let's lend a helping hand to "<%= @active_case.worker.alias %>" and try to get more contribution. </p>
+    <p> Thank you</p>
   </body>
 </html>
