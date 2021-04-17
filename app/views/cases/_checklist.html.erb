@@ -16,7 +16,7 @@
             <i class="case-verification-row fas fa-check-circle"></i>
             Call worker
           </td>
-          <td><%= f.input :call_done %></td>
+          <td><%= f.input :call_done, label_html: { class: 'text-dark' } %></td>
         </tr>
 
         <tr data-completed="<%= c.worker_photo_id_front? %>" height="10%">
@@ -128,18 +128,17 @@
             <i class="case-verification-row fas fa-check-circle"></i>
             Claim Evidence
           </td>
-          <td data-controller="multi_upload">
-            <%= f.input :files, input_html: { multiple: true }, label: false, data: { action: "multi_upload#addFile" } %>
+          <td>
+            <%= f.input :files, input_html: { multiple: true }, label: false %>
             <% if c.files.attached? %>
               <% c.files.each do |file| %>
-                <small><em>
+                <p><small><em>
                   <%= file.filename %>
                   <%= link_to 'Remove',
                     delete_attachment_case_path(c, file.id),
                     method: :delete,
                     data: { confirm: "Delete?" } %>
-                  <% end %>
-                </em></small>
+                </em></small></p>
               <% end %>
             <% end %>
           </td>
@@ -164,17 +163,17 @@
             </td>
           </tr>
         <% end %>
-
+      <% end %>
     </tbody>
   </table>
 
-  <div>
-   Please make sure all the verification steps are completed before making the case active.
-    Verification incomplete but still want to make the case active?
-    <%= f.input :admin_approved, as: :boolean, label: "Admin override" %>
-  </div>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end pb-3">
+  <%= f.input :admin_approved,
+    label: 'Admin override (Verify without completing all steps)',
+    label_html: { class: 'text-dark' },
+    input_html: { 'data-checklist-target': 'checkbox', data: { action: 'checklist#override'} }
+  %>
 
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start pb-3">
     <%= f.submit "Save",  class: 'btn btn-primary mr-2', style:'width:95px;' %>
   </div>
 <% end %>
