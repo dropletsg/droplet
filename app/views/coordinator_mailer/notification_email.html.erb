@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello, your case <%= @active_case.title %> is off track</h1>
-    
+    <h1> Dear <%=@active_case.coordinator.name %>, </h1>
+    <p> Case <%= @active_case.title %> is off track </p>
   </body>
 </html>
