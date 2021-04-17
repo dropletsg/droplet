@@ -21,9 +21,15 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'selected_cases', to: 'cases#selected_cases'
+  get 'cases_roundup_telegram', to: 'cases#cases_roundup_telegram'
+  post 'cases_roundup_telegram', to: 'cases#cases_roundup_telegram'
+
   resources :payments, only: [:new, :show, :create] do
     member do
       get 'success'
     end
   end
+
+  resources :case_contributors, only: [:new, :create]
 end

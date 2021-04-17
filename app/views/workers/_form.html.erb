@@ -1,16 +1,37 @@
-<%= simple_form_for(@worker) do |f| %>
-  <%= f.input :email %>
-  <%= f.input :name %>
-  <%= f.input :alias %>
-  <%= f.input :mobile_number %>
-  <%= f.input :description %>
-  <%= f.input :photo_id_front %>
-  <%= f.input :photo_id_back %>
-  <%= f.input :id_selfie %>
-  <%= f.input :id_type %>
-  <%= f.input :id_valid %>
-  <%= f.input :payment_link %>
-  <%= f.input :payment_qr %>
-  <%= f.input :is_archived %>
-  <%= f.submit %>
-<% end %>
+<div class="section">
+  <div class="container">
+    <h2 class="mb-3">New worker</h2>
+
+    <%= simple_form_for(worker) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :alias %>
+      <%= f.input :mobile_number %>
+
+      <%= f.input :id_type, label: 'ID type', collection: Worker::ID_TYPES, wrapper_html: { class: "mb-0" } %>
+      <small class="text-muted"><%= f.input :id_valid, label: 'ID validated?' %></small>
+
+      <%= f.input :email %>
+      <%= f.input :description %>
+
+      <div class="form-row">
+        <div class="col">
+          <%= f.input :photo_id_front, label: 'Photo ID (front)' %>
+        </div>
+        <div class="col">
+          <%= f.input :photo_id_back, label: 'Photo ID (back)' %>
+        </div>
+        <div class="col">
+          <%= f.input :id_selfie, label: 'Selfie with ID' %>
+        </div>
+        <div class="col">
+          <%= f.input :payment_qr, label: 'Payment QR code' %>
+        </div>
+      </div>
+
+      <%= f.input :payment_link %>
+      <%= f.input :is_archived unless worker.new_record? %>
+      <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
