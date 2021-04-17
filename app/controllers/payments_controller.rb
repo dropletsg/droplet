@@ -19,13 +19,7 @@ class PaymentsController < ApplicationController
         update_target_amount(@payment)
         redirect_to case_path(@case), notice: "Outgoing payment recorded. Target amount updated."
       end
-
-      # if @payment.save!
-      #   update_target_amount(@payment)
-      #   redirect_to case_path(@case), notice: "Outgoing payment recorded. Target amount updated."
-      # else
-      #   redirect_to case_path(@case), notice: "Outgoing payment recorded. Target amount updated."
-      # end
+    
     else
       payment = Payment.create!(
         payment_params.merge(
@@ -37,31 +31,15 @@ class PaymentsController < ApplicationController
         )
       )
 
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [{
-          name: 'contribution',
-          amount: payment.amount.to_i * 100,
-          currency: 'sgd',
-          quantity: 1
-        }],
-        success_url: success_payment_url(payment),
-        cancel_url: success_payment_url(payment),
-        payment_intent_data: {
-          metadata: {
-            payment_id: payment.id,
-            case_id: payment.case.id
-          }
-        }
-      )
+      session = create_stripe_checkout_session(payment)
 
       payment.update(checkout_session_id: session.id)
       redirect_to payment_path(payment)
     end
-  end
 
   def success
     @payment = Payment.find(params[:id])
+    @case_contributor = CaseContributor.new
   end
 
   private
@@ -73,5 +51,25 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:amount, :payment_reference, :payment_type)
+  end
+
+  def create_stripe_checkout_session(payment)
+    Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        name: 'contribution',
+        amount: payment.amount.to_i * 100,
+        currency: 'sgd',
+        quantity: 1
+      }],
+      success_url: success_payment_url(payment),
+      cancel_url: success_payment_url(payment),
+      payment_intent_data: {
+        metadata: {
+          payment_id: payment.id,
+          case_id: payment.case.id
+        }
+      }
+    )
   end
 end

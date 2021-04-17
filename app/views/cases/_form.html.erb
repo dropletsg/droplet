@@ -1,19 +1,48 @@
-<div class="container">
-  <%= simple_form_for(@case) do |f| %>
-    <%= f.association :coordinator %>
-    <%= f.association :worker %>
-    <%= f.input :title %>
-    <%= f.input :story_summary %>
-    <%= f.input :story %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :target_amount %>
-    <%= f.input :payment_reference %>
-    <%= f.input :status, collection: Case::STATUS, default: 'new' %>
-    <%= f.input :category,collection: Case::CATEGORIES %>
-    <%= f.input :admin_approved %>
-    <%= f.input :paid_proof %>
-    <%= f.input :files %>
-    <%= f.submit %>
-  <% end %>
+<div class="section">
+  <div class="container">
+    <% if @case.errors.any? %>
+      <div class="alert alert-warning">
+        <h2><%= pluralize(@case.errors.count, "error") %> prohibited this case from being saved:</h2>
+
+        <ul>
+        <% @case.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <h2 class="mb-3">New case</h2>
+
+    <%= simple_form_for(@case) do |f| %>
+      <small><%= link_to "Add new worker", new_worker_path, target: "_blank" %></small>
+      <%= f.association :worker %>
+
+      <%= f.input :title %>
+      <%= f.input :story, input_html: { rows: 15 } %>
+      <%= f.input :story_summary, input_html: { rows: 5 } %>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.input :start_date, label: 'Start date', as: :date, html5: true %>
+          </div>
+          <div class="col">
+            <%= f.input :end_date, label: 'End date', as: :date, html5: true %>
+          </div>
+        </div>
+      </div>
+
+      <%= f.input :target_amount, input_html: { min: 1 } %>
+
+      <small><%= link_to "Add new coordinator", new_coordinator_path, target: "_blank" %></small>
+      <%= f.association :coordinator, required: false %>
+
+      <%= f.input :category, collection: Case::CATEGORIES %>
+      <%= f.input :admin_approved, inline_html: { class: 'form-check-sign' } %>
+      <%= f.input :files %>
+      <%= f.input :paid_proof if @case.active? %>
+      <%= f.input :status, collection: Case::STATUS unless @case.new_record? %>
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 </div>

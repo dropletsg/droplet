@@ -14,8 +14,9 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-
+    <div class="section pt-6 pb-0 mb-0">
+      <%= render 'shared/flashes', class: 'section mt-6' %>
+    </div>
     <%= yield %>
   </body>
 </html>

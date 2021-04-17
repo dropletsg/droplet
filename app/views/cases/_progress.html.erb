@@ -1,0 +1,29 @@
+<div class="progress" style="height: 20px;">
+  <div class="progress-bar"
+    role="progressbar"
+    style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
+    aria-valuenow="<%= @case.current_amount_cents %>"
+    aria-valuemin="0"
+    aria-valuemax="<%= @case.target_amount.cents %>">
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h4 class="mt-1">
+      S<%= Money.new(@case.current_amount).format(
+        no_cents: true,
+        symbol_before_without_space: true
+      ) %> Raised
+    </h4>
+    <p>
+      out of <%= @case.target_amount.format(
+        no_cents: true,
+        symbol_before_without_space: true
+      ) %> Goal
+      (<%= (@case.target_amount - Money.new(@case.current_amount)).format(
+        no_cents: true,
+        symbol_before_without_space: true
+      ) %> left)
+    </p>
+  </div>
+</div>

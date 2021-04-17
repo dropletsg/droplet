@@ -13,7 +13,6 @@ puts 'Creating 20 fake workers...'
 end
 puts 'Finished!'
 
-
 puts 'Creating 20 fake coordinators...'
 20.times do
   coordinator = Coordinator.new(
@@ -25,5 +24,5 @@ puts 'Creating 20 fake coordinators...'
   )
   coordinator.save!
 end
-puts 'Finished!'
 
+puts 'Finished!'

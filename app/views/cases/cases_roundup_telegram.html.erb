@@ -1,0 +1,45 @@
+ <div class="container">
+  <div style="padding: 20px; ">
+    <h4>Create Message</h4>
+    <textarea id="telegram-msg" name="telegram-msg" rows="4" cols="100"><%= @display_msg %></textarea>
+    <button  id="sweet-alert-telegram" class=" btn btn-primary"  style="margin-top: 10px;"><i class="fab fa-telegram-plane"></i> Share</button>
+    <button class=" btn post-button" hidden></button>
+  </div>
+ </div>
+
+  <!-- To generate nicEdit on all textarea for rich text -->
+  <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+  
+  <!-- To send message to telegram channel  -->
+  <script>
+    new nicEditor({buttonList : ['bold','italic','underline']}).panelInstance('telegram-msg');
+    
+    let post_button = document.querySelector(".post-button");
+    post_button.addEventListener("click", (e)=>{
+      let area = nicEditors.findEditor('telegram-msg'); 
+      let content = area.getContent();
+      const msg = content.replace(/<div>|<br>|<\/span>|<div[\s\w="-:;]*>|<span[\s\w="-:;]*>|<br[\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
+      console.log(content);
+      console.log(msg)
+
+      fetch("https://api.telegram.org/bot1719790312:AAFWT2mpG1YETwJRmzhHVw6BfxyIAPwC47M/sendMessage", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ 
+            "chat_id":-1001170880075,
+            "text": msg,
+            "parse_mode": "HTML" 
+            })
+        })
+          .then(response => response.json())
+          .then((data) => {
+            console.log(data);
+          });
+    })
+  </script>
+
+

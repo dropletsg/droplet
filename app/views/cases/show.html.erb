@@ -1,112 +1,233 @@
-<div class="container">
-    <div class="row justify-content-around mt-3">
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <%= image_tag "https://res.cloudinary.com/yuanming91/image/upload/v1617429145/case_lifecycle_tmixcq.png", class: "img-fluid" %>
+<div class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <h2><span class="label label-<%= @case.active? ? 'primary' : 'default' %>"><%= @case.status %></span> <%= @case.title %></h2>
+    </div>
+    <div class="row justify-content-lg-around mt-5">
+      <div class="col-7">
+        <div class="card h-100">
+          <div class="card-header">
+            <h4 class="mt-1">Story</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><%= @case.story_summary %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between">
+            <h4 class="mt-1 d-inline">Case details</h4>
+            <div class="dropdown align-bottom">
+              <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h"></i>
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to "Edit case", edit_case_path, class: "dropdown-item" %>
+                <%= link_to "Send update", "https://mail.google.com/a/domain.com/mail/u/0/?fs=1&su=Update%20on%20case#{@case.id}&body=Dear%20Contributor,&bcc=#{@emails.join(',')}&tf=cm", target:"_blank", class: "dropdown-item" %>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul id="tabs" class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#progress" role="tab">Progress</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#worker" role="tab">Worker</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#payments" role="tab">Payments</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="my-tab-content" class="tab-content text-left">
+
+              <!-- Progress tab -->
+              <div class="tab-pane active card-text" id="progress" role="tabpanel">
+                <div class="row mt-1">
+                  <div class="col">
+                    <%= render 'progress' %>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <table class="w-100">
+                      <tbody>
+                        <tr>
+                          <td width="35%"><strong>Start date: </strong></td>
+                          <td><%= @case.start_date.strftime("%d %B %Y") %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>End date: </strong></td>
+                          <td><%= @case.end_date.strftime("%d %B %Y") %><small class="text-muted"> (in <%= time_ago_in_words(@case.end_date) %>)</small></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Category: </strong></td>
+                          <td><%= @case.category&.capitalize %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Coordinator: </strong></td>
+                          <td><%= @case.coordinator.name %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                  <div class="row mt-3">
+                    <div class="col">
+                      <h3>Record outgoing payment</h3>
+                      <%= simple_form_for Payment.new do |f| %>
+                        <%= hidden_field_tag :payment_type, "outgoing" %>
+                        <%= hidden_field_tag :case_id, @case.id %>
+                        <%= f.input :amount %>
+                        <%= f.input :payment_reference %>
+                        <%= f.submit "Submit payment", class: "btn btn-primary" %>
+                      <% end %>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- Worker tab -->
+              <div class="tab-pane card-text" id="worker" role="tabpanel">
+                <div class="row mt-1">
+                  <div class="col">
+                    <table class="w-100">
+                      <tbody class="align-top">
+                        <tr>
+                          <td width="35%"><strong>Name: </strong></td>
+                          <td><%= link_to @worker.name, worker_path(@worker) %> (<%= @worker.alias %>)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Mobile no: </strong></td>
+                          <td><%= @worker.mobile_number %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>ID type: </strong></td>
+                          <td>
+                            <%= @worker.id_type&.humanize %>
+                            <span>
+                              <% if @worker.id_valid %>
+                                <span class="text-success" style="font-size: 0.8em;"> <i class="fas fa-check-circle text-success" style="font-size: 0.8em;"></i>Validated</span>
+                              <% else %>
+                                <span class="text-muted" style="font-size: 0.8em;"> <i class="fas fa-times-circle text-muted" style="font-size: 0.8em;"></i>Not validated</span>
+                              <% end %>
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Email: </strong></td>
+                          <td><%= @worker.email %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Description: </strong></td>
+                          <td>
+                            <%= @worker.description.truncate(150) %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Files: </strong></td>
+                          <td>
+                            <p><small>
+                              <% if @worker.photo_id_front.attached? %>
+                                <i class="fas fa-check-circle"></i>
+                              <% else %>
+                                <i class="fas fa-times-circle"></i>
+                              <% end %>
+                              Photo ID (front)
+                            </small></p>
+
+                            <p><small>
+                              <% if @worker.photo_id_back.attached? %>
+                                <i class="fas fa-check-circle"></i>
+                              <% else %>
+                                <i class="fas fa-times-circle"></i>
+                              <% end %>
+                              Photo ID (back)
+                            </small></p>
+
+                            <p><small>
+                              <% if @worker.id_selfie.attached? %>
+                                <i class="fas fa-check-circle"></i>
+                              <% else %>
+                                <i class="fas fa-times-circle"></i>
+                              <% end %>
+                              Selfie with ID
+                            </small></p>
+
+                            <p><small>
+                              <% if @worker.payment_qr.attached? %>
+                                <i class="fas fa-check-circle"></i>
+                              <% else %>
+                                <i class="fas fa-times-circle"></i>
+                              <% end %>
+                              Payment QR code
+                            </small></p>
+
+                            <p><small>
+                              <% if @worker.payment_link.present? %>
+                                <i class="fas fa-check-circle"></i>
+                              <% else %>
+                                <i class="fas fa-times-circle"></i>
+                              <% end %>
+                              Payment link
+                            </small></p>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payments tab -->
+              <div class="tab-pane card-text" id="payments" role="tabpanel">
+                <table class="w-100">
+                  <thead>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Source</th>
+                  </thead>
+                  <tbody class="align-top">
+                    <% @case.payments.where(payment_type: 'incoming').each do |payment| %>
+                      <tr>
+                        <td><%= payment.updated_at.getlocal.strftime('%F @ %r') %></td>
+                        <td><%= payment.amount %></td>
+                        <td><%= payment.payment_reference %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col" data-controller="checklist">
+        <div class="card h-100 border" data-checklist-target="verification">
+          <div class="card-header">
+            <h4 class="mt-1">Verification</h4>
+          </div>
+          <div class="card-body">
+            <div class="case-verification">
+              <%= render 'checklist', c: @case, worker: @worker %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row justify-content-around">
-        <div class="col-4 case-profile-card">
-          <div class="worker-img-container">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-worker" %>
-          </div>
-          <div class="status-bar">
-            <%= @case.status.upcase %>
-            <!-- Button trigger modal -->
-            <sup><a href="#" class="d-inline" data-toggle="modal" data-target="#exampleModalCenter">What's this?</a></sup>
-          </div>
-          <%= link_to "Update", edit_case_path %>
-          <%= render 'social_media', url: @url, facebook_url: @facebook_url %>
 
-          <div class="case-info-container">
-            <p><strong>Category:</strong> <%= @case.category.capitalize %></p>
-            <div class="row">
-              <div class="col">
-                <strong>Start Date</strong>
-                <p><%= @case.start_date %></p>
-              </div>
-              <div class="col">
-                <strong>Due Date</strong>
-                <p><%= @case.end_date %></p>
-              </div>
-            </div>
-            <div class="progress" style="height:20px;">
-              <div class="progress-bar"
-                role="progressbar"
-                style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
-                aria-valuenow="<%= @case.current_amount_cents %>"
-                aria-valuemin="0"
-                aria-valuemax="<%= @case.target_amount %>">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p><%= money_without_cents_and_with_symbol @case.current_amount %> / <%= money_without_cents_and_with_symbol @case.target_amount %></p>
-              </div>
-            </div>
-            <p><strong>Coordinator</strong>: <%= @case.coordinator.name%></p>
-
-            <p><strong>Notes</strong></p>
-            <ul class="list-group">
-              <% @case.case_notes.each do |note| %>
-                <li class="list-group-item"><%= note.content %></li>
-              <% end %>
-            </ul>
-            <%= link_to 'Leave a note', new_case_case_notes_path(@case), class: "btn btn-outline-dark" %>
-          </div>
-        </div>
-
-        <div class="col-7" >
-          <div class="case-card  ">
-
-            <div class="row p-4 ">
-              <div class="col ">
-                <p>Name <%= @case.worker.name %></p>
-                <p>Mobile Number <%= @case.worker.mobile_number %></p>
-              </div>
-              <div class="col">
-                <p>Alias <%= @case.worker.alias %></p>
-                <p>Email <%= @case.worker.email %></p>
-              </div>
-            </div>
-          </div>
-          <div class="case-card p-4">
-            Summary
-            <p><%= @case.story_summary %></p>
-          </div>
-          <div class="case-card p-4">
-            Story
-            <p><%= @case.story %></p>
-          </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container">
-  <div class="row justify-content-around mt-3">
-    <p>Record outgoing payment</p>
-    <%= simple_form_for Payment.new do |f| %>
-      <%= hidden_field_tag :payment_type, "outgoing" %>
-      <%= hidden_field_tag :case_id, @case.id %>
-      <%= f.input :amount %>
-      <%= f.input :payment_reference %>
-      <%= f.submit "Submit payment", class: "btn btn-primary" %>
-    <% end %>
   </div>
-</div>
-
-<hr style="height:2px;border:none;color:#333;background-color:#ccf2f4; width:60%">
-
-<div class="container mb-5">
-  <%= render 'checklist', c: @case, worker: @worker %>
 </div>
