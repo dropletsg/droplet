@@ -23,11 +23,6 @@ class Case < ApplicationRecord
     (payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)).cents
   end
 
-  def update_target_amount
-    new_amount = target_amount - payments.where(payment_type: "outgoing").sum(&:amount)
-    update!(target_amount: new_amount)
-  end
-
   def calculate_progress
     amount_received = 500 # replace with payment received
     donation_progress = amount_received / target_amount.to_f * 100

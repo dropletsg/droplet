@@ -91,13 +91,10 @@
     </div>
 </div>
 
+
 <div class="container">
   <div class="row justify-content-around mt-3">
     <p>Record outgoing payment</p>
-    <!-- Record an outgoing payment to a Case's worker -->
-    <!-- A dropdown form where User can select "outgoing" -->
-    <!-- An input field to input outgoing amount -->
-    <!-- A submit button so that a record can be created  -->
     <%= simple_form_for Payment.new do |f| %>
       <%= hidden_field_tag :payment_type, "outgoing" %>
       <%= hidden_field_tag :case_id, @case.id %>
