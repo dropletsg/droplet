@@ -1,15 +1,17 @@
+include ActionView::Helpers::DateHelper
+
 class CasesController < ApplicationController
   before_action :set_case, only: %i[show edit update shortlist list delete_attachment ]
 
   def index
-    @cases = Case.all
+    @cases = Case.includes(:worker).includes(:coordinator).order(params[:sort])
   end
 
   def show
     @worker = @case.worker
     @url = Rails.env.development? ? "https://google.com" : active_cases_url
     @facebook_url = "https://www.facebook.com/plugins/share_button.php?href=#{@url}&layout=button&size=large&appId=321172835013412&width=77&height=28"
-    
+
     @emails = @case.case_contributors.map(&:email)
   end
 
@@ -32,9 +34,13 @@ class CasesController < ApplicationController
   def edit; end
 
   def update
-    if @case.update(case_update_params.merge({
-      status: params[:case][:status] || @case.status
-    }))
+    if @case.update(
+      case_update_params.merge(
+        {
+          status: params[:case][:status] || @case.status
+        }
+      )
+    )
       redirect_to @case, notice: "Case updated successfully."
     else
       render :edit
@@ -49,14 +55,21 @@ class CasesController < ApplicationController
   end
 
   def cases_roundup_telegram
-    selected_cases = params[:select_case]
-    cases_id = selected_cases.map(&:to_i)
-    @display_messages = ["<div>For more details, please visit: #{root_url}</div>"]
-    cases_id.each do |id|
-      case_id = Case.find(id)
-      @display_messages << "<div><b>#{case_id.worker.alias}</b> <i>(Case Ref ##{id})</i> - #{case_id.story_summary}</div><div>🎯 Target: #{case_id.target_amount.format}</div><div>📌 End Date: #{case_id.end_date.strftime("%d %b %Y")}</div>"
-    end
-    @display_msg = @display_messages.join("<div><br></div>")
+    return '' unless params[:select_case]
+
+    messages = params[:select_case].map do |case_id|
+      c = Case.find(case_id)
+      <<~MESSAGE
+        <div>
+          🔶 <u>#{c.worker.alias}</u> (case ##{case_id}) requests <b>#{c.target_amount.format}</b> — #{c.story_summary}
+        </div>
+        <div>
+          📌 📌 #{c.end_date.strftime('%d %b %Y')} (#{c.end_date >= Date.today ? 'in ' : ''}#{time_ago_in_words(c.end_date)}#{c.end_date >= Date.today ? '' : ' ago'})
+        </div>
+      MESSAGE
+    end.join("<div><br></div>")
+
+    @display_msg = "#{messages}<div><br></div><div>For more details, please visit: #{root_url}</div>"
   end
 
   private
@@ -78,5 +91,5 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
   end
 
-  
+
 end

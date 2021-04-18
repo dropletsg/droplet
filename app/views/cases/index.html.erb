@@ -1,19 +1,14 @@
-<div class="container" data-controller="checklist">
+<div class="container p-0" data-controller="checklist">
   <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
     <h3>All cases</h3>
     <%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
-    <div class="input-group">
-      <%= link_to "New case", new_case_path, class: "btn btn-primary mr-2" %>
-      <div class="dropdown align-bottom">
-        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary">
-          Actions
-        </a>
+    <div class="btn-group">
+      <%= link_to "New case", new_case_path, class: "btn btn-primary" %>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <%= form.submit "Create Telegram Message", class: "dropdown-item" %>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <%= form.submit "Create Telegram Message", class: "btn btn-primary" %>
+
       </div>
+
     </div>
   </div>
 
@@ -22,13 +17,13 @@
       <th scope="col">
         <input type="checkbox" id="select-all" data-action="change->checklist#selectAll" >
       </th>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Worker</th>
-      <th scope="col">Coordinator</th>
-      <th scope="col">Status</th>
-      <th scope="col">Start date</th>
-      <th scope="col">End date</th>
+      <th scope="col"><%= link_to '#', sort: 'id' %>
+      <th scope="col"><%= link_to 'Title', sort: 'title' %></th>
+      <th scope="col"><%= link_to 'Worker', sort: 'workers.name' %></th>
+      <th scope="col"><%= link_to 'Coordinator', sort: 'coordinators.name' %></th>
+      <th scope="col"><%= link_to 'Status', sort: 'status' %></th>
+      <th scope="col"><%= link_to 'Start date', sort: 'start_date' %></th>
+      <th scope="col"><%= link_to 'End date', sort: 'end_date' %></th>
       <th scope="col">Progress</th>
     </thead>
     <tbody>
