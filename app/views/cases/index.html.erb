@@ -10,7 +10,6 @@
       </div>
 
     </div>
-  </div>
 
   <table class="table table-bordered">
     <thead>
@@ -28,7 +27,7 @@
     </thead>
     <tbody>
       <% @cases.each do |c| %>
-        <tr class = "case-row" data-case-id="<%= c.id %>">
+        <tr class ="case-row<%= ' text-muted' unless c.active? %>" data-case-id="<%= c.id %>">
           <td><%= check_box_tag 'select_case[]', c.id, false, data: { 'checklist-target': 'select' } %></td>
           <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
           <td><%= c.title %></td>
@@ -38,12 +37,12 @@
           <td>
             <%= c.start_date.strftime("%d %B %Y") %>
             <br>
-            <small class="text-muted"><%= time_ago_in_words(c.start_date) %></small>
+            <small class="text-muted"><%= time_ago_in_words(c.start_date) %> ago</small>
           </td>
           <td>
             <%= c.end_date.strftime("%d %B %Y") %>
             <br>
-            <small class="text-muted"><%= time_ago_in_words(c.end_date) %></small>
+            <small class="text-muted"><%= c.end_date >= Date.today ? "in #{time_ago_in_words(c.end_date)}" : "#{time_ago_in_words(c.end_date)} ago"  %></small>
             </td>
           <td style="width:20%">
             <div class="progress" style="height: 20px;">

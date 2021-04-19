@@ -7,10 +7,13 @@ export default class extends Controller {
   static targets = ['verification', 'checkbox', 'select']
 
   override() {
-    this.verificationTarget.classList.toggle('border-success')
+    if (this.checkboxTarget.checked) {
+      this.verificationTarget.classList.add('border-success')
+    }
   }
 
   selectAll() {
+    console.log('checked')
     this.selectTargets.forEach(checkbox => {
       checkbox.checked = !checkbox.checked
     })
