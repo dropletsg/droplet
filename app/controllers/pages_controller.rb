@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[home active_cases show]
+  skip_before_action :authenticate_user!, only: %i[home active_cases active_cases_show]
 
   def home
     redirect_to cases_path if user_signed_in?
@@ -15,5 +15,9 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
+  end
+
+  def active_cases_show
+    @case = Case.find(params[:id])
   end
 end
