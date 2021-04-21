@@ -6,6 +6,7 @@
     <%= f.input :name %>
     <%= f.input :email %>
     <%= hidden_field_tag :case_id, @payment.case.id  %>
+    <%= hidden_field_tag :payment_id, @payment.id  %>
     <%= f.button  :submit, "Subscribe", class: "btn btn-primary mb-3"%>
   <% end %>
 </div>

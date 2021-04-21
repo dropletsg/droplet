@@ -1,46 +1,116 @@
 <div class="section">
   <div class="container ">
     <header><h1><%= @case.title %></h1></header>
-    <div class="w-50">
-      <div class="description ">
-        <div class="mt-3"><%= @case.story_summary %></div>
-        <div class="mt-3"><%= @case.story %></div>
-      </div>
-      <div class="content">
-        <div class="case-member">
-          <div class="case-member-title"><h4>Coordinator and Beneficiary</h4></div>
-          <hr>
-          <div class="case-member d-flex justify-content-between">
-            <div class="coordinator d-flex">
-              <div class="coordinator-avatar m-2">
-                <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+    <div class="d-flex">
+      <div class="w-50">
+      <hr>
+      <p><i class="fas fa-briefcase-medical"></i> <%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></p>
+      Created <%= time_ago_in_words(@case.start_date) %> ago |
+      Fund needed by <%= @case.end_date.strftime("%d %B %Y") %>
+      <hr>
+        <div class="description ">
+          <div class="mt-3"><%= @case.story_summary %></div>
+          <div class="mt-3"><%= @case.story %></div>
+        </div>
+        <div class="content">
+          <div class="case-member">
+            <div class="case-member-title"><h4>Coordinator and Worker</h4></div>
+            <hr>
+            <div class="case-member d-flex justify-content-between">
+              <div class="coordinator d-flex">
+                <div class="coordinator-avatar m-2">
+                  <i class="far fa-user fa-2x mr-2"></i>
+                </div>
+                <div class="coordinator-info">
+                  <p><%= @case.coordinator.name %></p>
+                  <p>Coordinator</p>
+                  <button class="btn btn-outline-primary">Contact</button>
+                </div>
               </div>
-              <div class="coordinator-info m-2">
-                <p><%= @case.coordinator.name %></p>
-                <p>Coordinator</p>
-                <button  class="btn btn-outline-primary">Contact</button>
-              </div>
-            </div>
-            <div class="beneficiary d-flex">
-              <div class="beneficiary-avatar m-2">
-                <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-              </div>
-              <div class="beneficiary-info m-2">
-                <p><%= @case.worker.alias %></p>
-                <p>Beneficiary</p>
+              <div class="beneficiary d-flex">
+                <div class="beneficiary-avatar m-2">
+                  <i class="far fa-user fa-2x mr-2"></i>
+                </div>
+                <div class="beneficiary-info ">
+                  <p><%= @case.worker.alias %></p>
+                  <p>Worker</p>
+                </div>
               </div>
             </div>
           </div>
+          <div class="comment">
+          <h4>Comment</h4>
+          <hr>
+          </div>
         </div>
-        <div class="comment">
-        <h4>Comment</h4>
-        <hr>
+      </div>
+      <div class="sidebar card my-3 mx-5" style="width: 35%; height: 100%;">
+        <div class="m-4">
+          <div class="prgress-info">
+            <%= render 'progress', c:@case %>
+            <div class="static d-flex">
+              <div class="num-of-contributors mr-4">
+                <%= @num_of_contributors %>
+                <p><%= @num_of_contributors > 1 ? "contributors" : "contributor" %></p>
+              </div>
+              <div class="num-of-subscribers">
+                <%= @num_of_subscribers %>
+                <p><%= @num_of_subscribers > 1 ? "subscribers" : "subscriber" %></p>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 my-2">Share</button>
+            <button class="btn btn-primary w-100 my-2">Contribute Now</button>
+          </div>
+          
+          <div class="contribution-info">
+          
+              <% @contributions.order("created_at desc").limit(3).each do |contribution| %>
+                <hr>
+                <div class="d-flex">
+                   <div class="contributor-info ml-2">
+                    <p><i class="fas fa-user-circle mr-2"></i><%= contribution.payee_name %></p>
+                    <p><%= money_without_cents_and_with_symbol(contribution.amount) %>&nbsp;&nbsp;<span class="dot"></span> <%= time_ago_in_words(contribution.created_at) %> ago</p>
+                   </div>
+                </div>
+              <% end %>
+              
+              <!-- Button trigger modal -->
+              <button class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+                See All
+              </button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="sidebar">
-      
-    </div>
+    
   </div>
   
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>Join this list.</p>
+        <% @contributions.order("created_at desc").each do |contribution| %>
+          <hr>
+          <div class="d-flex">
+            <div class="contributor-info ml-2">
+              <p><i class="fas fa-user-circle mr-2"></i><%= contribution.payee_name %></p>
+              <p><%= money_without_cents_and_with_symbol(contribution.amount) %>&nbsp;&nbsp;<span class="dot"></span> <%= time_ago_in_words(contribution.created_at) %> ago</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-simple m-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

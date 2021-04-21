@@ -19,5 +19,8 @@ class PagesController < ApplicationController
 
   def active_cases_show
     @case = Case.find(params[:id])
+    @contributions = Payment.where(case_id: @case, payment_type: "pending")
+    @num_of_contributors = @contributions.size
+    @num_of_subscribers = CaseContributor.where(case_id: @case).size
   end
 end
