@@ -34,11 +34,9 @@ import highlightRow from "../plugins/checklist";
 
 
   document.addEventListener('turbolinks:load', () => {
-
-    if(document.querySelector('.case-card')) {
+    if(document.querySelector('.case-verification')) {
       highlightRow();
     }
-
 
     initSweetalert('#sweet-alert-telegram', {
       text: "Are you sure you want to post to Telegram?",
@@ -49,7 +47,6 @@ import highlightRow from "../plugins/checklist";
           link.click();
         }
     });
-
 
   });
 

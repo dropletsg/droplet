@@ -21,9 +21,28 @@
           <li class="nav-item">
             <%= link_to "Public cases", active_cases_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Admin", new_user_session_path, class: "nav-link" %>
+            <a class= "nav-link" href="#section2">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Contribute
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Cases", active_cases_path, class:"dropdown-item" %>
+              <a class="dropdown-item" href="#">Solidarity Fund</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class= "nav-link" href="#section4">Contact Us</a>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to "Admin login", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>

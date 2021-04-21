@@ -1,0 +1,22 @@
+i.fas {
+  font-size: 1em;
+
+  &.icon-grey {
+    color: grey;
+  }
+}
+
+.form-group.file {
+  margin-bottom: 0;
+}
+
+.selected-file {
+  background: #ddeeff;
+  border-radius: 0.2em;
+  margin-top: 1px;
+  padding: 0.2em;
+}
+
+.selected-file input[type='file'] {
+  display: none;
+}

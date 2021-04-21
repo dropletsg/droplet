@@ -1,5 +1,5 @@
 <div class="progress" style="height: 20px;">
-  <div class="progress-bar"
+  <div class="progress-bar-<%= @case.off_track? ? 'danger' : 'success' %>"
     role="progressbar"
     style="width: <%= 100 * @case.current_amount_cents/@case.target_amount.cents %>%;"
     aria-valuenow="<%= @case.current_amount_cents %>"

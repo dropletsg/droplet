@@ -1,17 +1,12 @@
-<div class="container">
-  <div class="row py-4">
-    <div class="col">
-      <h1>Payment successful!</h1>
-      <p>Contributed <strong><%= humanized_money_with_symbol @payment.amount %></strong> to <strong><%= @payment.case.worker.alias %></strong> for <strong><%= @payment.case.title %></strong></p>
-      <p>Subcribe to this case for update</p>
-      <%= simple_form_for @case_contributor do |f| %>
-        <%= f.input :name %>
-        <%= f.input :email %>
-        <%= hidden_field_tag :case_id, @payment.case.id  %>
-        <%= f.submit :submit%>
-      <% end %>
-      <%= link_to 'Back', active_cases_path %>
-    </div>
-  </div>
+<h2 class="mb-4">Thank you for your contribution!</h2>
+<p>Contributed <strong><%= humanized_money_with_symbol @payment.amount %></strong> to <strong><%= @payment.case.worker.alias %></strong> for <strong>Case Ref #<%= @payment.case.id %>: <%= @payment.case.title %>.</strong></p>
+<div class="mt-4 w-50">
+  <p>Subscribe to this case if you wish to receive updates on the <%= @payment.case.worker.alias %>:</p>
+  <%= simple_form_for @case_contributor do |f| %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= hidden_field_tag :case_id, @payment.case.id  %>
+    <%= f.button  :submit, "Subscribe", class: "btn btn-primary mb-3"%>
+  <% end %>
 </div>
-
+<%= link_to 'Back', active_cases_path %>
