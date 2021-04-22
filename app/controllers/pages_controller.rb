@@ -15,5 +15,6 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
+
   end
 end

@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <h3>Active Cases</h3>
 <div class="container d-flex mt-4 p-0  align-items-center">
   <div>
@@ -38,48 +41,64 @@
 <div class="card-grid mt-5">
   <% @cases.each do |c| %>
     <div class="card" style="width: 22rem;">
-      <div class="card-header">
-        #<%= c.id %> <%= c.title %>
-      </div>
+      <%# <div class="card-header"> %>
+        <%# #<%= c.id %> <%#<%= c.title %>
+      <%# </div> %>
       <div class="m-2">
         <div class="card-body card-text">
-          <%= render 'progress', c:c %>
-          <table class="w-100 mt-2">
-            <tbody>
+
+          <div class="mt-3 title-ellipsis">
+            <p class="font-weight-bold text-dark"># <%= c.id %> <%= c.title%></p>
+          </div>
+
+          <div class="mt-3">              
+            <div class="d-flex">
+              <% if c.category == "medical" %>
+                <i class="fa fa-plus-square"></i><p><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></p>
+              <% end %>
+              <% if c.category == "agent_fee" %>
+                <i class='fas fa-file-alt'></i><p><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></p>
+              <% end %>
+              <% if c.category == "others" %>
+                <i class='fas fa-hand-holding-heart'></i><p><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></p>
+              <% end %>
+              <% if c.category == "bills" %>
+                <i class='far fa-credit-card'></i><p><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></p>
+              <% end %>
+            </div>
+          </div>
+
+            <%# <tbody>
               <tr>
                 <td width="35%" style="vertical-align: text-top;"><strong>Title: </strong></td>
                 <td><%= c.title%></td>
-              </tr>
+              <%# </tr>
               <tr>
                 <td><strong>Category: </strong></td>
                 <td><%= c.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></td>
-              </tr>
+              <%# </tr>
               <tr>
                 <td><strong>Start date: </strong></td>
                 <td><%= c.start_date.strftime("%d %B %Y") %></td>
-              </tr>
+              <%# </tr>
               <tr>
                 <td><strong>End date: </strong></td>
-                <td><%= c.end_date.strftime("%d %B %Y") %><small class="text-muted"> (in <%= time_ago_in_words(c.end_date) %>)</small></td>
-              </tr>
+                <td><%= c.end_date.strftime("%d %B %Y") %><%#small class="text-muted"> (in <%= time_ago_in_words(c.end_date) %><%#/small></td>
+              <%# </tr>
             </tbody>
-          </table>
+          </table> %>
 
-          <div class="mt-3">
-            <strong>Summary: </strong>
+          <div class="mt-3 ellipsis">
             <p><%= c.story_summary %></p>
           </div>
 
+          <%= render 'progress', c: c %>
+
           <p>
-            <button class="btn btn-primary mt-2 w-100" type="button" data-toggle="collapse" data-target="#caseStory<%= c.id %>" aria-expanded="false" aria-controls="caseStory<%= c.id %>">
-              Learn More
+            <button class="btn btn-primary mt-2 w-100" type="button" >
+              <%= link_to "learn more", "#", target: "_blank" %>
             </button>
           </p>
-          <div class="collapse" id="caseStory<%= c.id %>">
-            <div class="card-body">
-              <p><%= c.story %></p>
-            </div>
-          </div>
 
           <p>
             <button class="btn btn-primary mt-2 w-100" type="button" data-toggle="collapse" data-target="#caseCoordinator<%= c.id %>" aria-expanded="false" aria-controls="caseCoordinator<%= c.id %>">
