@@ -10,7 +10,7 @@ class CaseContributorsController < ApplicationController
     payment = Payment.find(params[:payment_id])
     payee_name = @case_contributor.name
     payee_name.present? ? payment.update(payee_name: payee_name) : payment.update(payee_name: "Anonymous")
-    redirect_to active_cases_path(@case_contributor.case)
+    redirect_to active_cases_path
   end
 
   private
