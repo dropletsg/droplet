@@ -27,10 +27,9 @@
     let post_button = document.querySelector(".post-button");
     post_button.addEventListener("click", (e)=>{
       let area = nicEditors.findEditor('telegram-msg');
-      let content = area.getContent();
-      const msg = content.replace(/<div>|<br>|<\/span>|<div[\s\w="-:;]*>|<span[\s\w="-:;]*>|<br[\s\w="-:;]*>/g , "").replace(/<\/div>/g , "\n").replace(/&nbsp;/g," ");
-      console.log(content);
-      console.log(msg)
+      let content = area.getContent().replace(/<br>/g, "")
+      console.log(area.getContent())
+      console.log(content)
 
       fetch("https://api.telegram.org/bot<%= ENV['TELEGRAMBOT_TOKEN']%>/sendMessage", {
           method: "POST",
@@ -40,7 +39,7 @@
           },
           body: JSON.stringify({
             "chat_id":"<%= ENV['CHAT_ID']%>",
-            "text": msg,
+            "text": content,
             "parse_mode": "HTML"
             })
         })
