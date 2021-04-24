@@ -5,7 +5,19 @@
       <div class="w-50">
         <!-- Case description -->
         <hr>
-        <h6><i class="fas fa-briefcase-medical mr-2"></i> <%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></h6>
+        <% if @case.category == "medical" %>
+          <h6><i class="fas fa-plus-square mr-2"></i><%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></h6>
+        <% end %>
+        <% if @case.category == "agent_fee" %>
+          <h6><i class='fas fa-file-alt mr-2'></i><%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></h6>
+        <% end %>
+        <% if @case.category == "others" %>
+          <h6><i class='fas fa-hand-holding-heart mr-2'></i><%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></h6>
+        <% end %>
+        <% if @case.category == "bills" %>
+          <h6><i class='far fa-credit-card mr-2'></i><%= @case.category.gsub(/_/, ' ').gsub(/\b\w/, &:capitalize) %></h6>
+        <% end %>
+
         <div class="d-flex justify-content-between">
           <p class="">Created <%= time_ago_in_words(@case.start_date) %> ago </p>
           <p>Fund needed by <strong><%= @case.end_date.strftime("%d %B %Y") %></strong></p>
