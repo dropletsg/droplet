@@ -97,13 +97,13 @@
             </div>
           -->
             <div class="card-body">
-            <p>STRIPE</p>
-            <p><i class="fab fa-cc-visa fa-2x"></i> <i class="fab fa-cc-mastercard fa-2x"></i> <i class="fab fa-cc-amex fa-2x"></i></p>
-              <%= simple_form_for @payment do |f| %>
-                <%= hidden_field_tag 'case_id', c.id %>
-                <%= f.input :amount %>
-                <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3 btn-wd' %>
-              <% end %>
+              <p>STRIPE</p>
+              <p><i class="fab fa-cc-visa fa-2x"></i> <i class="fab fa-cc-mastercard fa-2x"></i> <i class="fab fa-cc-amex fa-2x"></i></p>
+                <%= simple_form_for @payment do |f| %>
+                  <%= hidden_field_tag 'case_id', c.id %>
+                  <%= f.input :amount %>
+                  <%= f.button :submit, 'Submit', class: 'btn btn-primary mb-3 btn-wd' %>
+                <% end %>
             </div>
 
           </div>

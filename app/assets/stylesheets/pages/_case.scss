@@ -21,6 +21,7 @@ i.fas {
   display: none;
 }
 
+<<<<<<< HEAD
 .social-share-button {
   display: flex;
   flex-wrap: wrap;
@@ -36,4 +37,8 @@ i.fas {
 
 #shareModalTitle {
   font-weight: 900;
+  th > a {
+    color: black;
+    font-weight: bold;
+  }
 }
