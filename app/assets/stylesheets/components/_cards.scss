@@ -558,3 +558,25 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
 }
+
+.ellipsis{
+  text-overflow: ellipsis;
+  overflow: hidden;
+	max-height: 50rem;
+	-webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+}
+
+.title-ellipsis{
+	text-overflow: ellipsis;
+  overflow: hidden;
+	max-height: 50rem;
+	-webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+}
+
+.last-payment-text{
+	font-size: 12px;
+}

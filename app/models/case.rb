@@ -163,4 +163,8 @@ class Case < ApplicationRecord
   def worker_payment_qr?
     worker.payment_qr.attached?
   end
+
+  def last_payment
+    payments.where(payment_type:"incoming").order("created_at desc").limit(1).first
+  end
 end

@@ -15,6 +15,7 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
+
   end
 
   def active_cases_show
