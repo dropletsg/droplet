@@ -42,6 +42,7 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'stimulus-rails'
 gem 'turbolinks_render'
+gem 'social-share-button'
 
 group :development, :test do
   gem 'pry-byebug'

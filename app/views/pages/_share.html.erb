@@ -1,0 +1,25 @@
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-notice">
+    <div class="modal-content">
+      <div class="modal-header border-bottom mt-5 mx-5 px-0 pb-3">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title mb-2 text-left" id="shareModalTitle">Help by sharing</h3>
+        <p class="text-left">Fundraisers shared on social networks raise up to 5 times more!</p>
+      </div>
+      <div class="modal-body mx-5 px-0">
+        <%= social_share_button_tag(c.title) %>
+      </div>
+      <div class="modal-footer mx-5 px-0">
+
+        <!-- Clipboard -->
+        <div class="row mt-3 w-100 d-flex clipboard-group">
+          <input type="text" value="<%= case_url(c) %>" id="myInput" class="flex-grow-1">
+          <button class="btn btn-secondary clipboard-btn"><i class="fas fa-clipboard"></i></button>
+        </div>
+        <p class="text-success d-none" id="copied-text">Copied!</p>
+
+        <button type="button" class="btn btn-primary btn-link" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>

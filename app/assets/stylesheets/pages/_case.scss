@@ -20,3 +20,20 @@ i.fas {
 .selected-file input[type='file'] {
   display: none;
 }
+
+.social-share-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .ssb-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    background-size: cover;
+    margin: 1rem;
+  }
+}
+
+#shareModalTitle {
+  font-weight: 900;
+}
