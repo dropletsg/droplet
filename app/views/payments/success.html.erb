@@ -3,11 +3,20 @@
 <div class="mt-4 w-50">
   <p>Subscribe to this case if you wish to receive updates on <%= @payment.case.worker.alias %>'s case:</p>
   <%= simple_form_for @case_contributor do |f| %>
+    <%= hidden_field_tag :case_id, @payment.case.id %>
+    <%= hidden_field_tag :payment_id, @payment.id  %>
+
     <%= f.input :name %>
     <%= f.input :email %>
-    <%= hidden_field_tag :case_id, @payment.case.id  %>
-    <%= hidden_field_tag :payment_id, @payment.id  %>
-    <%= f.button  :submit, "Subscribe", class: "btn btn-primary mb-3"%>
+
+    <div class="form-group string"></div>
+      <%= label_tag :comment, 'Leave a comment', class: 'string' %>
+      <%= text_field_tag :comment, '', class: 'form-control string' %>
+    </div>
+
+    <%= f.button :submit, "Subscribe", class: "btn btn-primary mt-3 d-block"%>
+    <%= link_to 'Back', active_cases_path %>
+
   <% end %>
 </div>
-<%= link_to 'Back', active_cases_path %>
+
