@@ -5,13 +5,18 @@
   <%= simple_form_for @case_contributor do |f| %>
     <%= hidden_field_tag :case_id, @payment.case.id %>
     <%= hidden_field_tag :payment_id, @payment.id  %>
-  
+
     <%= f.input :name %>
     <%= f.input :email %>
-    <label>Your well-wishes for the worker:*</label>
-    <br>
-    <%= text_field_tag(:comment, value=nil, size:70)%>
-    <%= f.button  :submit, "Subscribe", class: "btn btn-primary mb-3"%>
+
+    <div class="form-group string"></div>
+      <%= label_tag :comment, 'Leave a comment', class: 'string' %>
+      <%= text_field_tag :comment, '', class: 'form-control string' %>
+    </div>
+
+    <%= f.button :submit, "Subscribe", class: "btn btn-primary mt-3 d-block"%>
+    <%= link_to 'Back', active_cases_path %>
+
   <% end %>
 </div>
-<%= link_to 'Back', active_cases_path %>
+
