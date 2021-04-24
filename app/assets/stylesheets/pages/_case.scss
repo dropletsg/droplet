@@ -21,7 +21,23 @@ i.fas {
   display: none;
 }
 
-th > a {
-  color: black;
-  font-weight: bold;
+.social-share-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .ssb-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    background-size: cover;
+    margin: 1rem;
+  }
+}
+
+#shareModalTitle {
+  font-weight: 900;
+  th > a {
+    color: black;
+    font-weight: bold;
+  }
 }

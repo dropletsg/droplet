@@ -1,0 +1,46 @@
+<div class="modal fade" id="contributionListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom mx-5">
+        <div class="row d-flex justify-content-between">
+          <p class="font-weight-bold">Contributions (<%= number_to_human(incoming_payments.count) %>)</p>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <button class="btn btn-primary w-100 my-2 d-flex align-items-center" type="button" data-toggle="collapse" data-target="#caseCoordinator<%= c.id %>" aria-expanded="false" aria-controls="caseCoordinator<%= c.id %>">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span class="flex-grow-1">Contribute now</span>
+        </button>
+        <div class="collapse my-2" id="caseCoordinator<%= c.id %>">
+          <p class="card-title d-flex justify-content-lg-between">
+            <span class="font-weight-bold">Enter your contribution</span>
+            <span class="text-muted"><small>
+              <i class="fab fa-cc-visa fa-2x"></i> <i class="fab fa-cc-mastercard fa-2x"></i> <i class="fab fa-cc-amex fa-2x"></i>
+            </small></span>
+          </p>
+          <%= simple_form_for @payment do |f| %>
+            <%= hidden_field_tag 'case_id', c.id %>
+            <%= f.input :amount, label: false %>
+            <%= f.button :submit, 'Submit', class: 'btn btn-primary w-100 btn-wd' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-body">
+        <% incoming_payments.order("created_at desc").each do |payment| %>
+
+          <div class="d-flex justify-content-start align-items-center">
+            <i class="fas fa-user-circle mr-3"></i>
+            <div>
+              <p><%= payment.payee_name || 'Anonymous' %></p>
+              <p class="mb-0">
+                <%= money_without_cents_and_with_symbol(payment.amount) %>
+                <span class="dot"></span>
+                <small><%= time_ago_in_words(payment.created_at) %> ago</small>
+              </p>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

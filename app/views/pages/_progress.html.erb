@@ -1,14 +1,18 @@
 <div class="row">
   <div class="col">
-    <div class="mt-4 font-weight-bold text-dark">
+    <h5 class="d-inline"><strong>
       S<%= Money.new(c.current_amount).format(
         no_cents: true,
         symbol_before_without_space: true
-      ) %> Raised
-    </div>
-
-    <p class="last-payment-text">
-      <%= c.last_payment.nil? ? 'Be the first to contribute' : "Contribution made #{time_ago_in_words(c.last_payment.created_at)} ago" %>
+      ) %>
+    </strong></h5>
+       raised of <%= c.target_amount.format(
+        no_cents: true,
+        symbol_before_without_space: true
+      ) %> goal (<%= Money.new([0, c.target_amount - c.current_amount].max).format(
+        no_cents: true,
+        symbol_before_without_space: true
+      ) %> left)
     </p>
    
     <div class="progress" style="height: 20px;">
@@ -36,3 +40,14 @@
     </div>  
   </div>
 </div>
+
+<div class="progress">
+  <div class="progress-bar-success"
+    role="progressbar"
+    style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+    aria-valuenow="<%= c.current_amount_cents %>"
+    aria-valuemin="0"
+    aria-valuemax="<%= c.target_amount.cents %>">
+  </div>
+</div>
+

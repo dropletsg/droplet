@@ -1,0 +1,24 @@
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel">Get in touch with</h3>
+      </div>
+      <div class="modal-body">
+        <div class="coordinator d-flex mb-2">
+          <div class="coordinator-avatar m-2">
+            <i class="far fa-user fa-2x mr-2"></i>
+          </div>
+          <div class="coordinator-info">
+            <p><%= c.coordinator.name %></p>
+            <p>Coordinator</p>
+            <% if c.coordinator.telegram_handle.present? %>
+              <i class="fab fa-telegram fa-lg"> <%= link_to "@#{c.coordinator.telegram_handle}", "https://t.me/#{c.coordinator.telegram_handle}", target: "_blank", style:"font-size: 15px;" %></i>
+            <% end  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

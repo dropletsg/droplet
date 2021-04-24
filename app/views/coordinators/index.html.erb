@@ -16,23 +16,25 @@
   <% end %>
 </div>
 
-<table class="table table-bordered">
-  <thead>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Mobile number</th>
-    <th scope="col">Email</th>
-    <th scope="col">Description</th>
-  </thead>
-  <tbody>
-    <% @coordinators.each do |coordinator| %>
-      <tr>
-        <td scope="row" width="1%"><%= link_to coordinator.id, coordinator_path(coordinator) %></td>
-        <td><%= coordinator.name %></td>
-        <td><%= coordinator.mobile_number %></td>
-        <td><%= coordinator.email %></td>
-        <td><%= coordinator.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="card">
+  <table class="table">
+    <thead>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Mobile number</th>
+      <th scope="col">Email</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      <% @coordinators.each do |coordinator| %>
+        <tr>
+          <td scope="row" width="1%"><%= link_to coordinator.id, coordinator_path(coordinator) %></td>
+          <td><%= coordinator.name %></td>
+          <td><%= coordinator.mobile_number %></td>
+          <td><%= coordinator.email %></td>
+          <td><%= coordinator.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
