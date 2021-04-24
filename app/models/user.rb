@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  EMAILS_ALLOWED = %w[yuanming.lee91@gmail.com jasonleewkd@gmail.com jaelyn.sng@gmail.com jiiayenn.lee@gmail.com]
+  EMAILS_ALLOWED = %w[yuanming.lee91@gmail.com jasonleewkd@gmail.com jaelyn.sng@gmail.com jiiayenn.lee@gmail.com migrantmutualaid@gmail.com]
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
