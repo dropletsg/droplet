@@ -14,6 +14,30 @@
         symbol_before_without_space: true
       ) %> left)
     </p>
+   
+    <div class="progress" style="height: 20px;">
+      <div class="progress-bar"
+        role="progressbar"
+        style="width: <%= 100 * c.current_amount_cents/c.target_amount.cents %>%;"
+        aria-valuenow="<%= c.current_amount_cents %>"
+        aria-valuemin="0"
+        aria-valuemax="<%= c.target_amount.cents %>">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between px-1">
+      <p>
+        <%= 100 * c.current_amount_cents/c.target_amount.cents %>%
+         of <%= c.target_amount.format(
+          no_cents: true,
+          symbol_before_without_space: true
+        ) %> Goal
+      </p>
+
+      <p>
+        <%= (c.end_date - Date.today).to_i %> more days
+      </p>
+    </div>  
   </div>
 </div>
 

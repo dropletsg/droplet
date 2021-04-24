@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       patch 'list'
       delete 'delete_attachment/:delete_attachment_id', to: "cases#delete_attachment", as: :delete_attachment
     end
+
+    resources :case_comments, only: [:new, :create]
   end
 
   post 'selected_cases', to: 'cases#selected_cases'

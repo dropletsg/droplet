@@ -4,7 +4,11 @@ class CasesController < ApplicationController
   before_action :set_case, only: %i[show edit update shortlist list delete_attachment ]
 
   def index
-    @cases = Case.includes(:worker).includes(:coordinator).order(params[:sort])
+    @cases = Case
+             .all
+             .by_status
+             .includes(:worker, :coordinator)
+             .order(params[:sort])
   end
 
   def show
@@ -60,16 +64,12 @@ class CasesController < ApplicationController
     messages = params[:select_case].map do |case_id|
       c = Case.find(case_id)
       <<~MESSAGE
-        <div>
-          🔶 <u>#{c.worker.alias}</u> (case ##{case_id}) requests <b>#{c.target_amount.format}</b> — #{c.story_summary}
-        </div>
-        <div>
-          📌 📌 #{c.end_date.strftime('%d %b %Y')} (#{c.end_date >= Date.today ? 'in ' : ''}#{time_ago_in_words(c.end_date)}#{c.end_date >= Date.today ? '' : ' ago'})
-        </div>
+        🔶 <u>#{c.worker.alias}</u> (case ##{case_id}) requests <b>#{c.target_amount.format}</b> — #{c.story_summary}<br>
+        📌 📌 #{c.end_date.strftime('%d %b %Y')} (#{c.end_date >= Date.today ? 'in ' : ''}#{time_ago_in_words(c.end_date)}#{c.end_date >= Date.today ? '' : ' ago'})
       MESSAGE
-    end.join("<div><br></div>")
+    end.join("\n<br><br>")
 
-    @display_msg = "#{messages}<div><br></div><div>For more details, please visit: #{root_url}</div>"
+    @display_msg = "#{messages}<br><br>\n\nFor more details, please visit: #{root_url}"
   end
 
   private

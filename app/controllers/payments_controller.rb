@@ -40,6 +40,7 @@ class PaymentsController < ApplicationController
   def success
     @payment = Payment.find(params[:id])
     @case_contributor = CaseContributor.new
+    @case_comment = CaseComment.new
   end
 
   private

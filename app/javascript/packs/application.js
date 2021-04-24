@@ -31,6 +31,7 @@ import "controllers"
 import { initSweetalert } from '../plugins/init_sweetalert';
 import highlightRow from "../plugins/checklist";
 import copyText from "../plugins/clipboard";
+import activeCasesModal from "../plugins/active_cases_modal";
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -41,9 +42,13 @@ document.addEventListener('turbolinks:load', () => {
       copyText(clipboardGroup)
     })
   }
-
+  
   if(document.querySelector('.case-verification')) {
     highlightRow();
+  }
+
+  if(document.querySelectorAll('.modalBtn')) {
+    activeCasesModal();
   }
 
   initSweetalert('#sweet-alert-telegram', {
@@ -57,7 +62,6 @@ document.addEventListener('turbolinks:load', () => {
   });
 
 });
-
 
 window.SocialShareButton = {
   openUrl(url, width, height) {
