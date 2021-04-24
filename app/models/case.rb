@@ -5,6 +5,7 @@ class Case < ApplicationRecord
   has_many :payments
   has_many :case_notes
   has_many :case_contributors
+  has_many :case_comments, dependent: :destroy
   has_one_attached :paid_proof
   has_many_attached :files
   monetize :target_amount_cents

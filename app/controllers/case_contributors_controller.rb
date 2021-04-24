@@ -1,4 +1,6 @@
 class CaseContributorsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[new create]
+
   def new
     @case_contributor = CaseContributor.new
   end
@@ -6,6 +8,8 @@ class CaseContributorsController < ApplicationController
   def create
     @case_contributor = CaseContributor.new(case_contributor_params.merge({ case_id: params[:case_id] }))
     @case_contributor.save!
+
+    CaseComment.create!(content: params[:comment], case: @case_contributor.case, case_contributor: @case_contributor)
     redirect_to active_cases_path(@case_contributor.case)
   end
 

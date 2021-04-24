@@ -5,7 +5,12 @@
   <%= simple_form_for @case_contributor do |f| %>
     <%= f.input :name %>
     <%= f.input :email %>
-    <%= hidden_field_tag :case_id, @payment.case.id  %>
+    <label>Your well-wishes for the worker:*</label>
+    <br>
+    <%= text_field_tag(:comment, value=nil, size:70)%>
+    <%= hidden_field_tag :case_id, @payment.case.id %>
+    <br>
+    <br>
     <%= f.button  :submit, "Subscribe", class: "btn btn-primary mb-3"%>
   <% end %>
 </div>
