@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
   get 'active_cases', to: 'pages#active_cases'
+  get 'active_cases/:id', to: 'pages#active_cases_show'
 
   devise_for :users
 

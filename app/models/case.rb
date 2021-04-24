@@ -15,8 +15,19 @@ class Case < ApplicationRecord
   validates_numericality_of :target_amount, greater_than: 0
   validate :shortlisted_status_conditions, :active_status_conditions, :closed_status_conditions
 
+  scope :by_status, -> { order(Arel.sql(order_by_status)) }
+
   STATUS = %w[new shortlisted active closed archived]
   CATEGORIES = %w[medical agent_fee bills others]
+  STATUS_ORDERED = %w[active shortlisted new closed archived]
+
+  def self.order_by_status
+    ret = "CASE"
+    STATUS_ORDERED.each_with_index do |status, index|
+      ret << " WHEN status = '#{status}' THEN #{index}"
+    end
+    ret << " END"
+  end
 
   def current_amount
     payments.where(payment_type: "incoming").sum(&:amount) - payments.where(payment_type: "outgoing").sum(&:amount)

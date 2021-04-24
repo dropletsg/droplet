@@ -58,8 +58,10 @@
 .btn-group .btn + .btn,
 .btn-group .btn + .btn-group,
 .btn-group .btn-group + .btn,
-.btn-group .btn-group + .btn-group{
+.btn-group .btn-group + .btn-group,
+.btn-group .btn{
     margin-left: -2px;
+    border-left: 2px solid white;
 }
 
 
