@@ -69,8 +69,8 @@
       <div class="m-2">
         <div class="card-body card-text">
 
-          <div class="mt-3 title-ellipsis">
-            <p class="font-weight-bold text-dark"># <%= c.id %> <%= c.title%></p>
+          <div class="mt-1 title-ellipsis">
+            <p class="font-weight-bold text-dark"> <%= c.title%></p>
           </div>
 
           <div class="mt-3">              
@@ -97,8 +97,8 @@
           <%= render 'progress', c: c %>
 
           <p>
-            <button class="btn btn-primary mt-2 w-100" type="button" >
-              <%= link_to "learn more", "#" %>
+            <button type="button" class="btn btn-primary mt-2 w-100" >
+              <%= link_to "learn more", "#", class:"learn-more-btn"%>
             </button>
           </p>
         
