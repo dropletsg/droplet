@@ -31,22 +31,27 @@ import "controllers"
 // import fetchWithToken from "../utils/fetch_with_token";
 import { initSweetalert } from '../plugins/init_sweetalert';
 import highlightRow from "../plugins/checklist";
+import activeCasesModal from "../plugins/active_cases_modal";
 
 
-  document.addEventListener('turbolinks:load', () => {
-    if(document.querySelector('.case-verification')) {
-      highlightRow();
-    }
+document.addEventListener('turbolinks:load', () => {
+  if(document.querySelector('.case-verification')) {
+    highlightRow();
+  }
 
-    initSweetalert('#sweet-alert-telegram', {
-      text: "Are you sure you want to post to Telegram?",
-      buttons: {cancel: "Back", approve: "Yes"}},(value) => {
-        if (value) {
-          const link = document.querySelector('.post-button');
-          console.log(value)
-          link.click();
-        }
-    });
+  if(document.querySelectorAll('.modalBtn')) {
+    activeCasesModal();
+  }
 
+  initSweetalert('#sweet-alert-telegram', {
+    text: "Are you sure you want to post to Telegram?",
+    buttons: {cancel: "Back", approve: "Yes"}},(value) => {
+      if (value) {
+        const link = document.querySelector('.post-button');
+        console.log(value)
+        link.click();
+      }
   });
+
+});
 
