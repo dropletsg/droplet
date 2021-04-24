@@ -154,7 +154,9 @@
           <div class="coordinator-info">
             <p><%= @case.coordinator.name %></p>
             <p>Coordinator</p>
-            <i class="fab fa-telegram fa-lg"> <%= link_to "@#{@case.coordinator.telegram_handle}", "https://t.me/#{@case.coordinator.telegram_handle}", target: "_blank", style:"font-size: 15px;" %></i>
+            <% if @case.coordinator.telegram_handle.present? %>
+              <i class="fab fa-telegram fa-lg"> <%= link_to "@#{@case.coordinator.telegram_handle}", "https://t.me/#{@case.coordinator.telegram_handle}", target: "_blank", style:"font-size: 15px;" %></i>
+            <% end  %>
           </div>
         </div>
       </div>
