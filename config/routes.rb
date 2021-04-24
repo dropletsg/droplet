@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :cases do
     resource :case_notes
-    member do 
+    member do
       patch 'shortlist'
       patch 'list'
       delete 'delete_attachment/:delete_attachment_id', to: "cases#delete_attachment", as: :delete_attachment
@@ -31,6 +31,6 @@ Rails.application.routes.draw do
       get 'success'
     end
   end
-  
+
   resources :case_contributors, only: [:new, :create]
 end

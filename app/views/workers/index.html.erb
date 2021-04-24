@@ -16,25 +16,27 @@
   <% end %>
 </div>
 
-<table class="table table-bordered">
-  <thead>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Alias</th>
-    <th scope="col">Mobile number</th>
-    <th scope="col">Email</th>
-    <th scope="col">Description</th>
-  </thead>
-  <tbody>
-    <% @workers.each do |worker| %>
-      <tr>
-        <td scope="row" width="1%"><%= link_to worker.id, worker_path(worker) %></td>
-        <td><%= worker.name %></td>
-        <td><%= worker.alias %></td>
-        <td><%= worker.mobile_number %></td>
-        <td><%= worker.email %></td>
-        <td><%= worker.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="card">
+  <table class="table">
+    <thead>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Alias</th>
+      <th scope="col">Mobile number</th>
+      <th scope="col">Email</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      <% @workers.each do |worker| %>
+        <tr>
+          <td scope="row" width="1%"><%= link_to worker.id, worker_path(worker) %></td>
+          <td><%= worker.name %></td>
+          <td><%= worker.alias %></td>
+          <td><%= worker.mobile_number %></td>
+          <td><%= worker.email %></td>
+          <td><%= worker.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
