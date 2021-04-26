@@ -12,7 +12,7 @@ class CaseContributorsController < ApplicationController
     CaseComment.create!(content: params[:comment], case: @case_contributor.case, case_contributor: @case_contributor)
     
     payment = Payment.find(params[:payment_id])
-    payment.update(payee_name: payee_name || "Anonymous")
+    payment.update(payee_name: @case_contributor.name || "Anonymous")
     redirect_to active_cases_path(@case_contributor.case)
   end
 
