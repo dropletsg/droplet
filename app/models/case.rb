@@ -14,6 +14,7 @@ class Case < ApplicationRecord
   validates_inclusion_of :status, in: %w[new shortlisted active closed archived]
   validates_numericality_of :target_amount, greater_than: 0
   validate :shortlisted_status_conditions, :active_status_conditions, :closed_status_conditions
+  validates_length_of :title, maximum: 40
 
   scope :by_status, -> { order(Arel.sql(order_by_status)) }
 
