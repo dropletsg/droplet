@@ -226,25 +226,3 @@
     </div>
   </div>
 </div>
-
-
-<div class="row mt-5">
-  <div class="col">
-    <div class="card h-100 border">
-      <div class="card-header">
-        <h4 class="mt-1">Contributor's comments</h4>
-      </div>
-      <div class="card-body">
-        <div class="col">
-          <% @case.case_comments.each do |cc| %>
-            <% if cc.content.present? %>
-              <p><%= "#{cc.case_contributor.name}: #{cc.content}" %></p>
-              <p><%= cc.created_at.strftime("%d-%b-%Y %I:%M%p") %></p>
-              <br>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
