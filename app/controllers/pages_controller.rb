@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
-
+    @listings = @cases
   end
 
   def active_cases_show

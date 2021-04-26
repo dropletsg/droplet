@@ -77,7 +77,9 @@
 
         <!-- contribution-info -->
         <div class="my-2">
-          <h5><strong class="text-primary"><%= @incoming_payments.count %></strong> people have contributed</h5>
+          <h5>
+            <strong class="text-primary"><%= @incoming_payments.count %></strong> <%= 'person'.pluralize(@incoming_payments.count) %> contributed so far
+          </h5>
           <% @incoming_payments.order("created_at desc").limit(3).each do |payment| %>
             <hr>
             <div class="d-flex justify-content-start align-items-center">
