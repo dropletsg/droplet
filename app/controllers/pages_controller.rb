@@ -15,7 +15,6 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
-
   end
 
   def active_cases_show
@@ -23,5 +22,6 @@ class PagesController < ApplicationController
     @case = Case.find(params[:id])
     @incoming_payments = @case.payments.where(payment_type: "incoming")
     @case_contributors = @case.case_contributors
+    @case_comments = @case.case_comments
   end
 end
