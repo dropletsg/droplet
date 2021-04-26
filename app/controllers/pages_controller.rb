@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home active_cases active_cases_show]
 
   def home
-    redirect_to cases_path if user_signed_in?
+    redirect_to dashboard_path if user_signed_in?
   end
 
   def active_cases
@@ -15,7 +15,6 @@ class PagesController < ApplicationController
     end
 
     @category = params[:category]
-
   end
 
   def active_cases_show
@@ -23,5 +22,6 @@ class PagesController < ApplicationController
     @case = Case.find(params[:id])
     @incoming_payments = @case.payments.where(payment_type: "incoming")
     @case_contributors = @case.case_contributors
+    @case_comments = @case.case_comments
   end
 end

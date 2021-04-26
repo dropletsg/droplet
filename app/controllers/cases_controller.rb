@@ -59,7 +59,7 @@ class CasesController < ApplicationController
   end
 
   def cases_roundup_telegram
-    return '' unless params[:select_case]
+    return unless params[:select_case]
 
     messages = params[:select_case].map do |case_id|
       c = Case.find(case_id)

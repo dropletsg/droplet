@@ -29,12 +29,33 @@
           </div>
         </div>
       </div>
+
+      <!--comment-->
+      <div class="card h-100 w-100">
+        <div class="card-body">
+          <h5><%= pluralize @case_comments.size, "Comment" %></h5>
+          <% @case_comments.each do |comment| %>
+            <hr>
+            <div class="d-flex mt-2">
+              <p><i class="fas fa-user-circle mr-3"></i>
+              <div>
+                 <p><%= comment.case_contributor.name %></p>
+              <p class="mb-0">
+                <%= comment.content %>
+                <span class="dot"></span>
+                <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+              </p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="col-5">
     <!-- Sidebar card -->
-    <div class="sidebar card mt-0 mb-3 mx-5 h-100">
+    <div class="sidebar card mt-0 mb-3 mx-5 h-60">
       <div class="m-4">
 
        <!-- prgress-info -->

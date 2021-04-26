@@ -1,0 +1,3 @@
+<%= line_chart @cases.group_by_day(:created_at).count %>
+<%= pie_chart @cases.group(:created_at).count %>
+<%= column_chart @cases.group_by_day_of_week(:created_at, format: "%a").count %>
