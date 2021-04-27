@@ -561,11 +561,11 @@
 }
 
 .ellipsis{
-//   white-space: no-wrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  display: inline-block;
+  overflow: hidden;
+    max-height: 50rem;
+    -webkit-box-orient: vertical;
+  display: -webkit-box;
   -webkit-line-clamp: 8;
 }
 
