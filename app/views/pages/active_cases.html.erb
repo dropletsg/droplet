@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div class="container d-flex mt-4 p-0  align-items-center">
+<div class="container d-flex mt-4 p-0 align-items-center">
   <div>
     <h6 class="a">Filter By:</h6>
   </div>
@@ -74,9 +74,9 @@
       <div class="card-body pt-3">
         <%= render 'progress', c: c %>
 
-        <p class="card-text mt-3 h-75"><%= c.story_summary %></p>
+        <p class="card-text mt-3 ellipsis"><%= c.story_summary %></p>
 
-        <span class="badge badge-default">
+        <span class="badge badge-default ">
           <% if c.category == "medical" %>
             <i class='fas fa-plus-square mt-1 mr-1'></i>
           <% end %>

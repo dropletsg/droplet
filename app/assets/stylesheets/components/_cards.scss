@@ -278,6 +278,7 @@
         font-size: $font-paragraph;
         color: $font-color;
         padding-bottom: 15px;
+        height: 65% !important
     }
 
     h6{
@@ -560,12 +561,12 @@
 }
 
 .ellipsis{
-  text-overflow: ellipsis;
+//   white-space: no-wrap;
   overflow: hidden;
-	max-height: 50rem;
-	-webkit-box-orient: vertical;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: inline-block;
+  -webkit-line-clamp: 8;
 }
 
 .title-ellipsis{
