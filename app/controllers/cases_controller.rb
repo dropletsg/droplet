@@ -69,7 +69,7 @@ class CasesController < ApplicationController
       MESSAGE
     end.join("\n<br><br>")
 
-    @display_msg = "#{messages}<br><br>\n\nFor more details, please visit: #{root_url}"
+    @display_msg = "#{messages}<br><br>\n\nFor more details, please visit: #{active_cases_url}"
   end
 
   private
