@@ -2,7 +2,7 @@
 <%= form_with url: cases_roundup_telegram_path, local: true, method: :get do |form| %>
   <div class="container d-flex mt-3 p-0 justify-content-between align-items-center">
     <h3>All cases</h3>
-    
+
     <div class="btn-group">
       <%= link_to "New case", new_case_path, class: "btn btn-primary" %>
 
@@ -29,7 +29,7 @@
       </thead>
       <tbody>
         <% @cases.each do |c| %>
-          <tr class = "case-row" data-case-id="<%= c.id %>">
+          <tr class="case-row" data-case-id="<%= c.id %>">
             <td><%= check_box_tag 'select_case[]', c.id, false, data: { 'checklist-target': 'select' } %></td>
             <td scope="row" width="1%"><%= link_to c.id, case_path(c) %></td>
             <td><%= c.title %></td>
@@ -37,14 +37,14 @@
             <td><%= c.coordinator.name %></td>
             <td><%= c.status&.capitalize %></td>
             <td>
-              <%= c.start_date.strftime("%d %B %Y") %>
+              <%= c.start_date.strftime("%d %b %Y") %>
               <br>
-              <small class="text-muted"><%= time_ago_in_words(c.start_date) %></small>
+              <small class="text-muted"><%= time_ago_in_words(c.start_date) %> ago</small>
             </td>
             <td>
-              <%= c.end_date.strftime("%d %B %Y") %>
+              <%= c.end_date.strftime("%d %b %Y") %>
               <br>
-              <small class="text-muted"><%= time_ago_in_words(c.end_date) %></small>
+              <small class="text-muted">in <%= time_ago_in_words(c.end_date) %></small>
               </td>
             <td style="width:20%">
               <div class="progress" style="height: 20px;">
