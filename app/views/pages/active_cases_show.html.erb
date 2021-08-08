@@ -31,21 +31,25 @@
       </div>
 
       <!--comment-->
-      <div class="card h-100 w-100">
-        <div class="card-body">
+      <div class="card h-100 w-100 ">
+        <div class="card-body comment-card">
           <h5><%= pluralize @case_comments.size, "Comment" %></h5>
           <% @case_comments.each do |comment| %>
             <hr>
             <div class="d-flex mt-2">
               <p><i class="fas fa-user-circle mr-3"></i>
               <div>
-                 <p><%= comment.case_contributor.name %></p>
-              <p class="mb-0">
-                <%= comment.content %>
-                <span class="dot"></span>
-                <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-              </p>
+                <p><%= comment.case_contributor.name %></p>
+                <p class="mb-0">
+                  <%= comment.content %>
+                  <span class="dot"></span>
+                  <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+                </p>
               </div>
+               
+              <% if user_signed_in? %>
+               <%= link_to 'Delete', case_case_comment_path(@case,comment), method: :delete, remote: true, style: "margin-left: auto" %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -136,3 +140,14 @@
 <!-- Share button modal -->
 <%= render 'share', c: @case %>
 
+<script>
+
+const deleteComment = (e)=>{
+  if (e.target.classList.contains('delete-comment')){
+    console.log('delete');
+  }
+   e.preventDefault();
+};
+
+document.querySelector('.comment-card').addEventListener('click',deleteComment);
+</script>

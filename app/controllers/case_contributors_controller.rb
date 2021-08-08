@@ -8,7 +8,6 @@ class CaseContributorsController < ApplicationController
   def create
     @case_contributor = CaseContributor.new(case_contributor_params.merge({ case_id: params[:case_id] }))
     @case_contributor.save!
-
     CaseComment.create!(content: params[:comment], case: @case_contributor.case, case_contributor: @case_contributor)
     
     payment = Payment.find(params[:payment_id])

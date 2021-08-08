@@ -22,6 +22,7 @@ class PagesController < ApplicationController
     @case = Case.find(params[:id])
     @incoming_payments = @case.payments.where(payment_type: "incoming")
     @case_contributors = @case.case_contributors
-    @case_comments = @case.case_comments
+    @case_comments = @case.case_comments.where(is_soft_deleted: false)
+    
   end
 end

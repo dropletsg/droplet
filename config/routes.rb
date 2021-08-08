@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       delete 'delete_attachment/:delete_attachment_id', to: "cases#delete_attachment", as: :delete_attachment
     end
 
-    resources :case_comments, only: [:new, :create]
+    resources :case_comments, only: [:new, :create, :destroy]
   end
 
   post 'selected_cases', to: 'cases#selected_cases'

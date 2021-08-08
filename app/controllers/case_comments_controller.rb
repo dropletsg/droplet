@@ -11,9 +11,14 @@ class CaseCommentsController < ApplicationController
     @case_comment.save!
   end
 
+  def destroy
+    CaseComment.find(params[:id]).update(is_soft_deleted: true)
+    redirect_to active_case_path(params[:case_id])
+  end
+
   private
 
   def case_comment_params
-    params.require(:case_comment).permit(:content)
+    params.require(:case_comment).permit(:content, :is_soft_deleted)
   end
 end
