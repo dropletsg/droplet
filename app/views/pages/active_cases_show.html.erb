@@ -46,9 +46,8 @@
                   <small><%= time_ago_in_words(comment.created_at) %> ago</small>
                 </p>
               </div>
-               
               <% if user_signed_in? %>
-               <%= link_to 'Delete', case_case_comment_path(@case,comment), method: :delete, remote: true, style: "margin-left: auto" %>
+               <%= link_to 'Delete', case_case_comment_path(@case,comment_id: comment, comment_name: comment.case_contributor.name), method: :delete, remote: true, style: "margin-left: auto" %>
               <% end %>
             </div>
           <% end %>

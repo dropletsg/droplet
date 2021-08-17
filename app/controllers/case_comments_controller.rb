@@ -12,7 +12,7 @@ class CaseCommentsController < ApplicationController
   end
 
   def destroy
-    CaseComment.find(params[:id]).update(is_soft_deleted: true)
+    CaseComment.find(params[:comment_id]).update(is_soft_deleted: true)
     redirect_to active_case_path(params[:case_id])
   end
 
